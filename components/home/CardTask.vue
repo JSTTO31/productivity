@@ -1,5 +1,5 @@
 <template>
-    <v-card variant="plain" class="h-100 bg-surface rounded-lg d-flex flex-column pa-2">
+    <v-card  class="h-100 bg-surface rounded-lg d-flex flex-column pa-2">
         <v-card-title class="d-flex align-center text-h6">
         Daily tasks
         <v-spacer></v-spacer>

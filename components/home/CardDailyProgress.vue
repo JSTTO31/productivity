@@ -1,5 +1,5 @@
 <template>
-    <v-card variant="plain" class="h-25 bg-surface  rounded-lg pa-2" flat>
+    <v-card  class="h-25 bg-surface  rounded-lg pa-2" flat>
         <v-card-title class="d-flex text-h6">
             Today progress
         </v-card-title>

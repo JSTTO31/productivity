@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <!-- <UtilsThemeBackground ref="video" style="position: fixed;top: 0;left: 0;"></UtilsThemeBackground> -->
+    <UtilsThemeBackground ref="video" style="position: fixed;top: 0;left: 0;"></UtilsThemeBackground>
 
     <v-app-bar class="pa-0 border-b pr-5 bg-surface" :color="name == 'dark' ? '' : 'primary'" density="compact" flat>
       <!-- <UtilsThemeBackground ref="video" style="position: fixed;top: 0;left: 0;"></UtilsThemeBackground> -->
@@ -11,14 +10,12 @@
       <v-divider vertical inset class="mx-2 mr"></v-divider>
       <v-btn size="small" style="opacity: .8;" class="text-capitalize rounded-lg mr-2 font-weight-regular"
         @click="$router.push({ name: 'r-access-room', params: { room: 'aD3Vwed6abuoPE2BzInnTKcTKYp' } })" prepend-icon="mdi-home">Home</v-btn>
+      <v-divider vertical inset class="mr-2"></v-divider>
       <v-btn size="small" style="opacity: .8;" class="text-capitalize rounded-lg mr-2 font-weight-regular" prepend-icon="mdi-square-edit-outline" :to="{ name: 'r-access-room-my-task', params: { room: 'aD3Vwed6abuoPE2BzInnTKcTKYp' } }" >My Tasks</v-btn>
       <v-btn size="small" style="opacity: .8;" class="text-capitalize rounded-lg mr-2 font-weight-regular" prepend-icon="mdi-calendar" :to="{ name: 'r-access-room-task-management', params: { room: 'aD3Vwed6abuoPE2BzInnTKcTKYp' } }" >Schedules</v-btn>
-      <v-btn size="small" style="opacity: .8;" class="text-capitalize rounded-lg mr-2 font-weight-regular"
-        @click="$router.push({ name: 'r-access-room-documents', params: { room: 'aD3Vwed6abuoPE2BzInnTKcTKYp' } })" prepend-icon="mdi-dock-left">Documentation</v-btn>
-      <v-btn size="small" style="opacity: .8;" class="text-capitalize rounded-lg mr-2 font-weight-regular"
-        :to="{ name: 'r-access-room-file-management', params: { room: 'aD3Vwed6abuoPE2BzInnTKcTKYp' } }" prepend-icon="mdi-file-multiple">File management</v-btn>
-
-      <v-btn size="small" style="opacity: .8;" class="text-capitalize rounded-lg mr-2 font-weight-regular" prepend-icon="mdi-chat">Conversation</v-btn>
+      <v-divider vertical inset class="mr-2"></v-divider>
+      <v-btn size="small" style="opacity: .8;" class="text-capitalize rounded-lg mr-2 font-weight-regular" prepend-icon="mdi-dock-left">Documentation</v-btn>
+      <v-btn size="small" style="opacity: .8;" class="text-capitalize rounded-lg mr-2 font-weight-regular" prepend-icon="mdi-dock-left">Flash Card</v-btn>
       <v-spacer></v-spacer>
       <h5 class="mr-5 font-weight-medium" >Development of productivity system <v-icon>mdi-pencil-outline</v-icon></h5>
       <v-card @click="" class=" pa-1 mr-2 text-caption px-2">
@@ -42,7 +39,6 @@
     <ClientOnly>
       <NuxtPage></NuxtPage>
     </ClientOnly>
-  </div>
 </template>
   
 <script setup lang="ts">

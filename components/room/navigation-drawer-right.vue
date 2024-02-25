@@ -1,46 +1,32 @@
 <template>
-    <v-navigation-drawer location="right" floating rail color="transparent" style="z-index: 5000">
-        <div class="d-flex align-center pr-2 h-100" style="z-index: 5000">
-            <v-card class=" rounded-lg rounded-e-0" style>
-                <v-list class="h-100 d-flex pa-0 flex-column">
-                    <v-list-item prepend-icon="mdi-tune" class="py-4" @click="showSound = !showSound"
-                        :color="showSound ? 'secondary' : ''"></v-list-item>
-                    <v-menu location="start">
-                        <template #activator="{ props }">
-                            <v-list-item v-bind="props" prepend-icon="mdi-application-settings"></v-list-item>
-                        </template>
-                        <UtilsCardTheme class="mr-2 h-100"></UtilsCardTheme>
-                    </v-menu>
-                    <v-menu location="start" v-bind:close-on-content-click="false">
-                        <template #activator="{ props }">
-                            <v-list-item v-bind="props" prepend-icon="mdi-palette"></v-list-item>
-                        </template>
-                        <UtilsCardBackgroundColor class="h-100 mr-2"></UtilsCardBackgroundColor>
-                    </v-menu>
-                    <v-list-item prepend-icon="mdi-movie-open" class="py-4" @click="showMedia = !showMedia"
-                        :color="showMedia ? 'secondary' : ''"></v-list-item>
-                    <v-list-item prepend-icon="mdi-timer-outline" class="py-4" @click="showTimer = !showTimer"
-                        :color="showTimer ? 'secondary' : ''"></v-list-item>
-                    <v-list-item prepend-icon="mdi-pencil" class="py-4" @click="showTask = !showTask"
-                        :color="showTask ? 'secondary' : ''"></v-list-item>
-                    <v-spacer></v-spacer>
+    <v-navigation-drawer location="right" rail style="z-index: 5000">
+        <v-list class="h-100 d-flex pa-0 flex-column">
+            <v-list-item prepend-icon="mdi-tune" style="overflow-x: visible;">
+                <v-card height="25" width="25" style="position: absolute;left: -5px;top: 50%;transform: translateY(-50%);" color="red"></v-card>
+            </v-list-item>
 
-                    <v-list-item prepend-icon="mdi-chat" class="py-4" @click="showMedia = !showMedia"
-                        :color="showMedia ? 'secondary' : ''"></v-list-item>
-                    <v-tooltip width="450" content-class="bg-surface pa-5 rounded-lg">
-                        <template #activator="{ props }">
-                            <v-list-item prepend-icon="mdi-bullhorn-outline" class="py-4" @click="showTask = !showTask"
-                                :color="showTask ? 'secondary' : ''"></v-list-item>
-                        </template>
-                        Reminder: For the best experience, use headphones! 🔊 Get ready to amplify your app journey with richer
-                        sound.
-                        Volume up, distractions out!
-                    </v-tooltip>
-                    <v-list-item prepend-icon="mdi-cog" class="py-4" @click="showTask = !showTask"
-                        :color="showTask ? 'secondary' : ''"></v-list-item>
-                </v-list>
-        </v-card>
-        </div>
+            <v-menu location="start">
+                <template #activator="{ props }">
+                    <v-list-item v-bind="props" prepend-icon="mdi-application-settings"></v-list-item>
+                </template>
+                <UtilsCardTheme class="mr-2 h-100"></UtilsCardTheme>
+            </v-menu>
+            <v-menu location="start" v-bind:close-on-content-click="false">
+                <template #activator="{ props }">
+                    <v-list-item v-bind="props" prepend-icon="mdi-palette"></v-list-item>
+                </template>
+                <UtilsCardBackgroundColor class="h-100 mr-2"></UtilsCardBackgroundColor>
+            </v-menu>
+            <v-list-item prepend-icon="mdi-movie-open" class="py-4" @click="showMedia = !showMedia"
+                :color="showMedia ? 'secondary' : ''"></v-list-item>
+            <v-list-item prepend-icon="mdi-timer-outline" class="py-4" @click="showTimer = !showTimer"
+                :color="showTimer ? 'secondary' : ''"></v-list-item>
+            <v-list-item prepend-icon="mdi-pencil" class="py-4" @click="showTask = !showTask"
+                :color="showTask ? 'secondary' : ''"></v-list-item>
+            <v-spacer></v-spacer>
+            <v-list-item prepend-icon="mdi-cog" class="py-4" @click="showTask = !showTask"
+                :color="showTask ? 'secondary' : ''"></v-list-item>
+        </v-list>
     </v-navigation-drawer>
     <div class="marker">
         <div></div>
@@ -130,6 +116,14 @@ onBeforeRouteLeave((to, from, next) => {
 </script>
   
 <style scoped>
+#menu-card{
+    position: fixed;
+    top: 55px;
+    right: 65px;
+    height: 91.8vh;
+}
+
+
 #navigation-tools{
     position: fixed;
     right: 0;

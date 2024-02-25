@@ -1,48 +1,61 @@
 <template>
-  <v-hover v-slot="{props, isHovering}">
-    <v-navigation-drawer v-bind="props" :width="isHovering ? 150 : 25" style="transition: .25s ease;" class="animate-opacity">
-      <div class="w-100 h-100 d-flex align-center justify-end" v-if="!isHovering">
-        <v-icon>mdi-chevron-right</v-icon>
-      </div>
-      <div class="d-flex flex-column justify-center px-2 h-100" v-if="isHovering">
-        <v-card v-for="n in 3" height="125" color="grey-lighten-1" class="my-2 d-flex align-center justify-center">
-          <h1>{{ n }}</h1>
+  <v-main class="h-100">
+    <v-carousel hide-delimiter-background class="h-100 w-100" :show-arrows="false">
+      <v-carousel-item>
+        <v-card class="bg-transparent rounded-lg d-flex justify-center flex-column align-center h-100" flat>
+          <h1 style="line-height: 1;font-family: 'Orbitron', sans-serif;font-weight:200;font-size: 100px;opacity: .8;">
+            09:30
+          </h1>
+          <div class="d-flex align-center">
+            <h5 class="text-center font-weight-regular ">{{ new Date().toDateString() }}</h5>
+          </div>
         </v-card>
-      </div>
-    </v-navigation-drawer>
-  </v-hover>
-  <v-main>
-    <!-- <v-card id="clock" class="bg-transparent rounded-lg d-flex justify-center flex-column align-center" flat v-if="true">
-      <h1 style="line-height: 1;font-family: 'Orbitron', sans-serif;font-weight:200;font-size: 100px;opacity: .8;">09:30
-      </h1>
-      <div class="d-flex align-center">
-        <h5 class="text-center font-weight-regular ">{{ new Date().toDateString() }}</h5>
-      </div>
-    </v-card> -->
-    <v-container class="h-screen bg-transparent" fluid
-      style="position: fixed; top: 0;left:0;width: 100%;padding: 90px 280px 15px 210px;">
-      <v-row class="h-100 d-flex ma-0">
-        <v-col class="h-100 d-flex flex-column text-white" cols="12">
-          <v-container fluid class="pa-0 h-100">
-            <v-row class="h-100 pb-0">
-              <v-col class="px-5 h-100 py-0" cols="7">
-                <HomeCardTask></HomeCardTask>
-              </v-col>
-              <v-col cols="5" class="h-100  py-0 d-flex flex-column" style="grid-row-gap: 35px;">
-                <HomeCardDailyProgress></HomeCardDailyProgress>
-                <HomeCardTimer></HomeCardTimer>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-col>
-      </v-row>
-    </v-container>
+      </v-carousel-item>
+      <v-carousel-item>
+        <v-container class="h-screen bg-transparent"
+          style="padding-inline: 220px;padding-top: 50px; padding-bottom: 100px;" fluid>
+          <v-row class="h-100 d-flex ma-0">
+            <v-col class="h-100 d-flex flex-column text-white" cols="12">
+              <v-container fluid class="pa-0 h-100">
+                <v-row class="h-100 pb-0">
+                  <v-col class="px-5 h-100 py-0" cols="7">
+                    <HomeCardTask></HomeCardTask>
+                  </v-col>
+                  <v-col cols="5" class="h-100  py-0 d-flex flex-column" style="grid-row-gap: 35px;">
+                    <HomeCardDailyProgress></HomeCardDailyProgress>
+                    <HomeCardTimer></HomeCardTimer>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-carousel-item>
+      <v-carousel-item>
+        <v-container class="h-100" style="padding: 100px 350px;">
+          <v-card elevation="10" class="rounded-lg h-100 "
+            color="yellow">
+            <v-card-title class="d-flex align-center" style="font-size: 18px">
+              Notes
+              <v-spacer></v-spacer>
+              <v-btn append-icon="mdi-plus" variant="tonal" size="small" class="text-capitalize">new</v-btn>
+            </v-card-title>
+            <v-divider></v-divider>
+            <v-card-text contenteditable="true" class="px-5 py-1 text-decoration-underline"
+              style="line-height: 2;font-family: 'Reenie Beanie', cursive;font-size: 30px;font-weight: 600;outline: none;">
+              The sun set behind the mountains as a lone traveler found solace in the whispering winds.
+            </v-card-text>
+          </v-card>
+        </v-container>
+      </v-carousel-item>
+    </v-carousel>
+
   </v-main>
 </template>
     
 <script setup lang="ts">
 useHead({
-  title: 'Efficiently | Home'
+  title: 'Home'
 })
 
 definePageMeta({
@@ -128,5 +141,6 @@ definePageMeta({
   position: fixed;
   bottom: 0;
   right: 0; */
-/* } */</style>
+/* } */
+</style>
     

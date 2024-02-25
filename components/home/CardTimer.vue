@@ -1,5 +1,5 @@
 <template>
-    <v-card variant="plain" class="h-75   rounded-lg pa-5 bg-surface" flat>
+    <v-card  class="h-75   rounded-lg pa-5 bg-surface" flat>
         <v-card-title class="d-flex justify-center">
             <v-btn-group color="transparent">
                 <v-btn class="text-capitalize" active>Pomodoro</v-btn>
