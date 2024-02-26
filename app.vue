@@ -21,7 +21,7 @@ useHead({
   },
   link: [
     {
-      rel:"icon",  type: "image/x-icon", href:"/favicon.png", 
+      rel:"icon",  type: "image/x-icon", href:"/fav.png", 
     },
     { rel: "preconnect", href: "https://fonts.googleapis.com" },
     { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" },

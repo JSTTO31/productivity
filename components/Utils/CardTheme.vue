@@ -1,5 +1,5 @@
 <template>
-    <v-card class="pa-5 mt-3 rounded-lg" elevation="10" width="325">
+    <v-card class="pa-5 rounded-0" flat width="325">
         <h4 class="font-weight-regular">Select your theme</h4>
         <v-divider class="mt-2 mb-4"></v-divider>
         <div>

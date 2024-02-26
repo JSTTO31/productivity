@@ -35,7 +35,7 @@
         CC
       </v-avatar> -->
     </v-app-bar>
-    <RoomNavigationDrawerRight></RoomNavigationDrawerRight>
+    <navigationDrawerRight></navigationDrawerRight>
     <ClientOnly>
       <NuxtPage></NuxtPage>
     </ClientOnly>

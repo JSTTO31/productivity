@@ -32,7 +32,7 @@
         </v-container>
       </v-carousel-item>
       <v-carousel-item>
-        <v-container class="h-100" style="padding: 100px 350px;">
+        <v-container class="h-100" style="padding: 150px 400px;">
           <v-card elevation="10" class="rounded-lg h-100 "
             color="yellow">
             <v-card-title class="d-flex align-center" style="font-size: 18px">
@@ -49,7 +49,6 @@
         </v-container>
       </v-carousel-item>
     </v-carousel>
-
   </v-main>
 </template>
     

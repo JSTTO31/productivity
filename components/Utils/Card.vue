@@ -6,9 +6,9 @@
                     <v-icon class="mr-2">{{ icon }}</v-icon>
                     {{ title }}
                     <v-spacer></v-spacer>
-                    <v-icon class="ml-1" size="20" color="success"  @click="emits('minimize')">mdi-circle</v-icon>
-                    <v-icon class="ml-1" size="20" color="warning"  @click="maximize()">mdi-circle</v-icon>
-                    <v-icon class="ml-1" size="20" color="error"  @click="emits('close')">mdi-circle</v-icon>
+                    <v-icon class="ml-1" size="18" color="success"  @click="maximize()" >mdi-circle</v-icon>
+                    <v-icon class="ml-1" size="18" color="warning" @click="emits('minimize')">mdi-circle</v-icon>
+                    <v-icon class="ml-1" size="18" color="error"  @click="emits('close')">mdi-circle</v-icon>
                 </h4>
                 <slot name="title"></slot>
             </v-card>
@@ -85,6 +85,7 @@ onMounted(() => {
         container.style.left = 50 + 'px'
         
         const {isDrag: drag} = useDraggable(container)
+        
         watchEffect(() => {
             isDrag = drag
 

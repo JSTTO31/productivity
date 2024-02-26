@@ -1,31 +1,29 @@
 <template>
-    <v-navigation-drawer location="right" rail style="z-index: 5000">
+    <v-navigation-drawer location="right" width="459" rail id="right-navigation">
         <v-list class="h-100 d-flex pa-0 flex-column">
-            <v-list-item prepend-icon="mdi-tune" style="overflow-x: visible;">
-                <v-card height="25" width="25" style="position: absolute;left: -5px;top: 50%;transform: translateY(-50%);" color="red"></v-card>
+            <v-list-item prepend-icon="mdi-tune" @click="showSound = true">
             </v-list-item>
 
-            <v-menu location="start">
+            <v-menu transition="slide-x-reverse-transition" location="start" target="right-navigation" height="700">
                 <template #activator="{ props }">
                     <v-list-item v-bind="props" prepend-icon="mdi-application-settings"></v-list-item>
                 </template>
-                <UtilsCardTheme class="mr-2 h-100"></UtilsCardTheme>
+                <UtilsCardTheme class="mr-2 rounded-lg mt-2"></UtilsCardTheme>
             </v-menu>
-            <v-menu location="start" v-bind:close-on-content-click="false">
+            <v-menu transition="slide-x-reverse-transition" location="start" v-bind:close-on-content-click="false"  height="700">
                 <template #activator="{ props }">
                     <v-list-item v-bind="props" prepend-icon="mdi-palette"></v-list-item>
                 </template>
                 <UtilsCardBackgroundColor class="h-100 mr-2"></UtilsCardBackgroundColor>
             </v-menu>
-            <v-list-item prepend-icon="mdi-movie-open" class="py-4" @click="showMedia = !showMedia"
+            <v-list-item prepend-icon="mdi-movie-open" @click="showMedia = !showMedia"
                 :color="showMedia ? 'secondary' : ''"></v-list-item>
-            <v-list-item prepend-icon="mdi-timer-outline" class="py-4" @click="showTimer = !showTimer"
+            <v-list-item prepend-icon="mdi-timer-outline" @click="showTimer = !showTimer"
                 :color="showTimer ? 'secondary' : ''"></v-list-item>
-            <v-list-item prepend-icon="mdi-pencil" class="py-4" @click="showTask = !showTask"
+            <v-list-item prepend-icon="mdi-pencil" @click="showTask = !showTask"
                 :color="showTask ? 'secondary' : ''"></v-list-item>
             <v-spacer></v-spacer>
-            <v-list-item prepend-icon="mdi-cog" class="py-4" @click="showTask = !showTask"
-                :color="showTask ? 'secondary' : ''"></v-list-item>
+            <v-list-item prepend-icon="mdi-cog" @click="showSettings = true"></v-list-item>
         </v-list>
     </v-navigation-drawer>
     <div class="marker">
@@ -41,26 +39,21 @@
     </UtilsCardTask>
     <UtilsCardTextEditor key="text-editor" class="floating-card" @vue:before-update="beforeUpdateElement"
         v-model:show-editor="showTextEditor"></UtilsCardTextEditor>
+    <UtilsCardSettings key="settings" class="floating-card" @vue:before-update="beforeUpdateElement"
+        v-model:show-settings="showSettings"></UtilsCardSettings>
 </template>
 <script lang="ts" setup>
-const { name } = useTheme()
+const rail = ref(true)
+const showSettings = ref(true)
 const showNavigation = ref<null | boolean>(null)
 const { audioOutputs: speakers } = useDevicesList({ requestPermissions: true })
 const hasHeadphone = computed(() => speakers.value.some(item => /Default - Headphones/.test(item.label)));
-const showNavigationTools = ref(false)
 const showTextEditor = ref(false)
 const showTask = ref(false)
 const showTimer = ref(false)
 const showMedia = ref(false)
 const showSound = ref(false)
 
-const mouseMove = (e: MouseEvent) => {
-    if (e.clientX + 10 >= window.innerWidth) {
-        showNavigationTools.value = true
-    } else {
-        showNavigationTools.value = false
-    }
-}
 const toFront = (currentElement: Element) => {
     const cards = document.querySelectorAll('.floating-card')
     const cardNumber = currentElement.getAttribute('element-sort-data')
@@ -104,25 +97,30 @@ onMounted(() => {
         })
     })
 
-    window.addEventListener('mousemove', mouseMove)
+
+    const navigationButtons = document.querySelectorAll('.nav-btn')
+
+
+    navigationButtons.forEach((item) => {
+        item.addEventListener('mouseenter', () => {
+            rail.value = false
+        })
+
+        item.addEventListener('mouseleave', () => {
+            rail.value = true
+        })
+    })
+
 
 })
 
 onBeforeRouteLeave((to, from, next) => {
-    removeEventListener('mousemove', mouseMove)
     return next()
 })
 
 </script>
   
 <style scoped>
-#menu-card{
-    position: fixed;
-    top: 55px;
-    right: 65px;
-    height: 91.8vh;
-}
-
 
 #navigation-tools{
     position: fixed;
