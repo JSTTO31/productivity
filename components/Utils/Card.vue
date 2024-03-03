@@ -7,7 +7,7 @@
                     {{ title }}
                     <v-spacer></v-spacer>
                     <v-icon class="ml-1" size="18" color="success"  @click="maximize()" >mdi-circle</v-icon>
-                    <v-icon class="ml-1" size="18" color="warning" @click="emits('minimize')">mdi-circle</v-icon>
+                    <!-- <v-icon class="ml-1" size="18" color="warning" @click="emits('minimize')">mdi-circle</v-icon> -->
                     <v-icon class="ml-1" size="18" color="error"  @click="emits('close')">mdi-circle</v-icon>
                 </h4>
                 <slot name="title"></slot>
@@ -57,7 +57,7 @@ function maximize(){
         const currentHeight = container.clientHeight
         const windowWidth = window.innerWidth
         const windowHeight =  window.innerHeight - 48
-        const isMaximize = currentWidth == windowWidth && currentHeight == windowHeight 
+        const isMaximize = currentWidth == (windowWidth - 50) && currentHeight == windowHeight 
 
         if(!isMaximize){
             container.classList.remove('rounded-lg')
@@ -69,7 +69,7 @@ function maximize(){
 
         container.style.top = isMaximize ? '50px' : '48px'
         container.style.left = isMaximize ? '40px' : '0px'
-        container.style.width = (isMaximize ? props.width :  windowWidth) + 'px'
+        container.style.width = (isMaximize ? props.width :  windowWidth - 50) + 'px'
         container.style.height = (isMaximize ? props.height : windowHeight) + 'px'
     }
 }

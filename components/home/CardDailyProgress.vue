@@ -1,6 +1,6 @@
 <template>
     <v-card  class="h-25 bg-surface  rounded-lg pa-2" flat>
-        <v-card-title class="d-flex text-h6">
+        <v-card-title class="d-flex">
             Today progress
         </v-card-title>
         <v-card-text class="py-2">

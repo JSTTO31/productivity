@@ -25,6 +25,12 @@
             <v-btn variant="elevated" class="text-capitalize px-10" color="primary" size="large" prepend-icon="mdi-play">Start</v-btn>
         </v-card-actions>
     </v-card>
+    <!-- <v-card  class="h-75  rounded-lg pa-5 bg-yellow-lighten-4 d-flex align-center justify-center flex-column" flat>
+        <v-avatar size="200" class="rounded-0 mb-10">
+            <v-img src="/award.png"></v-img>
+        </v-avatar>
+        <h2 class="text-center">Congratulation you're being productive productive</h2>
+    </v-card> -->
 </template>
 
 <script setup lang="ts">

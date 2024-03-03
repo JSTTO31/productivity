@@ -1,6 +1,6 @@
 <template>
     <v-card  class="h-100 bg-surface rounded-lg d-flex flex-column pa-2">
-        <v-card-title class="d-flex align-center text-h6">
+        <v-card-title class="d-flex align-center">
         Daily tasks
         <v-spacer></v-spacer>
         <!-- <v-btn icon="mdi-magnify" variant="text"></v-btn> -->

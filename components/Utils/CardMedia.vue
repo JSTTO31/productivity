@@ -5,7 +5,7 @@
             <v-card v-bind="props" class="rounded-0">
                 <v-card id="content" flat class="rounded-0 h-75 w-100">
                     <iframe v-if="url" :src="url" style="outline: none;border: none;" id="iframe"
-                        class="w-100 h-100"></iframe>
+                        class="w-100 h-100" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     <v-card v-else flat color="primary" variant="elevated"
                         class="w-100 h-100 d-flex  justify-center rounded-0 flex-column pa-5">
                         <h2>
@@ -15,9 +15,7 @@
                             Time to explore your favorite study materials! Just paste the URL, hit play, and let the joy of
                             learning unfold! 🚀🎉
                         </p>
-                        {{ url }}
                     </v-card>
-                   
                 </v-card>
                 <v-card-actions id="actions" class="px-2 h-25 bg-surface">
                     <v-text-field v-model="urlTextField" single-line density="compact" hide-details label="Enter the url"

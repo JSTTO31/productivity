@@ -1,7 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: false },
-  modules: ['@pinia/nuxt', 'vuetify-nuxt-module', '@vueuse/nuxt', '@pinia/nuxt'],
+  modules: [
+    '@pinia/nuxt',
+    'vuetify-nuxt-module',
+    '@vueuse/nuxt',
+    '@pinia/nuxt',
+    "@nuxt/image"
+  ],
   pinia: {
     storesDirs: ['./stores/**'],
   },

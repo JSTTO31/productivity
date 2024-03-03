@@ -4,130 +4,130 @@ export default function dragElement(element: HTMLElement){
     const main = document.getElementById('main')
     let markerCard : HTMLDivElement | null = null
     
-    function setPosition(e:MouseEvent, container: HTMLElement){
-        const clientY = e.clientY + 48.8
-        const clientX = e.clientX 
-        const windowHeightHalf = (window.innerHeight - 48.8) / 2
-        const windowWidthHalf = window.innerWidth / 2
+    // function setPosition(e:MouseEvent, container: HTMLElement){
+    //     const clientY = e.clientY + 48.8
+    //     const clientX = e.clientX 
+    //     const windowHeightHalf = (window.innerHeight - 48.8) / 2
+    //     const windowWidthHalf = window.innerWidth / 2
 
 
-        let containerWidth = window.innerWidth + 'px'
-        let containerHeight = window.innerHeight + 'px'
-        let containerPositionLeft = 'auto'
-        let containerPositionRight = 'auto'
-        let containerPositionBottom = 'auto'
-        let containerPositionTop = 'auto'
+    //     let containerWidth = window.innerWidth + 'px'
+    //     let containerHeight = window.innerHeight + 'px'
+    //     let containerPositionLeft = 'auto'
+    //     let containerPositionRight = 'auto'
+    //     let containerPositionBottom = 'auto'
+    //     let containerPositionTop = 'auto'
 
 
-        if(e.clientX <= 0){
-            containerWidth = window.innerWidth / 2 + 'px'
-            containerPositionLeft = '0'
+    //     if(e.clientX <= 0){
+    //         containerWidth = window.innerWidth / 2 + 'px'
+    //         containerPositionLeft = '0'
             
 
-            if(clientY > windowHeightHalf + 150){
-                containerPositionTop = windowHeightHalf + 48.8 + 'px'
-                containerHeight = windowHeightHalf + 'px'
-            }else if(clientY < windowHeightHalf - 150){
-                containerPositionTop =  48.8 + 'px'
-                containerHeight =  windowHeightHalf + 'px'
-            }else{
-                containerPositionTop = 48.8 + 'px'
-                containerHeight = window.innerHeight - 48.8 + 'px'
-            }
+    //         if(clientY > windowHeightHalf + 150){
+    //             containerPositionTop = windowHeightHalf + 48.8 + 'px'
+    //             containerHeight = windowHeightHalf + 'px'
+    //         }else if(clientY < windowHeightHalf - 150){
+    //             containerPositionTop =  48.8 + 'px'
+    //             containerHeight =  windowHeightHalf + 'px'
+    //         }else{
+    //             containerPositionTop = 48.8 + 'px'
+    //             containerHeight = window.innerHeight - 48.8 + 'px'
+    //         }
 
-        }else if(e.clientX >= (window.innerWidth - 5)){
-            containerPositionTop = 48.8 + 'px'
-            containerPositionRight = '0'
-            containerHeight = window.innerHeight - 48.8 + 'px'
-            containerWidth = window.innerWidth / 2 + 'px'
+    //     }else if(e.clientX >= (window.innerWidth - 5)){
+    //         containerPositionTop = 48.8 + 'px'
+    //         containerPositionRight = '0'
+    //         containerHeight = window.innerHeight - 48.8 + 'px'
+    //         containerWidth = window.innerWidth / 2 + 'px'
 
-            const clientY = e.clientY + 48.8
-            const windowHeightHalf = (window.innerHeight - 48.8) / 2
+    //         const clientY = e.clientY + 48.8
+    //         const windowHeightHalf = (window.innerHeight - 48.8) / 2
 
-            if(clientY > windowHeightHalf + 150){
-                containerPositionTop = windowHeightHalf + 48.8 + 'px'
-                containerHeight = windowHeightHalf + 'px'
-            }else if(clientY < windowHeightHalf - 150){
-                containerPositionTop = 48.8 + 'px'
-                containerHeight =  windowHeightHalf + 'px'
-            }else{
-                containerPositionTop = 48.8 + 'px'
-                containerHeight = window.innerHeight- 48.8 + 'px'
-            }
-        }else if(e.clientY >= 48.8){
-            containerPositionBottom = '0'
-            containerHeight = (window.innerHeight - 48.8) / 2 + 'px'
+    //         if(clientY > windowHeightHalf + 150){
+    //             containerPositionTop = windowHeightHalf + 48.8 + 'px'
+    //             containerHeight = windowHeightHalf + 'px'
+    //         }else if(clientY < windowHeightHalf - 150){
+    //             containerPositionTop = 48.8 + 'px'
+    //             containerHeight =  windowHeightHalf + 'px'
+    //         }else{
+    //             containerPositionTop = 48.8 + 'px'
+    //             containerHeight = window.innerHeight- 48.8 + 'px'
+    //         }
+    //     }else if(e.clientY >= 48.8){
+    //         containerPositionBottom = '0'
+    //         containerHeight = (window.innerHeight - 48.8) / 2 + 'px'
 
-            if(clientX >= windowWidthHalf + 150){
-                containerPositionLeft = windowWidthHalf + 'px';
-                containerWidth = window.innerWidth / 2 + 'px'
-            }else if(clientX <= windowWidthHalf - 150){
-                containerPositionLeft =  '0';
-                containerWidth = window.innerWidth / 2 + 'px'
-            }else{
-                containerPositionLeft = '0'
-                containerWidth = window.innerWidth + 'px'
-            }
+    //         if(clientX >= windowWidthHalf + 150){
+    //             containerPositionLeft = windowWidthHalf + 'px';
+    //             containerWidth = window.innerWidth / 2 + 'px'
+    //         }else if(clientX <= windowWidthHalf - 150){
+    //             containerPositionLeft =  '0';
+    //             containerWidth = window.innerWidth / 2 + 'px'
+    //         }else{
+    //             containerPositionLeft = '0'
+    //             containerWidth = window.innerWidth + 'px'
+    //         }
             
-        }else if(e.clientY <= window.innerHeight){
-            containerPositionTop = 48.8 + 'px'
-            containerPositionLeft = '0'
-            containerHeight = (window.innerHeight - 48.8) / 2 + 'px'
+    //     }else if(e.clientY <= window.innerHeight){
+    //         containerPositionTop = 48.8 + 'px'
+    //         containerPositionLeft = '0'
+    //         containerHeight = (window.innerHeight - 48.8) / 2 + 'px'
             
-            if(clientX >= windowWidthHalf + 150){
-                containerPositionLeft = windowWidthHalf + 'px';
-                containerWidth = window.innerWidth / 2 + 'px'
-            }else if(clientX <= windowWidthHalf - 150){
-                containerPositionLeft =  '0';
-                containerWidth = window.innerWidth / 2 + 'px'
-            }else{
-                containerPositionLeft = '0'
-                containerWidth = window.innerWidth + 'px'
-            }
-        }
+    //         if(clientX >= windowWidthHalf + 150){
+    //             containerPositionLeft = windowWidthHalf + 'px';
+    //             containerWidth = window.innerWidth / 2 + 'px'
+    //         }else if(clientX <= windowWidthHalf - 150){
+    //             containerPositionLeft =  '0';
+    //             containerWidth = window.innerWidth / 2 + 'px'
+    //         }else{
+    //             containerPositionLeft = '0'
+    //             containerWidth = window.innerWidth + 'px'
+    //         }
+    //     }
 
-        container.style.left = containerPositionLeft
-        container.style.right = containerPositionRight
-        container.style.bottom = containerPositionBottom
-        container.style.top = containerPositionTop
-        container.style.width = containerWidth
-        container.style.height = containerHeight
-
-
-    }
-
-    function showMarkerCard(e: MouseEvent){
-        const container = document.createElement('div')
-        const child = document.createElement('div')
-        container.classList.add('marker')
-
-        container.style.position = 'fixed'
-        container.style.padding = '8px 8px 8px 8px'
-        container.style.zIndex = window.getComputedStyle(element).zIndex
-        setPosition(e, container)
-        child.style.height = '100%'
-        child.style.width = '100%'
-        child.style.borderRadius = '10px'
-        child.style.background = 'rgb(var(--v-theme-background))'
-        child.style.boxShadow = '1px -1px 14px 0px rgba(0,0,0,0.75)'
-        child.style.filter = 'brightness(90%)'
-        container.appendChild(child)
+    //     container.style.left = containerPositionLeft
+    //     container.style.right = containerPositionRight
+    //     container.style.bottom = containerPositionBottom
+    //     container.style.top = containerPositionTop
+    //     container.style.width = containerWidth
+    //     container.style.height = containerHeight
 
 
+    // }
 
-        if(main){
-            main.prepend(container)
-        }
+    // function showMarkerCard(e: MouseEvent){
+    //     const container = document.createElement('div')
+    //     const child = document.createElement('div')
+    //     container.classList.add('marker')
 
-        markerCard = container
-    }
+    //     container.style.position = 'fixed'
+    //     container.style.padding = '8px 8px 8px 8px'
+    //     container.style.zIndex = window.getComputedStyle(element).zIndex
+    //     setPosition(e, container)
+    //     child.style.height = '100%'
+    //     child.style.width = '100%'
+    //     child.style.borderRadius = '10px'
+    //     child.style.background = 'rgb(var(--v-theme-background))'
+    //     child.style.boxShadow = '1px -1px 14px 0px rgba(0,0,0,0.75)'
+    //     child.style.filter = 'brightness(90%)'
+    //     container.appendChild(child)
 
-    function removeCardMarker(){
-        if(main && markerCard){
-            main.removeChild(markerCard)
-            markerCard = null
-        }
-    }
+
+
+    //     if(main){
+    //         main.prepend(container)
+    //     }
+
+    //     markerCard = container
+    // }
+
+    // function removeCardMarker(){
+    //     if(main && markerCard){
+    //         main.removeChild(markerCard)
+    //         markerCard = null
+    //     }
+    // }
 
     if(element){
         containerWidth = parseInt(element.getAttribute('element-width-data') || '0')
@@ -160,7 +160,7 @@ export default function dragElement(element: HTMLElement){
             document.onmousemove = null
             isDrag.value = false
             if(markerCard){
-                setPosition(e, element)
+                // setPosition(e, element)
                 element.classList.remove('rounded-lg')
                 element.classList.add('rounded-0')
                 // element.classList.add('border')
@@ -169,7 +169,7 @@ export default function dragElement(element: HTMLElement){
                 header.style.cursor = 'grab'
             }
             
-            removeCardMarker()
+            // removeCardMarker()
         }
     }
 
@@ -186,13 +186,13 @@ export default function dragElement(element: HTMLElement){
 
         if(e.clientX <= 0 || e.clientX >= (window.innerWidth - 5) || e.clientY >= window.innerHeight || e.clientY  <= 48.8){
             if(!markerCard){
-                showMarkerCard(e)
+                // showMarkerCard(e)
             }else{
-                setPosition(e, markerCard)
+                // setPosition(e, markerCard)
             }
         }else{
             if(markerCard){
-                removeCardMarker()
+                // removeCardMarker()
             }
         }
 
@@ -201,11 +201,11 @@ export default function dragElement(element: HTMLElement){
         // element.classList.remove('border')
         element.classList.add('rounded-lg')
           
-        if(element.clientWidth == window.innerWidth && element.offsetLeft == 0 && element.offsetTop == 48){
+        if(element.clientWidth == (window.innerWidth - 50) && element.offsetLeft == 0 && element.offsetTop == 48){
             const currentMousePositionX = e.clientX
             element.style.width = containerWidth + 'px'
             element.style.height = containerHeight + 'px'
-            element.style.left = (currentMousePositionX) - (containerWidth * (currentMousePositionX / window.innerWidth)) + 'px'
+            element.style.left = (currentMousePositionX) - (containerWidth * (currentMousePositionX / (window.innerWidth - 50))) + 'px'
         }  
 
         element.style.top = (element.offsetTop - pos2) + 'px'

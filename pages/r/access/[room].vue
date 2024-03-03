@@ -12,7 +12,7 @@
         @click="$router.push({ name: 'r-access-room', params: { room: 'aD3Vwed6abuoPE2BzInnTKcTKYp' } })" prepend-icon="mdi-home">Home</v-btn>
       <v-divider vertical inset class="mr-2"></v-divider>
       <v-btn size="small" style="opacity: .8;" class="text-capitalize rounded-lg mr-2 font-weight-regular" prepend-icon="mdi-square-edit-outline" :to="{ name: 'r-access-room-my-task', params: { room: 'aD3Vwed6abuoPE2BzInnTKcTKYp' } }" >My Tasks</v-btn>
-      <v-btn size="small" style="opacity: .8;" class="text-capitalize rounded-lg mr-2 font-weight-regular" prepend-icon="mdi-calendar" :to="{ name: 'r-access-room-task-management', params: { room: 'aD3Vwed6abuoPE2BzInnTKcTKYp' } }" >Schedules</v-btn>
+      <v-btn size="small" style="opacity: .8;" class="text-capitalize rounded-lg mr-2 font-weight-regular" prepend-icon="mdi-calendar" :to="{ name: 'r-access-room-schedules', params: { room: 'aD3Vwed6abuoPE2BzInnTKcTKYp' } }" >Schedules</v-btn>
       <v-divider vertical inset class="mr-2"></v-divider>
       <v-btn size="small" style="opacity: .8;" class="text-capitalize rounded-lg mr-2 font-weight-regular" prepend-icon="mdi-dock-left">Documentation</v-btn>
       <v-btn size="small" style="opacity: .8;" class="text-capitalize rounded-lg mr-2 font-weight-regular" prepend-icon="mdi-dock-left">Flash Card</v-btn>
@@ -51,15 +51,10 @@ definePageMeta({
   middleware: ['auth']
 })
 const {name} = useTheme()
-const showNavigation = ref<null | boolean>(null)
 const { audioOutputs: speakers } = useDevicesList({ requestPermissions: true })
 const hasHeadphone = computed(() => speakers.value.some(item => /Default - Headphones/.test(item.label)));
 const showNavigationTools = ref(false)
-const showTextEditor = ref(false)
-const showTask = ref(false)
-const showTimer = ref(false)
-const showMedia = ref(false)
-const showSound = ref(false)
+
 
 const mouseMove = (e: MouseEvent) => {
   if (e.clientX + 10 >= window.innerWidth) {

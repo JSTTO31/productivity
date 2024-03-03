@@ -3,7 +3,7 @@
         key="media" @close="emits('update:showSettings', false)" @minimize="emits('update:showSettings', false)">
         <template #default="props">
             <v-layout class="h-100 pa-0" fluid>
-                <v-navigation-drawer :rail="rail">
+                <v-navigation-drawer :rail="rail" width="300">
                     <v-list class="h-100" nav>
                         <v-list-item @click="selected = 0" :active="selected == 0" class="text-capitalize " prepend-icon="mdi-account-outline">
                             <span v-if="!rail">Profile
@@ -15,6 +15,10 @@
                         </v-list-item>
                         <v-list-item @click="selected = 2" :active="selected == 2" class="text-capitalize " prepend-icon="mdi-tune-vertical">
                             <span v-if="!rail">Sound setting
+                                </span>
+                        </v-list-item>
+                        <v-list-item @click="selected = 2" :active="selected == 2" class="text-capitalize " prepend-icon="mdi-bell">
+                            <span v-if="!rail">Notification Preferences
                                 </span>
                         </v-list-item>
                         <v-list-item @click="selected = 0" class="text-capitalize " prepend-icon="mdi-lock-outline">

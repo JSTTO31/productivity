@@ -13,17 +13,20 @@
       </v-carousel-item>
       <v-carousel-item>
         <v-container class="h-screen bg-transparent"
-          style="padding-inline: 220px;padding-top: 50px; padding-bottom: 100px;" fluid>
+          style="padding-inline: 50px;padding-top: 50px; padding-bottom: 100px;" fluid>
           <v-row class="h-100 d-flex ma-0">
             <v-col class="h-100 d-flex flex-column text-white" cols="12">
               <v-container fluid class="pa-0 h-100">
                 <v-row class="h-100 pb-0">
-                  <v-col class="px-5 h-100 py-0" cols="7">
+                  <v-col class="px-5 h-100 py-0" cols="4">
                     <HomeCardTask></HomeCardTask>
                   </v-col>
-                  <v-col cols="5" class="h-100  py-0 d-flex flex-column" style="grid-row-gap: 35px;">
+                  <v-col cols="4" class="h-100  py-0 d-flex flex-column" style="grid-row-gap: 35px;">
                     <HomeCardDailyProgress></HomeCardDailyProgress>
                     <HomeCardTimer></HomeCardTimer>
+                  </v-col>
+                  <v-col cols="4" class="h-100  py-0 d-flex flex-column" style="grid-row-gap: 35px;">
+                      <HomeCardSchedule></HomeCardSchedule>
                   </v-col>
                 </v-row>
               </v-container>
@@ -33,8 +36,7 @@
       </v-carousel-item>
       <v-carousel-item>
         <v-container class="h-100" style="padding: 150px 400px;">
-          <v-card elevation="10" class="rounded-lg h-100 "
-            color="yellow">
+          <v-card elevation="10" class="rounded-lg h-100 " color="yellow">
             <v-card-title class="d-flex align-center" style="font-size: 18px">
               Notes
               <v-spacer></v-spacer>

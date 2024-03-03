@@ -12,6 +12,7 @@ export type userType = {
 
 export const useUserStore = defineStore('user', () => {
     const user = ref<userType | null>(null)
+    const token = ref<string | null>(null)
 
     async function checkUserIfAuthenticated(token: string){
         const headers = {
@@ -44,5 +45,5 @@ export const useUserStore = defineStore('user', () => {
 
     return {
         login, checkUserIfAuthenticated, logout,
-        user}
+        user, token}
 })

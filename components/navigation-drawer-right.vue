@@ -1,21 +1,6 @@
 <template>
     <v-navigation-drawer location="right" width="459" rail id="right-navigation">
         <v-list class="h-100 d-flex pa-0 flex-column">
-            <v-list-item prepend-icon="mdi-tune" @click="showSound = true">
-            </v-list-item>
-
-            <v-menu transition="slide-x-reverse-transition" location="start" target="right-navigation" height="700">
-                <template #activator="{ props }">
-                    <v-list-item v-bind="props" prepend-icon="mdi-application-settings"></v-list-item>
-                </template>
-                <UtilsCardTheme class="mr-2 rounded-lg mt-2"></UtilsCardTheme>
-            </v-menu>
-            <v-menu transition="slide-x-reverse-transition" location="start" v-bind:close-on-content-click="false"  height="700">
-                <template #activator="{ props }">
-                    <v-list-item v-bind="props" prepend-icon="mdi-palette"></v-list-item>
-                </template>
-                <UtilsCardBackgroundColor class="h-100 mr-2"></UtilsCardBackgroundColor>
-            </v-menu>
             <v-list-item prepend-icon="mdi-movie-open" @click="showMedia = !showMedia"
                 :color="showMedia ? 'secondary' : ''"></v-list-item>
             <v-list-item prepend-icon="mdi-timer-outline" @click="showTimer = !showTimer"
@@ -44,7 +29,7 @@
 </template>
 <script lang="ts" setup>
 const rail = ref(true)
-const showSettings = ref(true)
+const showSettings = ref(false)
 const showNavigation = ref<null | boolean>(null)
 const { audioOutputs: speakers } = useDevicesList({ requestPermissions: true })
 const hasHeadphone = computed(() => speakers.value.some(item => /Default - Headphones/.test(item.label)));
