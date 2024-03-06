@@ -1,5 +1,5 @@
 <template>
-    <v-dialog :model-value="showDialog" @click:outside="emits('update:showDialog', false)" width="700" :contained="true"
+    <v-dialog :model-value="showDialog" @click:outside="close" width="700" :contained="true"
         scrim="primary">
         <v-form @submit.prevent="submit">
             <v-card class="rounded-lg d-flex flex-column" height="500">
@@ -141,11 +141,13 @@
                 </v-card-text>
                 <v-spacer></v-spacer>
                 <v-card-actions class="px-6 pb-5">
-                    <v-btn variant="flat" rounded="xl" prepend-icon="mdi-calendar-check" class="text-capitalize px-5"
-                        color="primary" type="submit">Save
+                    <v-btn variant="flat" prepend-icon="mdi-calendar-edit" class="text-capitalize px-5"
+                        color="success" type="submit" :disabled="!$v.$anyDirty">Update
                         Schedule</v-btn>
-                    <v-btn variant="text" rounded="xl" class="text-capitalize mr-3 px-3"
-                        prepend-icon="mdi-reload">Clear</v-btn>
+                    <v-btn variant="text" class="text-capitalize mr-3 px-3"
+                        @click="close">Cancel</v-btn>
+                    <v-spacer></v-spacer>
+                    <v-btn @click="remove" prepend-icon="mdi-trash-can" variant="tonal" color="error" class="text-capitalize px-3">Delete</v-btn>
                 </v-card-actions>
             </v-card>
         </v-form>
@@ -157,21 +159,24 @@ import { required, requiredIf, helpers } from '@vuelidate/validators';
 import useVuelidate from '@vuelidate/core';
 import { useScheduleStore } from '~/stores/schedule';
 const $schedule = useScheduleStore()
+const route = useRoute()
+const router = useRouter()
 const selectedWindow = ref(0)
 const props = defineProps(['showDialog'])
 const emits = defineEmits(['update:showDialog'])
+const {schedule} = storeToRefs(useScheduleStore())
 const calendar = reactive({
-    title: "team lunch",
-    description: "celebrate recent successes and discuss upcoming events",
-    location: "cafeteria",
-    pinned: true,
-    attendees: [],
-    recurrence: "weekly",
-    tags: [],
-    reminder: "30 minutes before",
-    visibility: "public",
-    startAt: new Date("2024-03-15T12:30:00"),
-    endAt: new Date("2024-03-15T13:30:00"),
+    title: schedule.value?.title,
+    description: schedule.value?.description,
+    location: schedule.value?.location,
+    pinned: schedule.value?.pinned,
+    attendees: schedule.value?.attendees,
+    recurrence: schedule.value?.recurrence,
+    tags: schedule.value?.tags.map(item => item._id) || [],
+    reminder: schedule.value?.reminder,
+    visibility: schedule.value?.visibility,
+    startAt: schedule.value?.startAt,
+    endAt: schedule.value?.endAt,
     wholeDay: false
 })
 
@@ -199,31 +204,37 @@ const alertOptions = [
     '1 day before',
 ]
 
+function close(){
+    const query = {...route.query}
+    delete query.edit
+    router.push({query})
+}
 
-const submit = async () => {
+
+async function submit(){
     if (!await $v.value.$validate()) {
         return
-    }
-
-    $schedule.create(calendar).then(() => {
-        setTimeout(() => {
-            $v.value.$reset()
-            calendar.title = '',
-            calendar.description = '',
-            calendar.location = '',
-            calendar.pinned = false,
-            calendar.attendees = [],
-            calendar.recurrence = 'none',
-            calendar.tags = [],
-            calendar.reminder = 'none',
-            calendar.visibility = 'private',
-            calendar.startAt = new Date(),
-            calendar.endAt = new Date(),
-            calendar.wholeDay = false
-        }, 100);
-        emits('update:showDialog', false)
-    })
+    }  
+    
+    //@ts-ignore
+    $schedule.update(schedule.value?._id, calendar)
+    schedule.value = null
 }
+
+function remove() {
+    if(schedule.value){
+        $schedule.destroy(schedule.value._id)
+        schedule.value = null
+        close()
+    }
+}
+
+onUpdated(() => {
+    if(!schedule.value){
+        close()
+    }
+})
+
 </script>
 
 <style scoped></style>

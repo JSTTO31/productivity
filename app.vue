@@ -1,14 +1,12 @@
 <template>
   <v-app class="h-screen w-screen">
-    <NuxtLoadingIndicator></NuxtLoadingIndicator>
+    <NuxtLoadingIndicator v-if="$route.name != $route.name"></NuxtLoadingIndicator>
     <ClientOnly>
       <NuxtLayout>
           <NuxtPage></NuxtPage>
       </NuxtLayout>
       <template #fallback>
-        <div class="h-screen w-screen d-flex align-center justify-center">
-          <h1>Loading...</h1>
-        </div>
+        <Loading></Loading>
       </template>
     </ClientOnly>
   </v-app>

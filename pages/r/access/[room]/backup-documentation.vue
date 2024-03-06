@@ -8,9 +8,6 @@
             </v-row>
         </v-container>
     </v-main>
-    <v-navigation-drawer location="right">
-
-    </v-navigation-drawer>
 </template>
 
 <script setup lang="ts">

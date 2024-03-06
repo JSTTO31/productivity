@@ -17,11 +17,11 @@
                             <span v-if="!rail">Sound setting
                                 </span>
                         </v-list-item>
-                        <v-list-item @click="selected = 2" :active="selected == 2" class="text-capitalize " prepend-icon="mdi-bell">
+                        <v-list-item @click="" class="text-capitalize " prepend-icon="mdi-bell">
                             <span v-if="!rail">Notification Preferences
                                 </span>
                         </v-list-item>
-                        <v-list-item @click="selected = 0" class="text-capitalize " prepend-icon="mdi-lock-outline">
+                        <v-list-item  @click="" class="text-capitalize " prepend-icon="mdi-lock-outline">
                             <span v-if="!rail">Privacy & Security
                                 </span>
                         </v-list-item>
@@ -83,17 +83,24 @@
                             <v-card-title class="text-subtitle-1">Background Themes</v-card-title>
                             <v-card-text>
                                 <v-card class="rounded-lg pa-5 border" flat>
-                                    <v-tooltip v-for="theme in themes">
+                                    <v-tooltip v-for="theme in themes.filter(item  => item.type == 'video')">
                                         <template #activator="{ props }">
                                             <v-avatar
                                                 :style="selectedTheme.id == theme.id ? 'border: 4px solid #F5E8C7' : 'border: 1px solid #435585'"
-                                                @click="selectedTheme = theme" style=";cursor:pointer" v-bind="props"
+                                                @click="selectedTheme = theme" style="cursor:pointer" v-bind="props"
                                                 size="55" v-ripple :color="theme.color" class="mb-4 rounded-xl mr-3">
                                                 <v-img :src="theme.icon"></v-img>
                                             </v-avatar>
                                         </template>
                                         {{ theme.label }}
                                     </v-tooltip>
+                                    <v-avatar
+                                        v-for="theme in themes.filter(item  => item.type == 'color')"
+                                        :style="theme.backgroundColor"
+                                        @click="selectedTheme = theme" style="cursor:pointer"
+                                        size="55" v-ripple class="mb-4 rounded-xl mr-3">
+                                        <v-img :src="theme.icon"></v-img>
+                                    </v-avatar>
                                 </v-card>
                             </v-card-text>
                         </v-card>
@@ -150,7 +157,7 @@ onMounted(() => {
     if (container) {
         container.style.position = 'fixed';
         container.style.top = '18%';
-        container.style.left = '18%';
+        container.style.left = '20%';
 
         const observer = new ResizeObserver((rs) => {
             if(rs[0].contentRect.width <= 700){

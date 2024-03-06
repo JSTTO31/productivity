@@ -17,7 +17,6 @@
             <v-card-text class="pa-0">
                 <div class="px-2 pt-2">
                     <v-text-field hide-details label="Search music..." prepend-inner-icon="mdi-magnify" variant="outlined" single-line></v-text-field>
-
                 </div>
                 <v-list class="bg-transparent h-100" style="overflow: auto;">
                     <v-card class="rounded-0 pa-5" :variant="index == 0 ? 'tonal' : 'elevated'"  :color="index == 0 ? '' : 'transparent'" @click="" flat v-for="music, index in musicList" :key="music.title" >

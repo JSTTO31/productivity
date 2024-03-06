@@ -1,6 +1,6 @@
 <template>
-    <v-navigation-drawer location="right" class="text-white" style="background-color: rgba(0,0,0,.3);z-index: 50;"
-        :model-value="showNavigation">
+    <v-navigation-drawer location="left"
+        :model-value="showNavigation" style="z-index: 50 !important;">
         <v-card class="pa-3 px-5 d-flex align-center border-b rounded-0" color="transparent" flat>
             <h4 class="font-weight-regular">Tasks</h4>
             <v-spacer></v-spacer>

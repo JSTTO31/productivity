@@ -57,7 +57,7 @@ function maximize(){
         const currentHeight = container.clientHeight
         const windowWidth = window.innerWidth
         const windowHeight =  window.innerHeight - 48
-        const isMaximize = currentWidth == (windowWidth - 50) && currentHeight == windowHeight 
+        const isMaximize = currentWidth == (windowWidth) && currentHeight == windowHeight 
 
         if(!isMaximize){
             container.classList.remove('rounded-lg')
@@ -69,7 +69,7 @@ function maximize(){
 
         container.style.top = isMaximize ? '50px' : '48px'
         container.style.left = isMaximize ? '40px' : '0px'
-        container.style.width = (isMaximize ? props.width :  windowWidth - 50) + 'px'
+        container.style.width = (isMaximize ? props.width :  windowWidth) + 'px'
         container.style.height = (isMaximize ? props.height : windowHeight) + 'px'
     }
 }
@@ -80,9 +80,7 @@ onMounted(() => {
     const content = document.getElementById(props.title + '-card-content')
 
     if (container) { 
-        container.style.position = 'fixed'
-        container.style.top = 55 + 'px'
-        container.style.left = 50 + 'px'
+
         
         const {isDrag: drag} = useDraggable(container)
         

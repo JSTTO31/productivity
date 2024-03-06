@@ -201,11 +201,11 @@ export default function dragElement(element: HTMLElement){
         // element.classList.remove('border')
         element.classList.add('rounded-lg')
           
-        if(element.clientWidth == (window.innerWidth - 50) && element.offsetLeft == 0 && element.offsetTop == 48){
+        if(element.clientWidth == (window.innerWidth) && element.offsetLeft == 0 && element.offsetTop == 48){
             const currentMousePositionX = e.clientX
             element.style.width = containerWidth + 'px'
             element.style.height = containerHeight + 'px'
-            element.style.left = (currentMousePositionX) - (containerWidth * (currentMousePositionX / (window.innerWidth - 50))) + 'px'
+            element.style.left = (currentMousePositionX) - (containerWidth * (currentMousePositionX / (window.innerWidth))) + 'px'
         }  
 
         element.style.top = (element.offsetTop - pos2) + 'px'

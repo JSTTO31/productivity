@@ -1,10 +1,10 @@
 <template>
-    <!-- <video  id="video" style="width: 100vw;position: absolute;top: 0;left: 0;filter: brightness(90%)" muted :autoplay="false" :src="selectedTheme.backgrounds[selectedBackground].path" loop>
-    </video> -->
-    <div style="width: 100vw;height: 100vh;position: absolute;top: 0;left: 0;filter: brightness(80%);background-color: #A9C9FF;
-background-image: linear-gradient(180deg, #A9C9FF 0%, #FFBBEC 100%);
-;
-;">
+    <video  id="video" style="width: 100vw;position: absolute;top: 0;left: 0;filter: brightness(80%)" muted :autoplay="true" v-if="selectedTheme.type == 'video'" :src="
+    //@ts-ignore
+    selectedTheme.backgrounds[selectedBackground].path" 
+    loop>
+    </video>
+    <div v-else style="width: 100vw;height: 100vh;position: absolute;top: 0;left: 0;filter: brightness(80%);" :style="selectedTheme.backgroundColor">
       
     </div>
 </template>

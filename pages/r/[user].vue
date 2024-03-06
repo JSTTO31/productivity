@@ -2,7 +2,7 @@
   <v-layout>
     <v-app-bar class="pa-0 border-b  pr-3 pl-2 bg-surface" flat>
       <v-btn class="text-capitalize px-1 mr-3" style="font-family: 'Lato';">
-        <AppLogo class="mr-0"></AppLogo>
+        <AppLogo class="mr-0" @click="$router.push({name: 'index'})"></AppLogo>
       </v-btn>
       <v-btn style="opacity: .8;" class="text-capitalize rounded-lg mr-2 font-weight-regular"
         append-icon="mdi-chevron-down"
@@ -13,12 +13,13 @@
         append-icon="mdi-chevron-down">Task management</v-btn>
       <v-spacer></v-spacer>
       <div style="width: 20%" class="mr-5">
-        <v-text-field rounded single-line hide-details prepend-inner-icon="mdi-magnify" density="compact"
-          label="search..." variant="solo-filled"></v-text-field>
+        <v-text-field single-line hide-details prepend-inner-icon="mdi-magnify" density="compact"
+          label="search..." variant="solo-filled" flat class="rounded-lg"></v-text-field>
       </div>
-      <v-btn prepend-icon="mdi-share" class="text-capitalize mx-2" rounded color="secondary"
+      
+      <v-btn prepend-icon="mdi-share" class="text-capitalize rounded-lg mx-2"  color="secondary"
         variant="elevated">Share</v-btn>
-      <v-btn append-icon="mdi-bell" class="mx-1 text-capitalize" variant="outlined" rounded>Notificationns</v-btn>
+      <v-btn append-icon="mdi-bell" class="mx-1 text-capitalize rounded-lg" variant="outlined" >Notificationns</v-btn>
       <v-avatar size="35" class="border text-caption font-weight-bold ml-2" color="#F5E8C7">
         JS
       </v-avatar>
@@ -57,8 +58,10 @@
     </v-navigation-drawer>
     <v-main class="bg-surface">
       <v-container fluid>
-        <v-card class="rounded-xl">
-          <v-img src="https://source.unsplash.com/random/1500x250/?premium"></v-img>
+        <h2 class="mb-5">Recents open</h2>
+        <v-card width="350" class="pa-5 rounded-lg border" flat @click="$router.push({ name: 'r-access-room', params: { room: 'aD3Vwed6abuoPE2BzInnTKcTKYp' } })">
+          <v-img src="/screenshot.png"></v-img>
+          <h3 class="mt-2">My room</h3>
         </v-card>
       </v-container>
     </v-main>
@@ -66,6 +69,7 @@
 </template>
 
 <script setup lang="ts">
+import room from './access/[room].vue'
 useHead({
   title: 'Home'
 })

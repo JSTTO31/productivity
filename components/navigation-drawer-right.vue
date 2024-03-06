@@ -1,6 +1,6 @@
 <template>
-    <v-navigation-drawer location="right" width="459" rail id="right-navigation">
-        <v-list class="h-100 d-flex pa-0 flex-column">
+    <!-- <v-navigation-drawer location="left" width="39" id="right-navigation" v-if="true">
+        <v-list class="h-100">
             <v-list-item prepend-icon="mdi-movie-open" @click="showMedia = !showMedia"
                 :color="showMedia ? 'secondary' : ''"></v-list-item>
             <v-list-item prepend-icon="mdi-timer-outline" @click="showTimer = !showTimer"
@@ -10,7 +10,25 @@
             <v-spacer></v-spacer>
             <v-list-item prepend-icon="mdi-cog" @click="showSettings = true"></v-list-item>
         </v-list>
-    </v-navigation-drawer>
+    </v-navigation-drawer> -->
+    <v-hover v-slot="{props, isHovering}">
+        <div id="tools"  class="pt-8" v-bind="props" style="height: 80px;" :style="{bottom: isHovering ? '6px' : '-40px', transition: '.2s ease'}">
+            <v-card  style="overflow: visible;" class=" justify-space-between rounded-lg pa-2 d-flex" :class="isHovering ? 'pt-2' : 'pt-5'" elevation="5" width="220">
+                <v-card  width="45" flat height="45" @click="showTask = !showTask" class="rounded tool pa-1 bg-transparent">
+                    <v-img src="/tools/notes.png"></v-img>
+                </v-card>
+                <v-card  width="45" flat height="45" @click="showTimer = !showTimer" class="rounded tool pa-1 bg-transparent">
+                    <v-img src="/tools/stopwatch.png"></v-img>
+                </v-card>
+                <v-card  width="45" flat height="45" @click="showMedia = !showMedia" class="rounded tool pa-1 bg-transparent">
+                    <v-img src="/tools/play-button.png"></v-img>
+                </v-card>
+                <v-card  width="45" flat height="45" @click="showSettings = !showSettings" class="rounded tool pa-1 mr-n2 bg-transparent">
+                    <v-img src="/tools/cogwheel.png"></v-img>
+                </v-card>
+            </v-card>
+        </div>
+    </v-hover>
     <div class="marker">
         <div></div>
     </div>
@@ -26,13 +44,13 @@
         v-model:show-editor="showTextEditor"></UtilsCardTextEditor>
     <UtilsCardSettings key="settings" class="floating-card" @vue:before-update="beforeUpdateElement"
         v-model:show-settings="showSettings"></UtilsCardSettings>
+
+  
 </template>
 <script lang="ts" setup>
 const rail = ref(true)
 const showSettings = ref(false)
 const showNavigation = ref<null | boolean>(null)
-const { audioOutputs: speakers } = useDevicesList({ requestPermissions: true })
-const hasHeadphone = computed(() => speakers.value.some(item => /Default - Headphones/.test(item.label)));
 const showTextEditor = ref(false)
 const showTask = ref(false)
 const showTimer = ref(false)
@@ -106,6 +124,25 @@ onBeforeRouteLeave((to, from, next) => {
 </script>
   
 <style scoped>
+.tool{
+    transition: .25s ease-in-out;
+
+}
+.tool:hover{
+    transform: scale(1.5) translateY(-10px);
+}
+
+.tool:active{
+    transform: scale(1.2);
+}
+#tools{
+  position: fixed;
+  bottom: -50px;
+  height: 60px;
+  right: 5%;
+  /* transform: translateX(-50%); */
+  z-index: 2000;
+}
 
 #navigation-tools{
     position: fixed;
@@ -118,13 +155,13 @@ onBeforeRouteLeave((to, from, next) => {
 
 .slide-enter-active,
 .slide-leave-active {
-    transition: transform .4s ease-out, opacity .2s linear, height 2s linear;
+    transition: transform .2s ease-out, opacity .1s linear;
 }
 
 .slide-enter-from,
 .slide-leave-to {
-    -webkit-transform: translateX(250%) scaleY(.05);
-    transform: translateX(250%) scaleY(.05);
+    -webkit-transform: scale(.5);
+    transform: scale(.5);
     opacity: 0;
 }
 </style>

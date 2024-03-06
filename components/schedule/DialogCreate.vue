@@ -161,18 +161,18 @@ const selectedWindow = ref(0)
 const props = defineProps(['showDialog'])
 const emits = defineEmits(['update:showDialog'])
 const calendar = reactive({
-    title: "team lunch",
-    description: "celebrate recent successes and discuss upcoming events",
-    location: "cafeteria",
-    pinned: true,
-    attendees: [],
-    recurrence: "weekly",
-    tags: [],
-    reminder: "30 minutes before",
-    visibility: "public",
-    startAt: new Date("2024-03-15T12:30:00"),
-    endAt: new Date("2024-03-15T13:30:00"),
-    wholeDay: false
+    "title": "weekly review",
+    "description": "evaluate project progress and set goals",
+    "location": "office",
+    "pinned": false,
+    "attendees": [],
+    "recurrence": "weekly",
+    "tags": [],
+    "reminder": "1 day before",
+    "visibility": "public",
+    "startAt": new Date("2024-02-28T16:00:00.000Z"),
+    "endAt": new Date("2024-02-28T17:00:00.000Z"),
+    "wholeDay": false
 })
 
 const rules = {

@@ -58,16 +58,15 @@ const remove_task = (id: number) => {
 }
 
 onMounted(() => {
-    //   const parent = document.getElementById('Todo List-container-child')
-    //   const content = document.getElementById('task-content')
+      const content = document.getElementById('Todo List-container')
 
-    //   if(content && parent){
+      if(content){
 
-    //     content.style.height = parent.clientHeight + 'px'
-    //     const observer = new ResizeObserver(() => {
-    //         content.style.height = parent.clientHeight + 'px'
-    //     })
-    //   }
+        content.style.position = 'fixed';
+        content.style.top = '18%';
+        content.style.left = '36%';
+
+      }
 
 
 

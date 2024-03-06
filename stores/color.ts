@@ -39,7 +39,7 @@ export const colors = [
 ]
 
 export const useColorStore = defineStore('color', () => {
-    const selectedBackgroundColor = ref("dark")
+    const selectedBackgroundColor = ref("light")
     const {global} = useTheme()
     const preferredColor = usePreferredColorScheme()
     function setBackgroundColor(value: string){

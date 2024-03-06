@@ -3,7 +3,7 @@
     </v-list-item>
     <v-list class="w-100" v-if="showListTags">
         <v-hover v-for="tag in tags" :key="tag.label" v-slot="{props, isHovering}">
-            <v-list-item class="px-5 text-caption border-b font-weight-light w-100" :active="isHovering" v-bind="props">
+            <v-list-item class="px-5 text-caption border-b font-weight-regular w-100" :active="isHovering" v-bind="props">
                 <template #prepend>
                     <v-icon :color="tag.color">mdi-square</v-icon>
                 </template>

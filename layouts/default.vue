@@ -19,9 +19,9 @@
           <v-btn class="text-capitalize mr-3 rounded-lg font-weight-bold" rounded="5" variant="elevated" @click="$router.push({name: 'auth-login'})" color="primary">Sign up</v-btn>
         </div>
         <div v-else>
-          <v-btn color="primary" variant="elevated" class="text-capitalize rounded-lg font-weight-bold" @click="$router.push({name: 'r-new-member', params: {
+          <v-btn color="primary" variant="elevated" class="text-capitalize rounded-lg font-weight-bold" @click="$router.push({name: 'r-user', params: {
             //@ts-ignore
-            email: user.email
+            user: user.email
           }})">Let's go to work</v-btn>
           <v-btn color="grey-darken-3" variant="elevated" class="ml-2 text-capitalize rounded-lg font-weight-bold" @click="$user.logout">Logout</v-btn>
         </div>

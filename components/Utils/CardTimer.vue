@@ -152,6 +152,10 @@ onMounted(() => {
     if (progressContent && content) {
         let originalHeight = height + 100
 
+        content.style.position = 'fixed';
+        content.style.top = '18%';
+        content.style.left = '36%';
+
         const observer = new ResizeObserver((resize) => {
             progressContent.style.transform = `scale(${content.clientHeight / originalHeight})`
         })

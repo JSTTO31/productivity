@@ -2,8 +2,8 @@ import type { TagType } from "./tag";
 import type { userType } from "./user";
 
 
-export type schedule = {
-    _id?: string,
+export type ScheduleData = {
+    _id: string,
     title: String,
     description: String,
     location: String,
@@ -18,8 +18,7 @@ export type schedule = {
     assignee?: userType,
 }
 
-export type scheduleedit = {
-    _id?: string,
+export type ScheduleForm = {
     title: String,
     description: String,
     location: String,
@@ -34,7 +33,8 @@ export type scheduleedit = {
 }
 
 export const useScheduleStore = defineStore('schedule', () => {
-    const schedules  = ref<schedule[]>([]);
+    const schedules  = ref<ScheduleData[]>([]);
+    const schedule  = ref<ScheduleData | null>(null);
 
     async function getAll(){
         try {
@@ -43,8 +43,6 @@ export const useScheduleStore = defineStore('schedule', () => {
             if(data.value){
                 //@ts-ignore
                 const {schedules: schedulesData} = data.value 
-                console.log(data.value);
-                
                 schedules.value = schedulesData
             }
 
@@ -53,7 +51,7 @@ export const useScheduleStore = defineStore('schedule', () => {
         }
     }
 
-    async function create(info: scheduleedit){
+    async function create(info: ScheduleForm){
         try {
             const response = await useApiFetch('/schedules', {
                 method: 'POST',
@@ -71,5 +69,60 @@ export const useScheduleStore = defineStore('schedule', () => {
         }
     }
 
-    return {schedules, getAll, create}
+    async function update(id: string, info: ScheduleForm){
+        try {
+            const response = await useApiFetch('/schedules/' + id, {
+                method: 'PUT',
+                body: {
+                    ...info
+                },
+                onResponse(e){
+                    schedules.value = schedules.value.map(item => item._id == id ? e.response._data.schedule : item)
+                    
+                }
+            })
+
+            return response
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async function destroy(id: string){
+        try {
+            const response = await useApiFetch('/schedules/' + id, {
+                method: 'DELETE',
+                onResponse(e){
+                    schedules.value = schedules.value.filter(item => item._id == id ? e.response._data.schedule : item)
+                }
+            })
+
+            return response
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async function togglePinned(id: string){
+        const schedule = schedules.value.find(item => item._id == id)
+        try {
+            const response = await useApiFetch('/schedules/' + id, {
+                method: 'PUT',
+                body: {
+                    ...schedule,
+                    pinned: !schedule?.pinned
+                },
+                onResponse(e){
+                    schedules.value = schedules.value.map(item => item._id == id ? e.response._data.schedule : item)
+                    
+                }
+            })
+
+            return response
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    return {schedules, schedule, getAll, create, update, togglePinned, destroy}
 })

@@ -1,21 +1,26 @@
 <template>
     <UtilsThemeBackground ref="video" style="position: fixed;top: 0;left: 0;"></UtilsThemeBackground>
-
     <v-app-bar class="pa-0 border-b pr-5 bg-surface" :color="name == 'dark' ? '' : 'primary'" density="compact" flat>
       <!-- <UtilsThemeBackground ref="video" style="position: fixed;top: 0;left: 0;"></UtilsThemeBackground> -->
-      <v-btn class="rounded-lg h-75" size="small"
+      <!-- <v-btn class="rounded-lg h-75" size="small"
         @click="$router.push({ name: 'r-user', params: { user: 'joshuasotto@example.example' } })">
         <v-icon style="transform: rotate(25deg)" size="20">mdi-lightning-bolt</v-icon>
-      </v-btn>
-      <v-divider vertical inset class="mx-2 mr"></v-divider>
+      </v-btn> -->
+      <!-- <v-divider vertical inset class="mx-2 mr"></v-divider> -->
       <v-btn size="small" style="opacity: .8;" class="text-capitalize rounded-lg mr-2 font-weight-regular"
         @click="$router.push({ name: 'r-access-room', params: { room: 'aD3Vwed6abuoPE2BzInnTKcTKYp' } })" prepend-icon="mdi-home">Home</v-btn>
-      <v-divider vertical inset class="mr-2"></v-divider>
-      <v-btn size="small" style="opacity: .8;" class="text-capitalize rounded-lg mr-2 font-weight-regular" prepend-icon="mdi-square-edit-outline" :to="{ name: 'r-access-room-my-task', params: { room: 'aD3Vwed6abuoPE2BzInnTKcTKYp' } }" >My Tasks</v-btn>
+      <v-btn size="small" style="opacity: .8;" class="text-capitalize rounded-lg mr-2 font-weight-regular" prepend-icon="mdi-square-edit-outline" :to="{ name: 'r-access-room-projects', params: { room: 'aD3Vwed6abuoPE2BzInnTKcTKYp' } }" >Projects</v-btn>
       <v-btn size="small" style="opacity: .8;" class="text-capitalize rounded-lg mr-2 font-weight-regular" prepend-icon="mdi-calendar" :to="{ name: 'r-access-room-schedules', params: { room: 'aD3Vwed6abuoPE2BzInnTKcTKYp' } }" >Schedules</v-btn>
-      <v-divider vertical inset class="mr-2"></v-divider>
+      <v-btn size="small" style="opacity: .8;" class="text-capitalize rounded-lg mr-2 font-weight-regular" prepend-icon="mdi-chart-arc">Performance</v-btn>
+      <!-- <v-divider vertical inset class="mr-2"></v-divider>
       <v-btn size="small" style="opacity: .8;" class="text-capitalize rounded-lg mr-2 font-weight-regular" prepend-icon="mdi-dock-left">Documentation</v-btn>
-      <v-btn size="small" style="opacity: .8;" class="text-capitalize rounded-lg mr-2 font-weight-regular" prepend-icon="mdi-dock-left">Flash Card</v-btn>
+      <VTooltip text="Sorry, this is currently unavailable">
+        <template #activator="{props}">
+          <v-btn v-bind="props" size="small" style="opacity: .8;" class="text-capitalize rounded-lg mr-2 font-weight-regular" prepend-icon="mdi-cards" append-icon="mdi-alert" color="warning" variant="tonal">
+            Flash Card
+          </v-btn>
+        </template>
+      </VTooltip> -->
       <v-spacer></v-spacer>
       <h5 class="mr-5 font-weight-medium" >Development of productivity system <v-icon>mdi-pencil-outline</v-icon></h5>
       <v-card @click="" class=" pa-1 mr-2 text-caption px-2">
@@ -25,20 +30,15 @@
       <v-badge dot color="red"  class="mr-3">
         <v-icon size="20">mdi-bell-outline</v-icon>
       </v-badge>
-    
-      <!-- <v-btn size="small" class="text-capitalize mx-2" color="secondary" variant="elevated"
-        append-icon="mdi-plus" prepend-icon="mdi-account-multiple">Members</v-btn> -->
       <v-avatar size="35" class="border text-caption font-weight-bold ml-2" color="#F5E8C7" style="z-index: 20;">
         JS
       </v-avatar>
-      <!-- <v-avatar size="35" class="border text-caption font-weight-bold ml-n4" color="green" style="z-index: 10">
-        CC
-      </v-avatar> -->
     </v-app-bar>
-    <navigationDrawerRight></navigationDrawerRight>
     <ClientOnly>
       <NuxtPage></NuxtPage>
     </ClientOnly>
+    <navigationDrawerRight></navigationDrawerRight>
+
 </template>
   
 <script setup lang="ts">
@@ -51,8 +51,6 @@ definePageMeta({
   middleware: ['auth']
 })
 const {name} = useTheme()
-const { audioOutputs: speakers } = useDevicesList({ requestPermissions: true })
-const hasHeadphone = computed(() => speakers.value.some(item => /Default - Headphones/.test(item.label)));
 const showNavigationTools = ref(false)
 
 
@@ -125,6 +123,10 @@ body::-webkit-scrollbar {
 .slide-leave-active {
     transition: transform .4s ease-out, opacity .2s linear, height 2s linear;
 }
+
+
+
+
 
 
 </style>
