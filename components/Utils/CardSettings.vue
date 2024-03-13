@@ -113,6 +113,10 @@
                             <v-card-text class="mt-n5">
                                 <v-switch :model-value="true" color="primary"></v-switch>
                             </v-card-text>
+                            <v-card-title class="text-subtitle-1 mt-n10">Hide navigation bar</v-card-title>
+                            <v-card-text class="mt-n5">
+                                <v-switch v-model="hideBar" color="primary"></v-switch>
+                            </v-card-text>
                         </v-card>
 
                     </v-container>
@@ -134,7 +138,7 @@ import { colors } from '../../stores/color';
 const props = defineProps(['showSettings'])
 const emits = defineEmits(['update:showSettings',])
 import { themes } from '../../stores/theme'
-const { selectedTheme } = storeToRefs(useThemeStore())
+const { selectedTheme, hideBar } = storeToRefs(useThemeStore())
 const { selectedBackgroundColor } = storeToRefs(useColorStore())
 const { sounds } = storeToRefs(useAppStore())
 const selected = ref(0)

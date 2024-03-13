@@ -27,12 +27,12 @@ export default defineNuxtConfig({
               primary: '#2D3250', 
               secondary: '#F6B17A',
               surface: '#424769', 
-              background: '#7077A1',
+              background: '#FAFAFA',
             }
           },
           dark: {
             colors: {
-              // primary: '#6200EE',
+              primary: '#6200EE',
               secondary: '#03DAC6',
               surface: '#212121'
             }

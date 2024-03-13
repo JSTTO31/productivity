@@ -1,5 +1,6 @@
 <template>
-    <schedule-navigation-drawer :show-navigation="showRightNavigation"></schedule-navigation-drawer>
+    <div>
+        <schedule-navigation-drawer :show-navigation="showRightNavigation"></schedule-navigation-drawer>
 
     <v-app-bar class="d-flex  align-center text-white border-b" density="compact"
         style="background-color: rgba(0,0,0,.2);z-index: 50 !important;" flat absolute>
@@ -27,6 +28,7 @@
         <schedule-dialog-edit :show-dialog="!!$route.query.edit && !!schedule" :key="schedule?._id || 'null'"></schedule-dialog-edit>
         <schedule-calendar-table :current-date="currentDate"></schedule-calendar-table>
     </v-main>
+    </div>
 </template>
 
 <script setup lang="ts">

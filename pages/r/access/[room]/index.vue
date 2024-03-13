@@ -1,6 +1,6 @@
 <template>
   <v-main class="h-100">
-    <v-carousel hide-delimiter-background hide-delimiters :show-arrows="false" class="h-100 w-100">
+    <v-carousel :show-arrows="false" class="h-100 w-100">
       <v-carousel-item>
         <v-card class="bg-transparent rounded-lg d-flex justify-center flex-column align-center h-100" flat>
           <h1 class="text-white" style="line-height: 1;font-family: 'Orbitron', sans-serif;font-weight:200;font-size: 100px;opacity: .8;">
@@ -11,7 +11,7 @@
           </div>
         </v-card>
       </v-carousel-item>
-      <!-- <v-carousel-item>
+      <v-carousel-item>
         <v-container class="h-screen bg-transparent"
           style="padding-inline: 50px;padding-top: 50px; padding-bottom: 100px;" fluid>
           <v-row class="h-100 d-flex ma-0">
@@ -49,7 +49,7 @@
             </v-card-text>
           </v-card>
         </v-container>
-      </v-carousel-item> -->
+      </v-carousel-item>
     </v-carousel>
   </v-main>
 </template>
@@ -67,6 +67,7 @@ useHead({
 definePageMeta({
   layout: false,
   layoutTransition: false,
+  middleware: 'auth'
 })
 
 

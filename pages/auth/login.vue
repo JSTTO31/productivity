@@ -1,57 +1,62 @@
 <template>
-    <v-main>
+    <v-main class="d-flex align-center justify-center ">
         <client-only>
-            <v-container fluid class="pa-0 bg-primary ">
-            <v-row class="ma-0">
-                <v-col cols="12" md="8" lg="5" class="h-screen pa-0 mx-auto">
-                    <div style="padding-inline: 50px;padding-top: 45px;">
-                        <h1 class="d-flex align-center"
-                            @click="$router.push({name: 'index'})"
-                            style="font-family: 'Lato', sans-serif;font-weight: 900;">
-                            <v-avatar class="rounded-0 mr-2">
-                                <v-img src="/fast-forward.png" style="filter: invert(100%);"></v-img>
-                            </v-avatar>
-                            Efficiently
-                        </h1>
-                        <v-card class="rounded-xl pa-10 mt-5 border" elevation="3">
-                            <h1>Login your account</h1>
-                            <h5 class="font-weight-regular">
-                                Gain secure access to your personalized account and start managing your tasks, goals, and
-                                progress effortlessly.
-                            </h5>
-                            <v-form class="mt-5" @submit.prevent="submit">
-                                <label class="font-weight-bold" for="email">Email address</label>
-                                <v-text-field v-model="$v.email.$model" :error-messages="$v.email.$errors[0]?.$message as string || ''" id="email" variant="outlined" class="my-2" prepend-inner-icon="mdi-email-outline" single-line
-                                    label="Enter your email address"></v-text-field>
-                                <label class="font-weight-bold" for="password">Password</label>
-                                <v-text-field :type="togglePassword ? 'text' : 'password'" v-model="$v.password.$model" :error-messages="$v.password.$errors[0]?.$message as string || ''" id="password" variant="outlined" class="my-2" prepend-inner-icon="mdi-lock-outline" single-line
-                                    label="Enter your password" :append-inner-icon="togglePassword ? 'mdi-eye-outline' : 'mdi-eye-off-outline'" @click:append-inner="togglePassword = !togglePassword"></v-text-field>
-                                <div class="d-flex align-center">
-                                    <v-btn type="submit" class="rounded-lg text-capitalize" append-icon="mdi-login" size="large" color="primary">Login account</v-btn>
-                                    <v-spacer></v-spacer>
-                                    <span class="text-blue-darken-1">Forgot the password?</span>
-                                </div>
-                                <v-divider class="my-5"></v-divider>
-                                <div class="d-flex flex-column align-center my-5">
-                                    <!-- <div class="d-flex">
-                                <span class="text-blue-darken-1">Forgot the password?</span>
-                            </div> -->
-                                    <span class="">Don't have an account?</span>
-                                    <span class="text-decoration-underline text-blue-darken-2">Create Account</span>
-                                </div>
-                            </v-form>
-                        </v-card>
+            <v-card flat class="rounded-xl px-5 d-flex mt-n15 flex-column px-10" width="550">
+                <v-avatar @click="$router.push({ name: 'index' })" class="mx-auto" size="75"
+                    style="transform: rotate(25deg);cursor: pointer;">
+                    <v-icon size="75">mdi-lightning-bolt</v-icon>
+                </v-avatar>
+                <h1 class="text-center font-weight-bold" style="font-family: 'Roboto', cursive !important;">Login to
+                    your account</h1>
+                <h3 class="font-weight-regular text-center mt-2">
+                    Don't have an account? <span class="text-blue-darken-2" style="cursor: pointer;" @click="$router.push({name: 'auth-register'})">Sign up</span>
+                </h3>
+                <v-card class="d-flex justify-center mt-10 align-center pa-3" @click="signInWithGoogle" variant="outlined">
+                    <v-avatar size="30">
+                        <v-img src="/icons/google.png"></v-img>
+                    </v-avatar>
+                    <h3 class="font-weight-medium ml-5">Sign in with google</h3>
+                </v-card>
+                <v-form @submit.prevent="submit" v-if="showTextField">
+                    <div class="d-flex align-center my-5">
+                        <v-divider></v-divider>
+                        <span class="w-100 text-center">with email address</span>
+                        <v-divider></v-divider>
                     </div>
-                </v-col>
-            </v-row>
-        </v-container>
+                    <label class="font-weight-bold" for="email">Email address</label>   
+                    <v-text-field v-model="$v.email.$model"
+                        :error-messages="$v.email.$errors[0]?.$message as string || ''" id="email" variant="solo-filled"
+                        flat class="my-2" prepend-inner-icon="mdi-email-outline" single-line
+                        label="Enter your email address"></v-text-field>
+                    <label class="font-weight-bold" for="password">Password</label>
+                    <v-text-field :type="togglePassword ? 'text' : 'password'" v-model="$v.password.$model"
+                        :error-messages="$v.password.$errors[0]?.$message as string || ''" id="password"
+                        variant="solo-filled" flat class="my-2" prepend-inner-icon="mdi-lock-outline" single-line
+                        label="Enter your password"
+                        :append-inner-icon="togglePassword ? 'mdi-eye-outline' : 'mdi-eye-off-outline'"
+                        @click:append-inner="togglePassword = !togglePassword"></v-text-field>
+                    <div class="d-flex align-center mt-n3">
+
+                        <v-spacer></v-spacer>
+                        <span class="text-blue-darken-1">Forgot the password?</span>
+                    </div>
+                    <v-btn type="submit" class="rounded-lg mt-5 text-capitalize" append-icon="mdi-login" size="large"
+                        color="primary">Login account</v-btn>
+                </v-form>
+                <div v-else>
+                    <v-card class="d-flex justify-center mt-5 align-center pa-3" @click="showTextField = true" color="grey-lighten-2"
+                        variant="flat">
+                        <h3 class="font-weight-medium ml-5" >Continue with email</h3>
+                    </v-card>
+                </div>
+            </v-card>
         </client-only>
     </v-main>
 </template>
 
 <script setup lang="ts">
 useHead({
-    title: 'Efficiently | Login your account'
+    title: 'Login your account'
 })
 definePageMeta({
     middleware: ['guest'],
@@ -59,7 +64,13 @@ definePageMeta({
     pageTransition: false,
 })
 const togglePassword = ref(false)
-const {$v, submit} = useAuth()
+const { $v, submit } = useAuth()
+const showTextField = ref(false)
+
+
+function signInWithGoogle(){
+    location.href = 'http://localhost:8000/auth/google'
+}
 </script>
 
 <style scoped></style>

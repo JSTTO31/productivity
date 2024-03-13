@@ -222,12 +222,13 @@ export const themes = [
 ]
 
 export const useThemeStore = defineStore('theme', () => {
-    const selectedTheme = ref(themes[11])
+    const selectedTheme = ref(themes[0])
     const selectedBackground = ref(0)
     const selectedThemeDark = computed(() => selectedTheme.value?.dark || false)
+    const hideBar = ref(false)
     console.log(selectedThemeDark.value);
     
-    return {selectedTheme, selectedBackground, selectedThemeDark}
+    return {selectedTheme, selectedBackground, selectedThemeDark, hideBar}
 })  
 
 

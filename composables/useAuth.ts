@@ -22,10 +22,33 @@ export default function useAuth(){
         if(!await $v.value.$validate()) return 
         
         try {
-            const {error} = await $user.login(credentials)
-            if(error){
-                $externalResults.value = error.value?.data.errors || {}
+            const {error, status} = await $user.login(credentials)
+            
+            if(error.value && error.value.data.errors){
+                $externalResults.value = error.value.data.errors.reduce((container: any, error: any) => {
+                    if(!container[error.path]){
+                        container[error.path] = []
+                    }
+
+                    container[error.path].push(error.msg)
+
+                    return container
+                },[])
             }
+            
+            if(error.value && error.value.statusCode == 401){
+                
+                $externalResults.value = {
+                    email: ['The credentials is incorrect, please try again!'],
+                    password: ['']
+                }
+            }
+
+            if(status.value == 'success'){
+                location.href = "http://localhost:3000/r/access/aD3Vwed6abuoPE2BzInnTKcTKYp"
+            }
+
+
         } catch (error) {
             console.log(error);
         }

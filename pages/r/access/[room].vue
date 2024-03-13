@@ -1,33 +1,26 @@
 <template>
-    <UtilsThemeBackground ref="video" style="position: fixed;top: 0;left: 0;"></UtilsThemeBackground>
-    <v-app-bar class="pa-0 border-b pr-5 bg-surface" :color="name == 'dark' ? '' : 'primary'" density="compact" flat>
-      <!-- <UtilsThemeBackground ref="video" style="position: fixed;top: 0;left: 0;"></UtilsThemeBackground> -->
-      <!-- <v-btn class="rounded-lg h-75" size="small"
-        @click="$router.push({ name: 'r-user', params: { user: 'joshuasotto@example.example' } })">
-        <v-icon style="transform: rotate(25deg)" size="20">mdi-lightning-bolt</v-icon>
-      </v-btn> -->
-      <!-- <v-divider vertical inset class="mx-2 mr"></v-divider> -->
-      <v-btn size="small" style="opacity: .8;" class="text-capitalize rounded-lg mr-2 font-weight-regular"
-        @click="$router.push({ name: 'r-access-room', params: { room: 'aD3Vwed6abuoPE2BzInnTKcTKYp' } })" prepend-icon="mdi-home">Home</v-btn>
-      <v-btn size="small" style="opacity: .8;" class="text-capitalize rounded-lg mr-2 font-weight-regular" prepend-icon="mdi-square-edit-outline" :to="{ name: 'r-access-room-projects', params: { room: 'aD3Vwed6abuoPE2BzInnTKcTKYp' } }" >Projects</v-btn>
-      <v-btn size="small" style="opacity: .8;" class="text-capitalize rounded-lg mr-2 font-weight-regular" prepend-icon="mdi-calendar" :to="{ name: 'r-access-room-schedules', params: { room: 'aD3Vwed6abuoPE2BzInnTKcTKYp' } }" >Schedules</v-btn>
-      <v-btn size="small" style="opacity: .8;" class="text-capitalize rounded-lg mr-2 font-weight-regular" prepend-icon="mdi-chart-arc">Performance</v-btn>
-      <!-- <v-divider vertical inset class="mr-2"></v-divider>
-      <v-btn size="small" style="opacity: .8;" class="text-capitalize rounded-lg mr-2 font-weight-regular" prepend-icon="mdi-dock-left">Documentation</v-btn>
-      <VTooltip text="Sorry, this is currently unavailable">
-        <template #activator="{props}">
-          <v-btn v-bind="props" size="small" style="opacity: .8;" class="text-capitalize rounded-lg mr-2 font-weight-regular" prepend-icon="mdi-cards" append-icon="mdi-alert" color="warning" variant="tonal">
-            Flash Card
-          </v-btn>
-        </template>
-      </VTooltip> -->
+  <UtilsThemeBackground ref="video" style="position: fixed;top: 0;left: 0;"></UtilsThemeBackground>
+  <v-app-bar class="pa-0 border-b pr-5 bg-surface" :color="name == 'dark' ? '' : 'primary'"
+    density="compact" flat v-if="true">
+    <v-btn size="small" style="opacity: .8;" class="text-capitalize rounded-lg mr-2 font-weight-regular"
+      @click="$router.push({ name: 'r-access-room', params: { room: 'aD3Vwed6abuoPE2BzInnTKcTKYp' } })"
+      prepend-icon="mdi-home">Home</v-btn>
+    <v-btn size="small" style="opacity: .8;" class="text-capitalize rounded-lg mr-2 font-weight-regular"
+      prepend-icon="mdi-square-edit-outline"
+      :to="{ name: 'r-access-room-projects', params: { room: 'aD3Vwed6abuoPE2BzInnTKcTKYp' } }">Projects</v-btn>
+    <v-btn size="small" style="opacity: .8;" class="text-capitalize rounded-lg mr-2 font-weight-regular"
+      prepend-icon="mdi-calendar"
+      :to="{ name: 'r-access-room-schedules', params: { room: 'aD3Vwed6abuoPE2BzInnTKcTKYp' } }">Schedules</v-btn>
+    <v-btn :to="{ name: 'r-access-room-statistics', params: { room: 'aD3Vwed6abuoPE2BzInnTKcTKYp' } }" size="small"
+      style="opacity: .8;" class="text-capitalize rounded-lg mr-2 font-weight-regular"
+      prepend-icon="mdi-chart-arc">Statistics</v-btn>
       <v-spacer></v-spacer>
-      <h5 class="mr-5 font-weight-medium" >Development of productivity system <v-icon>mdi-pencil-outline</v-icon></h5>
+      <h5 class="mr-5 font-weight-medium">Development of productivity system <v-icon>mdi-pencil-outline</v-icon></h5>
       <v-card @click="" class=" pa-1 mr-2 text-caption px-2">
         <v-icon class="mr-2">mdi-magnify</v-icon>
         <kbd>Ctrl+k</kbd>
       </v-card>
-      <v-badge dot color="red"  class="mr-3">
+      <v-badge dot color="red" class="mr-3">
         <v-icon size="20">mdi-bell-outline</v-icon>
       </v-badge>
       <v-avatar size="35" class="border text-caption font-weight-bold ml-2" color="#F5E8C7" style="z-index: 20;">
@@ -35,24 +28,23 @@
       </v-avatar>
     </v-app-bar>
     <ClientOnly>
-      <NuxtPage></NuxtPage>
+        <NuxtPage></NuxtPage>
     </ClientOnly>
-    <navigationDrawerRight></navigationDrawerRight>
-
+    <navigationDrawerRight navigationDrawerRight></navigationDrawerRight>
 </template>
-  
+
 <script setup lang="ts">
 useHead({
-  title: 'Development of productivity system'
+  title: 'Development of productivity system',
 })
 definePageMeta({
   layout: false,
   layoutTransition: false,
-  middleware: ['auth']
+  middleware: ['auth'],
 })
-const {name} = useTheme()
+const { name } = useTheme()
 const showNavigationTools = ref(false)
-
+const { hideBar } = storeToRefs(useThemeStore())
 
 const mouseMove = (e: MouseEvent) => {
   if (e.clientX + 10 >= window.innerWidth) {
@@ -83,14 +75,6 @@ const toFront = (currentElement: Element) => {
   }
 }
 
-const beforeUpdateElement = (node: VNode) => {
-  if (node.el) {
-    const element = document.getElementById(node.el.id)
-    if (element) {
-      toFront(element)
-    }
-  }
-}
 
 onMounted(() => {
   const cards = document.querySelectorAll('.floating-card')
@@ -105,7 +89,18 @@ onMounted(() => {
   })
 
   window.addEventListener('mousemove', mouseMove)
-  
+
+
+  window.addEventListener('keydown', (e) => {
+     if(e.ctrlKey && e.key == 'ArrowRight'){
+
+     }
+
+     if(e.ctrlKey && e.key == 'ArrowLeft'){
+      
+    }
+  })
+
 })
 
 onBeforeRouteLeave((to, from, next) => {
@@ -114,19 +109,19 @@ onBeforeRouteLeave((to, from, next) => {
 })
 
 </script>
-  
+
 <style scoped>
 body::-webkit-scrollbar {
   width: 0;
 }
-.slide-enter-active,
+
+/* .slide-enter-active,
 .slide-leave-active {
-    transition: transform .4s ease-out, opacity .2s linear, height 2s linear;
+  transition: transform .4s ease-out, opacity .2s linear, height 2s linear;
 }
 
-
-
-
-
-
+.slide-enter-from,
+.slide-leave-to {
+  opacity: .5;
+} */
 </style>

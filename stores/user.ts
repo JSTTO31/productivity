@@ -23,6 +23,14 @@ export const useUserStore = defineStore('user', () => {
         })
     }
 
+    async function checkUser(){
+        return await useApiFetch('/check', {
+            onResponse(event){
+                user.value = event.response._data.user
+            }
+        })
+    }
+
     async function login(credentials: {email: string, password: string}){
         return await useApiFetch('/login', {
             method: 'post',
@@ -30,20 +38,32 @@ export const useUserStore = defineStore('user', () => {
             onResponse: (event) => {
                 if(event.response.status == 200){
                     user.value = event.response._data.user
-                    const userData = JSON.stringify(event.response._data)
-                    localStorage.setItem("userData", userData)
                 }
             }
         })
     }
 
-    function logout(){
-        localStorage.removeItem('userData')
-        window.location.reload()    
+    async function register(information: {name: string, email: string, password: string, password_confirmation: string}){
+        return await useApiFetch('/register', {
+            method: 'POST',
+            body: {...information},
+            onResponse: (event) => {
+                user.value = event.response._data.user
+            }
+        })
+    }
+
+    async function logout(){
+        return await useApiFetch('/logout', {
+            method: 'POST',
+            onResponse(){
+                location.reload()
+            }
+        })
     }
 
 
     return {
-        login, checkUserIfAuthenticated, logout,
+        login, checkUserIfAuthenticated, logout, checkUser, register,
         user, token}
 })

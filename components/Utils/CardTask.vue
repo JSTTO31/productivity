@@ -14,8 +14,7 @@
                             :prepend-icon="task.is_check ? 'mdi-checkbox-marked' : 'mdi-checkbox-blank-outline'"
                             :color="task.is_check ? 'primary' : ''" active :variant="task.is_check ? 'elevated' : 'text'"
                             @click="task.is_check = !task.is_check">
-                            <span :class="task.is_check ? 'text-decoration-line-through' : ''">{{ task.title }} {{
-                                task.id }}</span>
+                            <span :class="task.is_check ? 'text-decoration-line-through' : ''">{{ task.title }} </span>
                             <template #append>
                                 <v-btn icon="mdi-close" size="small" variant="text"
                                     @click.stop="remove_task(task.id)"></v-btn>

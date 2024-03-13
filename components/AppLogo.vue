@@ -1,6 +1,6 @@
 <template>
     <h3 v-bind="$attrs" class="d-flex align-center wobble-hor-bottom"
-        style="font-family: 'Lato', sans-serif;font-weight: 900;cursor: pointer;">
+        style="font-family: 'Roboto', sans-serif;font-weight: 700;cursor: pointer;">
         <v-icon id="logo" class="rounded-circle " style="transform: rotate(25deg);">mdi-lightning-bolt</v-icon>
         Efficiently
     </h3>

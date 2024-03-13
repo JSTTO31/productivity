@@ -1,8 +1,8 @@
 <template>
     <v-card style="padding: 25px;outline: none;cursor: default;" class="rounded-lg pa-0" id="section" v-ripple="false" v-hover="false">
-        <div class="d-flex justify-center bg-grey-lighten-5 py-2">
+        <!-- <div class="d-flex justify-center bg-grey-lighten-5 py-2">
             <v-icon>mdi-dots-horizontal</v-icon>
-        </div>
+        </div> -->
         <div class="pa-5">
             <v-card color="transparent" flat id="card-title" class=" pa-0" style="z-index: 200;">
                 <div class=" w-100 py-0" style="display: flex;flex-wrap: wrap;row-gap: 10px;row">
@@ -33,7 +33,7 @@
                     <v-btn color="transparent" icon="mdi-dots-horizontal" flat class="ml-2 rounded-lg"></v-btn>
                 </div>
             </v-card>
-            <h3 contenteditable="true" class="pa-2 mt-2 text-grey-darken-4">{{ section.title }}</h3>
+            <h2 contenteditable="true" class="pa-2 mt-2 text-grey-darken-4">{{ section.title }}</h2>
             <p class="pa-2 mt-1 text-grey-darken-4" contenteditable="true">{{ section.content }}</p>
         </div>
     </v-card>

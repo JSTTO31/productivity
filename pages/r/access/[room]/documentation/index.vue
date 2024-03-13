@@ -1,7 +1,7 @@
 <template>
-    <v-navigation-drawer width="350" location="right" v-model="showNavigation" style="overflow: hidden;">
+    <v-navigation-drawer width="350" location="right" v-model="showNavigation" style="overflow: hidden;z-index: 100;">
         <v-layout class="h-100 w-100">
-            <v-app-bar elevation="2">
+            <v-app-bar class="border-b" flat>
                 <v-tabs v-model="tabs" grow>
                     <v-tab prepend-icon="mdi-message-outline" class="text-capitalize">Comments</v-tab>
                     <v-tab prepend-icon="mdi-account-group" class="text-capitalize">Members</v-tab>
@@ -64,14 +64,14 @@
                     </v-list-item>
                 </div>
             </v-main>
-            <v-footer app>
+            <v-footer app v-if="tabs == 0">
                 <v-text-field label="Write comment here..." single-line hide-details variant="solo-filled" flat
                     density="compact" append-inner-icon="mdi-send"></v-text-field>
             </v-footer>
         </v-layout>
     </v-navigation-drawer>
-    <v-app-bar elevation="2">
-        <v-app-bar-nav-icon icon="mdi-arrow-left"></v-app-bar-nav-icon>
+    <v-app-bar elevation="2" flat>
+        <v-app-bar-nav-icon icon="mdi-arrow-left" @click="$router.push({ name: 'r-access-room-projects', params: { room: 'aD3Vwed6abuoPE2BzInnTKcTKYp' } })"></v-app-bar-nav-icon>
         <v-app-bar-title>
             <div class="d-flex align-center">
                 <h4>{{ task.task_name }}</h4>
@@ -82,7 +82,7 @@
         <v-app-bar-nav-icon class="ml-5 rounded-lg" @click="showNavigation = !showNavigation"></v-app-bar-nav-icon>
 
     </v-app-bar>
-    <v-navigation-drawer width="350" class="pa-2 pl-10 pt-4" color="transparent" floating style="z-index: 100;">
+    <v-navigation-drawer width="350" class="pa-2 pl-10 pt-4" floating style="z-index: 100;">
         <v-btn append-icon="mdi-plus" class="rounded-lg text-capitalize" size="large" color="primary" block>Create new
             Section</v-btn>
         <v-card class="rounded-lg mt-3">
@@ -113,7 +113,7 @@
         </v-card>
     </v-navigation-drawer>
     <v-main>
-        <v-card class="h-100 w-100" color="transparent" flat>
+        <v-card class="h-100 w-100 bg-background" flat>
             <v-container style="padding-inline: 50px;">
                 <v-row>
                     <v-col cols="12">
@@ -140,7 +140,6 @@
                         <v-btn prepend-icon="mdi-plus" variant="tonal" block size="large"
                             class="text-white my-5 text-capitalize rounded-lg mx-auto">
                             <div>
-                                <v-icon>mdi-plus</v-icon>
                                 Add Section
                             </div>
                         </v-btn>
@@ -154,7 +153,7 @@
 <script setup lang="ts">
 import useDocumentationObject from '~/composables/useDocumentationObject';
 import useSectionsObject from '~/composables/useSectionsObject';
-const tabs = ref(0)
+const tabs = ref(1)
 const showNavigation = ref(true)
 const documentation = useDocumentationObject
 const sections = useSectionsObject

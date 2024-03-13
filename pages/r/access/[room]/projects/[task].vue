@@ -82,7 +82,7 @@
         <v-main style="overflow-y: auto;">
             <v-container class="px-5">
                 <div style="gap: 5px;" class="mb-5 w-100">
-                    <input class="w-100" style="font-size: 27px;font-family: 'Roboto', sans-serif;font-weight: 500;"
+                    <v-text-field variant="plain" class="w-100" style="font-size: 57px;font-family: 'Roboto', sans-serif;font-weight: 500;"
                         :value="task.task_name" placeholder="What is your task?" />
                 </div>
                 <div style="gap: 5px;">
