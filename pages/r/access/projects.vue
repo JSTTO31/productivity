@@ -58,7 +58,7 @@
                                     <v-btn variant="text" icon="mdi-dots-horizontal" size="small"></v-btn>
                                 </div>
                                 <project-list-card-item
-                                    @click="$router.push({ name: 'r-access-room-projects-task', params: { task: task.task_id } })"
+                                    @click="$router.push({ name: 'r-access-projects-task', params: { task: task.task_id } })"
                                     v-for="task in section.tasks" :key="task.task_name"
                                     :task="task"></project-list-card-item>
                                 <v-btn class="text-capitalize text-white rounded-lg" color="background" variant="tonal"
@@ -80,7 +80,7 @@
                     </v-container>
                 </v-card>
                 <v-dialog @dblclick:outside="$router.push('/')" contained persistent no-click-animation
-                    :model-value="$route.name == 'r-access-room-projects-task'" width="1000">
+                    :model-value="$route.name == 'r-access-projects-task'" width="1000">
                     <v-card class="h-screen rounded-lg">
                         <NuxtPage></NuxtPage>
                     </v-card>
@@ -91,12 +91,16 @@
 </template>
 
 <script setup lang="ts">
-import useChatboxObject from '~/composables/useChatboxObject';
-import useSectionsObject from '~/composables/useSectionsObject';
+useHead({
+    title: 'Projects'
+})
+definePageMeta({
+    layout: 'authenticated'
+})
 const showNavigation = ref(true)
 const showTask = ref(true)
 const showChatbox = ref(false)
-const chats = useChatboxObject
+const chats = useChatboxObject 
 const sections = useSectionsObject
 
 </script>

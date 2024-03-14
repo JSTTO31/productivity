@@ -116,11 +116,6 @@ onMounted(() => {
 
 
 })
-
-onBeforeRouteLeave((to, from, next) => {
-    return next()
-})
-
 </script>
   
 <style scoped>

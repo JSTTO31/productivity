@@ -1,5 +1,5 @@
 <template>
-    <v-navigation-drawer :model-value="showNavigation" style="z-index: 50 !important;" floating>
+    <v-navigation-drawer :model-value="showNavigation" style="z-index: 50 !important;" floating width="280">
         <v-layout class="h-100">
             <v-main style="overflow: auto;" id="project-list">
                 <v-list class="my-0 pa-0 px-2">

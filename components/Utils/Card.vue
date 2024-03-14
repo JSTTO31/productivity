@@ -109,9 +109,8 @@ onMounted(() => {
 
 })
 
-onBeforeRouteLeave((to, from, next) => {
+onUnmounted(() => {
     removeEventListener('resize', window_resize)
-    return next()
 })
 
 

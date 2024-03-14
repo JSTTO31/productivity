@@ -19,9 +19,9 @@
       </div>
       <div v-else>
         <v-btn color="primary" variant="elevated" class="text-capitalize rounded-lg font-weight-bold" @click="$router.push({
-      name: 'r-user', params: {
+      name: 'r-access-email', params: {
         //@ts-ignore
-        user: user.email
+        email: user.email
       }
     })">Let's go to work</v-btn>
         <v-btn color="grey-darken-3" variant="elevated" class="ml-2 text-capitalize rounded-lg font-weight-bold"

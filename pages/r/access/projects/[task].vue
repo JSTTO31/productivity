@@ -18,11 +18,11 @@
             <v-spacer></v-spacer>
 
             <v-btn class="ml-2 rounded-lg" icon="mdi-arrow-expand"
-                @click="$router.push({ name: 'r-access-room-projects' })"></v-btn>
+                @click="$router.push({ name: 'r-access-projects' })"></v-btn>
             <v-btn class="ml-2 rounded-lg" icon="mdi-dots-horizontal"
-                @click="$router.push({ name: 'r-access-room-projects' })"></v-btn>
+                @click="$router.push({ name: 'r-access-projects' })"></v-btn>
             <v-btn class="ml-2 rounded-lg" icon="mdi-close"
-                @click="$router.push({ name: 'r-access-room-projects' })"></v-btn>
+                @click="$router.push({ name: 'r-access-projects' })"></v-btn>
         </v-app-bar>
         <v-navigation-drawer location="right" class="pa-5" floating width="350">
             <v-card class="h-100 w-100 rounded-lg" variant="tonal">
@@ -130,7 +130,7 @@
                     </v-col>
                 </div>
                 <div style="gap: 5px;" class="d-flex mt-5">
-                    <a href="#" class="text-info" @click.prevent="$router.push({name: 'r-access-room-documentation'})">View the documentation</a>
+                    <!-- <a href="#" class="text-info" @click.prevent="$router.push({name: 'r-access-room-documentation'})">View the documentation</a> -->
                 </div>
             </v-container>
         </v-main>

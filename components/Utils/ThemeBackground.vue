@@ -1,5 +1,5 @@
 <template>
-    <video  id="video" style="width: 100vw;position: absolute;top: 0;left: 0;"  :style="$route.name == 'r-access-room' ? '' : 'filter: brightness(80%)'" muted :autoplay="true" v-if="selectedTheme.type == 'video'" :src="
+    <video  id="video" style="width: 100vw;position: absolute;top: 0;left: 0;"  :style="$route.name == 'r-access' ? '' : 'filter: brightness(80%)'" muted :autoplay="true" v-if="selectedTheme.type == 'video'" :src="
     //@ts-ignore
     selectedTheme.backgrounds[selectedBackground].path" 
     loop>
@@ -17,7 +17,7 @@ const {sounds} = storeToRefs(useAppStore())
 watch(sounds.value.theme, () => {
   //@ts-ignore
   const video : HTMLVideoElement | null = document.getElementById('video')
-  if(!video)return
+  if(!video) return
   video.muted = false
   video.volume = sounds.value.theme.value / 100
 })
@@ -31,7 +31,7 @@ onMounted(() => {
       video.muted = false
       video.volume = sounds.value.theme.value / 100
       video.play()
-    }, 500);
+    }, 2500);
   }
 })
 </script>
