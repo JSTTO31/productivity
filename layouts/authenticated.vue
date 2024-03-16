@@ -19,17 +19,32 @@
       <v-badge dot color="red" class="mr-3">
         <v-icon size="20">mdi-bell-outline</v-icon>
       </v-badge>
-      <v-avatar size="35" class="border text-caption font-weight-bold ml-2" color="#F5E8C7" style="z-index: 20;">
-        JS
-      </v-avatar>
+      <v-menu>
+        <template #activator="{props}">
+          <v-avatar v-bind="props" size="35" class="border text-caption font-weight-bold ml-2" color="#F5E8C7" style="z-index: 20;">
+            JS
+          </v-avatar>
+        </template>
+        <v-card width="150">
+          <v-list>
+            <v-list-item prepend-icon="mdi-logout" @click="$user.logout">Logout</v-list-item>
+          </v-list>
+        </v-card>
+      </v-menu>
   </v-app-bar>
   <ClientOnly>
     <slot></slot>
+    <template #fallback>
+      <Loading></Loading>
+    </template>
   </ClientOnly>
   <navigationDrawerRight></navigationDrawerRight>
+  <NotificationContainer></NotificationContainer>
 </template>
 
 <script setup lang="ts">
+import { useNotificationStore } from '~/stores/notification';
+const $user = useUserStore()
 const { user } = storeToRefs(useUserStore())
 const { name } = useTheme()
 const showNavigationTools = ref(false)

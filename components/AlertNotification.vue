@@ -1,5 +1,5 @@
 <template>
-   <v-alert id="timer-alert" width="350" class="pa-5 rounded-lg" elevation="5" color="#435585" v-if="show">
+   <v-alert id="timer-alert" width="350" class="pa-5 rounded-lg" density="compact" elevation="5" color="#435585" v-if="show">
         <div v-if="title">
             <h4 class="d-flex align-center">
                 {{ title }}

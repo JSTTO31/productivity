@@ -1,5 +1,5 @@
 <template>
-    <v-card class=" mb-3 pa-3 rounded-lg" :key="task.task_name" @click="">
+    <v-card class=" mb-3 pa-3 rounded-lg" :key="task.task_name">
         <!-- <v-card class="rounded-lg my-3" flat>
                                 <v-img :src="'https://source.unsplash.com/random/500x200/?collaboration&' + task.task_name"></v-img>
                             </v-card> -->

@@ -62,8 +62,12 @@ export const useUserStore = defineStore('user', () => {
         })
     }
 
+    async function getAll(query = ""){
+        return await useApiFetch('/users?' + query, {})
+    }
+
 
     return {
-        login, checkUserIfAuthenticated, logout, checkUser, register,
+        login, checkUserIfAuthenticated, logout, checkUser, register, getAll,
         user, token}
 })

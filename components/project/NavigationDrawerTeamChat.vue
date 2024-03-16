@@ -1,5 +1,5 @@
 <template>
-    <v-navigation-drawer location="right" width="350" v-if="showNav">
+    <v-navigation-drawer location="right" width="350" :model-value="showNav">
         <v-layout class="h-100 w-100" :model-value="showNav" style="z-index: 300;">
             <v-app-bar density="compact" class="pl-5 border-b" flat>
                 <h4>
@@ -7,7 +7,7 @@
                     Team Chat
                 </h4>
                 <v-spacer></v-spacer>
-                <v-btn icon="mdi-dots-horizontal" class="rounded-0" @click="emits('update:showNav', false)"></v-btn>
+                <v-btn icon="mdi-close" class="rounded-0" @click="emits('update:showNav', false)"></v-btn>
             </v-app-bar>
             <v-main id="chat-box-main" :style="{ overflowY: showNav ? 'auto' : 'hidden' }">
                 <div v-for="message in chats.messages" :key="message.sender">
