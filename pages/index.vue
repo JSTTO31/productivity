@@ -110,10 +110,10 @@
         <p class="text-center text-h6 text-white mt-2">Real Experiences, Real Results - Discover How Our App Transforms Lives</p>
       </div>
       <div class="d-flex mt-15 pt-15">
-        <v-col cols="4" class="pt-10" v-for="t, n in testimonial.slice(2)" :key="t.name">
-          <v-card elevation="5" :style="{filter: n == 3 ? 'blur(5px)' : ''}" class="pa-5 pt-0 d-flex flex-column rounded-xl" height="400" style="overflow: visible;">
+        <v-col cols="4" xl="3" class="pt-10" v-for="t, n in testimonial.slice(2)" :key="t.name">
+          <v-card elevation="5"  class="pa-5 pt-0 d-flex flex-column rounded-xl" height="400" style="overflow: visible;">
             <v-avatar size="200" class="mx-auto" style="margin-top: -100px;box-shadow: 0 0 18px #888;">
-              <v-img :src="`https://source.unsplash.com/random/150x150/?selfie,${t.gender}&example=` + n"></v-img>
+              <v-img lazy-src="/dummy-profile.jpg" :src="`https://source.unsplash.com/random/200x200/?selfie,${t.gender}&example=` + n"></v-img>
             </v-avatar>
             <div>
               <h1 class=" text-center mt-8">{{ t.name }}</h1>

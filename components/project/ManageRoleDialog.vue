@@ -54,6 +54,11 @@ function changeRoles(){
         emits('update:showDialog', false)
     })
 }
+
+
+watch(() => props.project.members.length, () => {
+    members.value = props.project.members.filter(item => item.role != 'owner')
+})
 </script>
 
 <style scoped></style>

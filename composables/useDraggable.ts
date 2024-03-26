@@ -149,6 +149,7 @@ export default function dragElement(element: HTMLElement){
         pos3 = e.clientX
         pos4 = e.clientY
         
+        
         if(header){
             header.style.cursor = 'grabbing'
         }

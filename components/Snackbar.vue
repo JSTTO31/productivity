@@ -19,7 +19,7 @@ let timer : NodeJS.Timeout | null= null
 
 timer = setTimeout(() => {
     snackbars.value = []
-}, 6000);
+}, 2000);
 
 function close(){
     snackbars.value = []

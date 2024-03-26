@@ -3,36 +3,48 @@
         <project-navigation-drawer :model-value="showNavigation"></project-navigation-drawer>
         <NuxtLoadingIndicator></NuxtLoadingIndicator>
         <suspense v-if="$route.params.project">
-            <NuxtPage keepalive></NuxtPage>
+            <NuxtPage></NuxtPage>
             <template #fallback>
                 <v-main class="h-screen">
                     <v-layout class="h-100 w-100" id="loading-layout">
-                        <v-app-bar class="" style="background: rgba(0, 0, 0, .5);"> </v-app-bar>
+                        <v-app-bar density="compact" class="border-b"  flat style="background-color: rgba(0,0,0,.5);">
+                            <v-card color="background" variant="tonal" class="ml-5  rounded-lg" width="40" height="30"></v-card>
+                            <v-card color="background" variant="tonal" class="ml-5  rounded-lg" width="250" height="30"></v-card>
+                            <v-spacer></v-spacer>
+                            <v-card color="background" variant="tonal" class="mr-5  rounded-lg" width="90" height="30"></v-card>
+                            <v-card color="background" variant="tonal" class="mr-5  rounded-lg" width="90" height="30"></v-card>
+
+                            <v-card color="background" variant="tonal" class="mr-5  rounded-circle" width="40" height="30"></v-card>
+                            <v-card color="background" variant="tonal" class="mr-5  rounded-circle" width="40" height="30"></v-card>
+                            <v-card color="background" variant="tonal" class="mr-5  rounded-circle" width="40" height="30"></v-card>
+                            <v-card color="background" variant="tonal" class="mr-5  rounded-lg" width="40" height="30"></v-card>
+                        </v-app-bar>
                         <v-main class="h-100">
-                            <v-card id="tasks-container" class="w-100 h-100 px-4" style="overflow-x: auto;"
+                            <v-card class="w-100 h-100 rounded-0"
                                 color="transparent">
-                                <v-container class="px-0 h-100 mr-15 d-flex " fluid>
-                                    <v-col cols="3" xl="2" class="h-100 pa-0 mr-3 rounded-lg"
+                                <v-container class="pa-0 h-100 mr-15 d-flex " fluid>
+                                    <v-col cols="3" xl="2" class="h-100 pa-0 rounded-lg"
                                         v-for="section in sections" :key="section.section_name">
-                                        <v-card class=" px-5 py-3 rounded-lg h-100"
-                                            style="background-color: rgba(0,0,0,.5);overflow-y: auto;">
+                                        <v-card class=" px-5 py-3 pt-10 rounded-0  h-100"
+                                            style="background-color: rgba(0,0,0,.2);overflow-y: auto;">
                                             <div class="text-white mb-2 d-flex align-center mb-5">
-                                                <v-card width="200" height="25" variant="tonal"></v-card>
+                                                <v-card width="200" height="25" color="background" variant="tonal"></v-card>
                                                 <v-spacer></v-spacer>
-                                                <v-card width="25" height="25" variant="tonal"></v-card>
+                                                <v-card class="mr-2" width="25" height="25" color="background" variant="tonal"></v-card> 
+                                                <v-card width="25" height="25" color="background" variant="tonal"></v-card> 
                                             </div>
                                             <v-card v-for="section in sections" class="mb-5" :key="section.id"
-                                                variant="tonal" color="background" height="50"></v-card>
-                                            <v-card class="text-capitalize text-white rounded-lg" color="background"
+                                                variant="tonal" color="background" height="60"></v-card>
+                                            <v-card class="text-capitalize rounded-lg" color="background"
                                                 variant="tonal" height="35" block>
                                             </v-card>
                                         </v-card>
                                     </v-col>
                                     <v-col cols="3" xl="2" class="h-100 pa-0 mr-3">
                                         <v-card
-                                            class=" px-5 py-3 rounded-lg d-flex text-white rounded-lg align-center justify-center text-subtitle-2 font-weight-bold text-white"
+                                            class="h-100 px-5 py-3 d-flex text-white rounded-0 align-center justify-center text-subtitle-2 font-weight-bold text-white"
                                             style="background-color: rgba(0,0,0,.5);">
-                                            <v-card variant="tonal" height="25">
+                                            <v-card variant="tonal" width="150" height="35">
                                             </v-card>
                                         </v-card>
                                     </v-col>
@@ -57,10 +69,7 @@
 </template>
 
 <script setup lang="ts">
-import { useProjectStore } from '~/stores/project';
 const sections = useSectionsObject
-
-const { project, projects } = storeToRefs(useProjectStore())
 useHead({
     title: 'Projects'
 })
@@ -71,11 +80,6 @@ definePageMeta({
 const showNavigation = ref(true)
 provide('showProjectsNavigation', showNavigation)
 
-onMounted(() => {
-    if (project.value) {
-        project.value = projects.value[0]
-    }
-})
 </script>
 
 <style scoped>

@@ -52,6 +52,12 @@
 </template>
 
 <script setup lang="ts">
+useHead({
+    title: 'Statistics',
+})
+definePageMeta({
+    layout: "authenticated"
+})
 const endDate = new Date()
 const startDate = new Date()
 startDate.setDate(-startDate.getDate())

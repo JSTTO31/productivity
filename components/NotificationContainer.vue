@@ -15,8 +15,6 @@
 <script setup lang="ts">
 import { useNotificationStore } from '~/stores/notification';
 const { notifications, snackbars } = storeToRefs(useNotificationStore())
-const showSnacksbar = ref(false)
-
 </script>
 
 <style scoped>

@@ -45,7 +45,7 @@ export default function useAuth(){
             }
 
             if(status.value == 'success'){
-                location.href = "http://localhost:3000/r/access/aD3Vwed6abuoPE2BzInnTKcTKYp"
+                location.href = "http://localhost:3000/r/access/home"
             }
 
 

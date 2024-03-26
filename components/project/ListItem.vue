@@ -1,5 +1,5 @@
 <template>
-    <v-list-item density="compact" :prepend-icon="'mdi-chevron-right'" v-ripple="false"
+    <v-list-item density="compact" :prepend-icon="'mdi-file-outline'" v-ripple="false"
         @click="$router.push({ name: 'r-access-projects-project', params: { project: project._id } })"
         class="text-caption py-0 font-weight-regular text-capitalize text-no-wrap"
         :active="project._id == $route.params.project">
@@ -103,7 +103,7 @@ onClickOutside(textField, () => {
     if(showRenameDialog.value){
         showRenameDialog.value = false
         if(title.value != props.project.title){
-            $project.update(props.project._id, title.value)
+            $project.updateById(props.project._id, {title: title.value, sections: []})
         }
     }
 })

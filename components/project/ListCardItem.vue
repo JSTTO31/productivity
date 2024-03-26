@@ -1,36 +1,204 @@
 <template>
-    <v-card class=" mb-3 pa-3 rounded-lg" :key="task.task_name">
-        <!-- <v-card class="rounded-lg my-3" flat>
-                                <v-img :src="'https://source.unsplash.com/random/500x200/?collaboration&' + task.task_name"></v-img>
-                            </v-card> -->
-        <p class="font-weight-medium text-subtitle-2 font-weight-regular">{{ task.task_name }}</p>
-        <p class="text-caption font-weight-regular">{{ task.description }}</p>
-        <div class="d-flex mt-2" style="gap: 10px;">
-            <v-chip size="small" prepend-icon="mdi-calendar" class="mb-1" color="success" density="comfortable">4 days
-                left</v-chip>
-            <v-chip size="small" prepend-icon="mdi-circle-medium" class="mb-1" color="info" density="comfortable"
-                v-if="task.priority == 'Low'">{{ task.priority }}</v-chip>
-            <v-chip size="small" prepend-icon="mdi-circle-medium" class="mb-1" color="warning" density="comfortable"
-                v-else-if="task.priority == 'Medium'">{{ task.priority }}</v-chip>
-            <v-chip size="small" prepend-icon="mdi-circle-medium" class="mb-1" color="error" density="comfortable"
-                v-else>{{ task.priority }}</v-chip>
+    <div class="mb-3 rounded bg-surface task" :disabled="!havePermission" style="z-index: 100 !important;"
+        :id="task._id || task.tempId"
+        @click.stop="$router.push({ query: { task: task?._id || task.tempId, section: section?._id || section.tempId } })">
+        <!-- <v-card class="rounded-lg ma-2 mt-2 mb-3" flat>
+            <v-img :src="'https://source.unsplash.com/random/500x200/?collaboration&' + task.title"></v-img>
+                
+        </v-card> -->
+        <div class="pa-3">
+            <div class="d-flex align-center">
+                <p class="font-weight-medium text-subtitle-1">{{ title }}</p>
+                <v-spacer></v-spacer>
+                <!-- <v-progress-circular :model-value="25" size="20"></v-progress-circular> -->
+                <v-btn size="" variant="text" @click.stop="ToggleCompleted" color="success" v-if="task.completed"
+                    icon="mdi-check-decagram"></v-btn>
+                <v-btn size="" variant="text" @click.stop="ToggleCompleted" v-else
+                    icon="mdi-check-decagram-outline"></v-btn>
+            </div>
+            <p class="text-caption font-weight-regular mt-1">{{ description }}</p>
+            <div class="d-flex mt-2" style="gap: 10px;">
+                <v-chip size="small" prepend-icon="mdi-calendar" class="mb-1 text-capitalize rounded" color="success">{{
+        timeAgo }}</v-chip>
+                <v-chip size="small" prepend-icon="mdi-flag-outline" class="mb-1 text-capitalize rounded" color="info"
+                    v-if="task.priority == 'low'">{{ task.priority }}</v-chip>
+                <v-chip size="small" prepend-icon="mdi-flag-outline" class="mb-1 text-capitalize rounded"
+                    color="warning" v-else-if="task.priority == 'medium'">{{ task.priority }}</v-chip>
+                <v-chip size="small" prepend-icon="mdi-flag-outline" class="mb-1 text-capitalize rounded" color="error"
+                    v-else>{{ task.priority }}</v-chip>
+            </div>
+            <v-divider class="my-1"></v-divider>
+            <div class="d-flex align-center">
+                <v-card v-for="assignee in  task.assignees" :key="assignee" class="rounded-circle mr-n5 border" flat>
+                    <v-avatar class="border" size="30">
+                        <v-img :src="'https://source.unsplash.com/random/100x100/?person&' + assignee"></v-img>
+                    </v-avatar>
+                </v-card>
+                <v-spacer></v-spacer>
+
+                <v-chip :prepend-icon="isWatcher ? 'mdi-eye-outline' : 'mdi-eye-off-outline'" variant="text"
+                    size="small" class="mr-2 text-capitalize rounded">Watch</v-chip>
+                <v-badge :content="task.notes ? task.notes.length : 0" location="right" inline>
+                    <v-chip prepend-icon="mdi-note-text-outline" variant="text" size="small"
+                        class="text-capitalize rounded">Notes</v-chip>
+                </v-badge>
+            </div>
         </div>
-        <div class="d-flex mt-1 align-end mt-2">
-            <v-card v-for="message, n in chats.messages.slice(7)" :key="message.sender" class="rounded-circle mr-n5">
-                <v-avatar class="border" size="30">
-                    <v-img :src="'https://source.unsplash.com/random/100x100/?person&' + message.sender"></v-img>
-                </v-avatar>
-            </v-card>
-            <v-spacer></v-spacer>
-            <v-icon size="20" class="mr-3">mdi-eye-outline</v-icon>
-            <v-icon size="20">mdi-message-outline</v-icon>
-        </div>
-    </v-card>
+    </div>
 </template>
 
 <script setup lang="ts">
-const props = defineProps(['task'])
-const chats = useChatboxObject
+import type { SectionType, TaskType } from '~/stores/project';
+const props = defineProps<{ task: TaskType, section: SectionType }>()
+const timeAgo = computed(() => useTimeAgo(new Date(props.task.dueDate)).value.match(/hours|hour|second|seconds|minute|minutes/ig) ? 'Due Today' : useTimeAgo(new Date(props.task.dueDate)).value)
+const { project } = storeToRefs(useProjectStore())
+const title = computed(() => props.task.title.length > 25 ? props.task.title.substring(0, 25) + '...' : props.task.title)
+const description = computed(() => props.task.description.length > 70 ? props.task.description.substring(0, 70) + '...' : props.task.description)
+const { user } = storeToRefs(useUserStore())
+const { role } = storeToRefs(useProjectStore())
+const havePermission = computed(() => props.task.assignees.some(item => item == user.value?._id || role.value == 'admin' || role.value == 'owner'))
+const ToggleCompleted = () => {
+    if (props.task.completed) {
+        props.task.completed = false
+    } else {
+        props.task.completed = true
+
+    }
+}
+const isWatcher = computed(() => props.task.watchBy.some(item => item == user.value?._id))
+
+function mousedown(e: MouseEvent) {
+    e.preventDefault()
+    e.stopPropagation()
+    //@ts-ignore
+    const card: HTMLElement = document.getElementById(props.task?._id || props.task?.tempId) as HTMLElement
+    //@ts-ignore
+    const parentSection: HTMLElement = document.getElementById(props.section?._id || props.section?.tempId) as HTMLElement
+    const sections = document.getElementsByClassName('section')
+    let pos1: number, pos2: number, pos3: number, pos4: number
+    let currentPositionLeft = card.getBoundingClientRect().x
+    let currentPositionTop = card.getBoundingClientRect().y
+    let beforeSectionIndex = Math.floor(currentPositionLeft / card.clientWidth)
+    let afterSectionIndex = Math.floor(currentPositionLeft / card.clientWidth)
+    pos1 = e.clientX
+    pos2 = e.clientY
+
+    parentSection.style.zIndex = '1000'
+    card.style.transform = 'rotate(-5deg)'
+
+
+    document.onmousemove = dragElement
+    document.onmouseup = (e) => {
+        e.preventDefault()
+        document.onmousemove = null
+        document.onmouseup = null
+        card.style.position = 'static'
+        card.style.top = currentPositionTop + 'px'
+        card.style.left = currentPositionLeft + 'px'
+        card.style.transform = 'rotate(0deg)'
+        card.style.boxShadow = 'none'
+        parentSection.style.zIndex = '100'
+
+        // remove dummy and push new position
+        if (sections[afterSectionIndex]) {
+            const currentSectionTaskContainer = sections[afterSectionIndex].querySelector('.task-container')
+            if (currentSectionTaskContainer) {
+                const findDummyIndex = Array.from(currentSectionTaskContainer.children).findIndex((element) => element.classList.contains('dummy'))
+                if (findDummyIndex > -1) {
+                    currentSectionTaskContainer.removeChild(currentSectionTaskContainer.children[findDummyIndex])
+                    if (project.value) {
+                        const section = project.value.sections[afterSectionIndex]
+                        if (section) {
+                            const tempTask = props.task
+                            props.section.tasks = props.section.tasks.filter(task => (task._id && task._id != props.task._id) || (task.tempId && task.tempId != props.task.tempId))
+                            section.tasks.splice(findDummyIndex, 0, tempTask)
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+
+    function dragElement(e: MouseEvent) {
+        e.preventDefault()
+        pos3 = e.clientX - pos1
+        pos4 = e.clientY - pos2
+        pos1 = e.clientX
+        pos2 = e.clientY
+
+        card.style.width = card.clientWidth + 'px'
+        card.style.position = 'fixed'
+        card.style.boxShadow = '2px 2px 5px rgba(0,0,0,.5)'
+        currentPositionTop += pos4
+        currentPositionLeft += pos3
+        card.style.top = (currentPositionTop) + 'px'
+        card.style.left = (currentPositionLeft) + 'px'
+
+        beforeSectionIndex = afterSectionIndex
+        afterSectionIndex = Math.floor((currentPositionLeft - (card.clientWidth / 2)) / card.clientWidth)
+
+        const currentSection = sections[afterSectionIndex]
+
+
+        if (currentSection) {
+            const currentSectionTaskContainer = currentSection.querySelector('.task-container')
+
+            if (beforeSectionIndex != afterSectionIndex) {
+                const beforeSection = sections[beforeSectionIndex]
+                const beforeSectionTaskContainer = beforeSection.querySelector('.task-container')
+                if (beforeSectionTaskContainer) {
+                    const findDummyCard = Array.from(beforeSectionTaskContainer.children).find(element => element.classList.contains('dummy'))
+                    if (findDummyCard) {
+                        beforeSectionTaskContainer.removeChild(findDummyCard)
+                    }
+                }
+            }
+
+
+
+            if (currentSectionTaskContainer) {
+                if (currentSectionTaskContainer.childElementCount > 1) {
+                    const findClosestTaskCard = Array.from(currentSectionTaskContainer.children).find(element => (element.getBoundingClientRect().y >= currentPositionTop))
+                    const findDummyCard = Array.from(currentSectionTaskContainer.children).find(element => element.classList.contains('dummy'))
+
+                    if (findDummyCard && (findClosestTaskCard && !findClosestTaskCard.classList.contains('dummy'))) {
+                        currentSectionTaskContainer.removeChild(findDummyCard)
+                    }
+
+                    if (findClosestTaskCard && (findClosestTaskCard && !findClosestTaskCard.classList.contains('dummy'))) {
+                        const div = document.createElement('div')
+                        div.style.height = card.clientHeight + 'px'
+                        div.style.background = 'rgba(0,0,0,.5)'
+                        div.style.borderRadius = '5px'
+                        div.style.marginBottom = '10px'
+                        div.classList.add('dummy')
+                        currentSectionTaskContainer.insertBefore(div, findClosestTaskCard)
+                    }
+
+
+
+                } else {
+                    const div = document.createElement('div')
+                    div.style.height = card.clientHeight + 'px'
+                    div.style.background = 'rgba(0,0,0,.5)'
+                    div.style.borderRadius = '5px'
+                    div.style.marginBottom = '10px'
+                    div.classList.add('dummy')
+                    currentSectionTaskContainer.prepend(div)
+                }
+            }
+        }
+    }
+}
+
+onMounted(() => {
+    //@ts-ignore
+    const card: HTMLElement = document.getElementById(props.task?._id || props.task?.tempId) as HTMLElement
+    if (card && card.parentElement) {
+        card.onmousedown = mousedown
+    }
+})
 </script>
 
 <style scoped></style>

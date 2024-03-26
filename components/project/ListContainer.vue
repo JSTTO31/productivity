@@ -1,5 +1,5 @@
 <template>
-    <v-list class="pa-0" v-if="projects.length > 0">
+    <v-list class="pa-0 bg-transparent" v-if="projects.length > 0">
         <project-list-item  v-for="project in projects" :key="project.title"  :project="project"></project-list-item>
     </v-list>
     <div v-else class="pt-15 px-4 mt-15 d-flex flex-column align-center">

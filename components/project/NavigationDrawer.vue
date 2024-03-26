@@ -1,5 +1,5 @@
 <template>
-    <v-navigation-drawer :model-value="showNavigation" style="z-index: 50 !important;" floating width="280">
+    <v-navigation-drawer  :model-value="showNavigation" class="border-e" style="z-index: 50 !important;" floating width="280">
         <v-layout class="h-100">
             <v-app-bar density="compact" class="border-b ml-0 pl-2" flat>
                 <v-text-field label="Search..." variant="solo-filled" flat hide-details single-line density="compact" prepend-inner-icon="mdi-filter-variant"></v-text-field>
@@ -21,9 +21,7 @@
                 <suspense>
                     <project-list-container></project-list-container>
                     <template #fallback>
-                        <v-list class="px-2" id="loading-list-container">
-                            <v-list-item variant="tonal" class="rounded-lg mb-2" v-for="n in 8"></v-list-item>
-                        </v-list>
+                        <v-skeleton-loader loading type="heading" v-for="n in 8"></v-skeleton-loader>
                     </template>
                 </suspense>
             </v-main>

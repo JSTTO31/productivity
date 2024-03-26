@@ -1,5 +1,5 @@
 <template>
-    <video  id="video" style="width: 100vw;position: absolute;top: 0;left: 0;"  :style="$route.name == 'r-access' ? '' : 'filter: brightness(80%)'" muted :autoplay="true" v-if="selectedTheme.type == 'video'" :src="
+    <video  id="video" style="width: 100vw;position: absolute;top: 0;left: 0;"  muted :autoplay="true" v-if="selectedTheme.type == 'video'" :src="
     //@ts-ignore
     selectedTheme.backgrounds[selectedBackground].path" 
     loop>
@@ -25,14 +25,14 @@ watch(sounds.value.theme, () => {
 
 onMounted(() => {
   //@ts-ignore
-  const video : HTMLVideoElement | null = document.getElementById('video')
-  if(video){
-    setTimeout(() => {
-      video.muted = false
-      video.volume = sounds.value.theme.value / 100
-      video.play()
-    }, 2500);
-  }
+  // const video : HTMLVideoElement | null = document.getElementById('video')
+  // if(video){
+  //   setTimeout(() => {
+  //     video.muted = false
+  //     video.volume = sounds.value.theme.value / 100
+  //     video.play()
+  //   }, 2500);
+  // }
 })
 </script>
 

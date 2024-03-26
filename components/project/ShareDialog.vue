@@ -9,7 +9,7 @@
             <div class=" mt-1">
                 <label class="text-subtitle-2" for="">Person email adress</label>
                 <div class="text-center">
-                    <v-menu offset-y :open-on-focus="true" :close-on-back="false" v-model="showMenu">
+                    <v-menu offset-y :open-on-focus="true" v-model="showMenu">
                         <template #activator="{props}">
                                 <v-text-field v-bind="props" @focus="showMenu = true" @keyup="($event: any) => onChange($event.target.value)"  density="compact" label="Enter person email address" class="mt-2" single-line variant="outlined" hide-details>
                                     <template #append>

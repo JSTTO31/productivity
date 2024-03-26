@@ -1,6 +1,6 @@
 <template>
     <transition name="slide">
-        <v-card :id="title + '-container'" :width="width" :height="height ? height : 'auto'"  main="true" elevation="10" v-show="showCard" class="rounded-lg" :element-width-data="width" :element-height-data="height">
+        <v-card  :id="title + '-container'" :width="width" :height="height ? height : 'auto'"  main="true" elevation="10" v-show="showCard" class="rounded-lg" :element-width-data="width" :element-height-data="height">
             <v-card :id="props.title + '-card-title'" class="rounded-0 bg-surface  pa-0" style="z-index: 1500;" flat>
                 <h4 class="pa-3 d-flex align-center pl-5 w-100 rounded-t-lg" :id="title + '-container-header'" style="cursor: grab;">
                     <v-icon class="mr-2">{{ icon }}</v-icon>

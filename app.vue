@@ -19,7 +19,7 @@ useHead({
   },
   link: [
     {
-      rel:"icon",  type: "image/x-icon", href:"/fav.png", 
+      rel:"icon",  type: "image/x-icon", href:"/favicon.png", 
     },
     {
       "rel": "preconnect",
@@ -50,20 +50,6 @@ watch(selectedBackgroundColor, (current) => {
 
 </script>
 <style>
-
-/* 
-.slide-enter-active, .slide-leave-active{
-  transition: all .25s linear;
-}
-
-.slide-enter-from, .slide-leave-to{
-  transform: translate(-50%);
-  opacity: .5;
-}
-
-.scale-enter-active, .scale-leave-active{
-  transition: all .1s linear;
-} */
 
 .scale-enter-from, .scale-leave-to{
   
