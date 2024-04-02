@@ -138,7 +138,6 @@
 const showShareDialog = ref(false)
 const showNavigation = inject('showProjectsNavigation')
 const showChatbox = ref(false)
-const chats = useChatboxObject
 const {priorities, watches, completes} = useSectionFilterObjects
 const { user } = storeToRefs(useUserStore())
 const { project, sectionSort, sectionFilter } = storeToRefs(useProjectStore())

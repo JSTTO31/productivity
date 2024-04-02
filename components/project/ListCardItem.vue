@@ -1,19 +1,22 @@
 <template>
-    <div class="mb-3 rounded bg-surface task" :disabled="!havePermission" style="z-index: 100 !important;"
+    <v-card class="mb-3 rounded bg-surface task" :disabled="!havePermission" style="z-index: 100 !important;cursor:pointer"
         :id="task._id || task.tempId"
-        @click.stop="$router.push({ query: { task: task?._id || task.tempId, section: section?._id || section.tempId } })">
+        @click="$router.push({ query: { task: task?._id || task.tempId, section: section?._id || section.tempId } })">
         <!-- <v-card class="rounded-lg ma-2 mt-2 mb-3" flat>
             <v-img :src="'https://source.unsplash.com/random/500x200/?collaboration&' + task.title"></v-img>
-                
         </v-card> -->
-        <div class="pa-3">
+        <v-card class="d-flex handle align-center justify-center rounded-lg" flat>
+            <v-icon>mdi-dots-horizontal</v-icon>
+        </v-card>
+        <v-divider></v-divider>
+        <div class="pa-3 pt-0">
             <div class="d-flex align-center">
                 <p class="font-weight-medium text-subtitle-1">{{ title }}</p>
                 <v-spacer></v-spacer>
                 <!-- <v-progress-circular :model-value="25" size="20"></v-progress-circular> -->
-                <v-btn size="" variant="text" @click.stop="ToggleCompleted" color="success" v-if="task.completed"
+                <v-btn size="" variant="text" @mousedown.stop @click.stop="ToggleCompleted" color="success" v-if="task.completed"
                     icon="mdi-check-decagram"></v-btn>
-                <v-btn size="" variant="text" @click.stop="ToggleCompleted" v-else
+                <v-btn size="" variant="text" @mousedown.stop @click.stop="ToggleCompleted" v-else
                     icon="mdi-check-decagram-outline"></v-btn>
             </div>
             <p class="text-caption font-weight-regular mt-1">{{ description }}</p>
@@ -44,7 +47,7 @@
                 </v-badge>
             </div>
         </div>
-    </div>
+    </v-card>
 </template>
 
 <script setup lang="ts">
@@ -57,11 +60,17 @@ const description = computed(() => props.task.description.length > 70 ? props.ta
 const { user } = storeToRefs(useUserStore())
 const { role } = storeToRefs(useProjectStore())
 const havePermission = computed(() => props.task.assignees.some(item => item == user.value?._id || role.value == 'admin' || role.value == 'owner'))
+const $notification = useNotificationStore()
 const ToggleCompleted = () => {
     if (props.task.completed) {
         props.task.completed = false
     } else {
+        useConfetti()
         props.task.completed = true
+        const title = "Task Completed"
+        const message = "Great job! You have successfully completed the task. 🎉😊"
+        const type = "success"
+        $notification.add(title, message, type)
 
     }
 }
@@ -70,8 +79,11 @@ const isWatcher = computed(() => props.task.watchBy.some(item => item == user.va
 function mousedown(e: MouseEvent) {
     e.preventDefault()
     e.stopPropagation()
+    const sectionsContainer = document.getElementById('sections-container')
     //@ts-ignore
     const card: HTMLElement = document.getElementById(props.task?._id || props.task?.tempId) as HTMLElement
+    //@ts-ignore
+    const handle = card.querySelector('.handle') as HTMLElement
     //@ts-ignore
     const parentSection: HTMLElement = document.getElementById(props.section?._id || props.section?.tempId) as HTMLElement
     const sections = document.getElementsByClassName('section')
@@ -85,6 +97,8 @@ function mousedown(e: MouseEvent) {
 
     parentSection.style.zIndex = '1000'
     card.style.transform = 'rotate(-5deg)'
+    card.style.zIndex = '1000'
+    handle.style.cursor = 'grabbing'
 
 
     document.onmousemove = dragElement
@@ -97,6 +111,9 @@ function mousedown(e: MouseEvent) {
         card.style.left = currentPositionLeft + 'px'
         card.style.transform = 'rotate(0deg)'
         card.style.boxShadow = 'none'
+        card.style.zIndex = '100'
+        handle.style.cursor = 'default'
+
         parentSection.style.zIndex = '100'
 
         // remove dummy and push new position
@@ -136,7 +153,7 @@ function mousedown(e: MouseEvent) {
         card.style.left = (currentPositionLeft) + 'px'
 
         beforeSectionIndex = afterSectionIndex
-        afterSectionIndex = Math.floor((currentPositionLeft - (card.clientWidth / 2)) / card.clientWidth)
+        afterSectionIndex = Math.floor((currentPositionLeft + (sectionsContainer?.scrollLeft || 0) - (card.clientWidth / 2)) / card.clientWidth)
 
         const currentSection = sections[afterSectionIndex]
 
@@ -194,11 +211,18 @@ function mousedown(e: MouseEvent) {
 
 onMounted(() => {
     //@ts-ignore
-    const card: HTMLElement = document.getElementById(props.task?._id || props.task?.tempId) as HTMLElement
-    if (card && card.parentElement) {
-        card.onmousedown = mousedown
+    const card : HTMLElement = document.getElementById(props.task._id || props.task.tempId) as HTMLElement
+    const handle = card.querySelector('.handle') as HTMLElement
+    
+    if (handle && handle.parentElement) {
+        handle.onclick = (e) => e.stopPropagation()
+        handle.onmousedown = mousedown
     }
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+.handle{
+    cursor: grab;
+}
+</style>

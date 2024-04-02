@@ -11,7 +11,7 @@
             </div>
           </v-card>
         </v-carousel-item>
-        <v-carousel-item>
+        <!-- <v-carousel-item>
           <v-container class="h-screen bg-transparent"
             style="padding-inline: 50px;padding-top: 50px; padding-bottom: 100px;" fluid>
             <v-row class="h-100 d-flex ma-0">
@@ -49,7 +49,7 @@
               </v-card-text>
             </v-card>
           </v-container>
-        </v-carousel-item>
+        </v-carousel-item> -->
       </v-carousel>
     </v-main>
   </template>

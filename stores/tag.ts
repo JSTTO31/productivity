@@ -10,6 +10,7 @@ export type TagType = {
 
 export const useTagStore = defineStore('tag', () => {
     const tags = ref<TagType[]>([])
+    const {schedules} = storeToRefs(useScheduleStore()) 
     
     async function getAll(){
         if(tags.value.length > 0){
@@ -29,6 +30,26 @@ export const useTagStore = defineStore('tag', () => {
         }
     }
 
+    async function create(label: string){
+        return await useApiFetch('/tags', {
+            method: 'POST',
+            body: {label,color: useColorGenerator() },
+            onResponse(event){
+                tags.value.push(event.response._data.tag)
+            }
+        })
+    }
 
-    return {tags, getAll}
+    async function destroy(id: string){
+        return await useApiFetch('/tags/' + id, {
+            method: 'delete',
+            onResponse(){
+                tags.value = tags.value.filter(item => item._id != id)
+                schedules.value = schedules.value.map(item => ({...item, tags: item.tags.filter(tag => tag._id != id)}))
+            }   
+        })
+    }
+
+
+    return {tags, getAll, create, destroy}
 })

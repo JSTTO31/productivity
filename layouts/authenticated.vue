@@ -16,7 +16,7 @@
       </v-tab>
       <v-tab size="small" style="opacity: .8;" class="text-capitalize"
         :to="{ name: 'r-access-schedules' }">
-        <v-icon>mdi-square-edit-outline</v-icon>
+        <v-icon>mdi-calendar</v-icon>
         Schedules
       </v-tab>
       <v-tab size="small" :to="{ name: 'r-access-statistics' }" style="opacity: .8;"
@@ -55,6 +55,8 @@
   </ClientOnly>
   <navigationDrawerRight></navigationDrawerRight>
   <NotificationContainer></NotificationContainer>
+  <audio id="audio-celebration" src="/audio/celebration.mp3"></audio>
+
 </template>
 
 <script setup lang="ts">

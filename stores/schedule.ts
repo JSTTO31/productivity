@@ -5,14 +5,17 @@ import type { userType } from "./user";
 export type ScheduleData = {
     _id: string,
     title: String,
-    description: String,
+    user: userType,
+    // description: String,
     location: String,
-    attendees: String[],
-    pinned: boolean,
+    // attendees: String[],
+    // pinned: boolean,
     recurrence: String,
     tags: TagType[],
+    link: string,
     reminder: String,
-    visibility: String,
+    finished: boolean
+    // visibility: String,
     startAt: Date,
     endAt: Date,
     assignee?: userType,
@@ -20,14 +23,16 @@ export type ScheduleData = {
 
 export type ScheduleForm = {
     title: String,
-    description: String,
+    // description: String,
     location: String,
-    attendees: String[],
-    pinned: boolean,
+    // attendees: String[],
+    // pinned: boolean,
     recurrence: String,
     tags: String[],
+    link: string,
     reminder: String,
-    visibility: String,
+    finished?: boolean,
+    // visibility: String,
     startAt: Date,
     endAt: Date,
 }
@@ -35,6 +40,7 @@ export type ScheduleForm = {
 export const useScheduleStore = defineStore('schedule', () => {
     const schedules  = ref<ScheduleData[]>([]);
     const schedule  = ref<ScheduleData | null>(null);
+    const $notification = useNotificationStore()
 
     async function getAll(){
         try {
@@ -60,6 +66,14 @@ export const useScheduleStore = defineStore('schedule', () => {
                 },
                 onResponse(e){
                     schedules.value.push(e.response._data.schedule)
+                    const notification = {
+                        title: "Schedule Created",
+                        message: "Your schedule has been successfully created! 🎉📅",
+                        type: "success"
+                      };
+                      
+                      
+                    $notification.add(notification.title, notification.message, 'success')
                 }
             })
 
@@ -77,6 +91,14 @@ export const useScheduleStore = defineStore('schedule', () => {
                     ...info
                 },
                 onResponse(e){
+                    const notification = {
+                        title: "Schedule Updated",
+                        message: "Your schedule has been successfully updated! 🔄📅",
+                        type: "success"
+                      };
+                      
+                      
+                    $notification.add(notification.title, notification.message, 'success')
                     schedules.value = schedules.value.map(item => item._id == id ? e.response._data.schedule : item)
                     
                 }
@@ -94,6 +116,13 @@ export const useScheduleStore = defineStore('schedule', () => {
                 method: 'DELETE',
                 onResponse(e){
                     schedules.value = schedules.value.filter(item => item._id == id ? e.response._data.schedule : item)
+                    const notification = {
+                        title: "Schedule Deleted",
+                        message: "The schedule has been successfully deleted. 🗓️",
+                        type: "success"
+                      };
+                     $notification.add(notification.title, notification.message, 'success')
+                    
                 }
             })
 
@@ -110,6 +139,7 @@ export const useScheduleStore = defineStore('schedule', () => {
                 method: 'PUT',
                 body: {
                     ...schedule,
+                    //@ts-ignore
                     pinned: !schedule?.pinned
                 },
                 onResponse(e){
@@ -124,5 +154,45 @@ export const useScheduleStore = defineStore('schedule', () => {
         }
     }
 
-    return {schedules, schedule, getAll, create, update, togglePinned, destroy}
+    async function toggleFinished(id: string){
+        const findSchedule = schedules.value.find(item => item._id == id)
+        if(!findSchedule) return
+        try {
+            const response = await useApiFetch('/schedules/' + id, {
+                method: 'PUT',
+                body: {
+                    ...findSchedule, finished: !findSchedule.finished
+                },
+                onResponse(e){
+                    let notification = null
+                    if(e.response._data.schedule.finished){
+                         notification = {
+                            title: "Schedule Completed",
+                            message: "Your schedule has been successfully completed! ✅📅",
+                            type: "success"
+                        };
+
+                        useConfetti()
+                    }
+                        notification = {
+                        title: "Schedule Updated",
+                        message: "Your schedule has been successfully updated! ✅📅",
+                        type: "success"
+
+                    };
+
+                    $notification.add(notification.title, notification.message, 'success')
+                    schedules.value = schedules.value.map(item => item._id == id ? e.response._data.schedule : item)
+
+                    
+                }
+            })
+
+            return response
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    return {schedules, schedule, getAll, create, update, togglePinned, destroy, toggleFinished}
 })

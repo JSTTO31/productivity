@@ -1,6 +1,6 @@
 <template>
     <div v-if="project">
-        <ProjectAppBar></ProjectAppBar>
+    <ProjectAppBar></ProjectAppBar>
         <v-main class="pr-0 pb-0 bg h-screen">
             <span id="teleport-dialog"></span>
             <v-card color="transparent" class="h-100 rounded-0" flat>

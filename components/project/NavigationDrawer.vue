@@ -9,7 +9,7 @@
                     </template>
                     <v-card class="rounded-lg pa-2">
                         <v-list>
-                            <v-list-item @click="$project.store" density="compact" class="rounded-lg mb-2 text-subtitle-2 text-left font-weight-regular">
+                            <v-list-item @click="$project.store" density="compact" class="rounded-lg mb-2 text-subtitle-2 text-caption text-left font-weight-regular">
                                 <v-icon class="mb-1 mr-2">mdi-plus</v-icon>New project</v-list-item>
                             <v-divider class="my-2"></v-divider>
                             <v-list-item density="compact" class="rounded-lg mb-2 text-caption text-center font-weight-regular">Sorry no templates available</v-list-item>

@@ -138,6 +138,7 @@ const findFirstAssignee = computed(
       (item) => item.user._id == props.task.assignees[0]
     ) || null
 );
+const $notification = useNotificationStore()
 const router = useRouter()
 const { project } = storeToRefs(useProjectStore());
 const mainSectionIcon = computed(() => (value: string) => value.toLocaleLowerCase() == 'in progress' ? 'mdi-progress-wrench' : value.toLocaleLowerCase() == 'to do' ? 'mdi-progress-clock' : value.toLocaleLowerCase() == 'completed' ? 'mdi-progress-check' : 'mdi-file-outline')
@@ -174,6 +175,12 @@ function ToggleCompleted() {
     props.task.completed = false
   } else {
     props.task.completed = true
+    const title = "Task Completed"
+    const message = "Great job! You have successfully completed the task. 🎉😊"
+    const type = "success"
+    props.task.completed = true
+    $notification.add(title, message, type)
+
 
   }
 }
