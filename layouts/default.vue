@@ -2,11 +2,10 @@
   <v-app-bar style="padding-inline: 115px;" height="80" flat absolute color="transparent">
     <AppLogo style="font-size: 28px;"></AppLogo>
     <v-spacer></v-spacer>
-    <v-btn variant="plain" class="mx-1 text-capitalize" :to="{ name: 'index' }">Home</v-btn>
-    <v-btn variant="plain" class="mx-1 text-capitalize" :to="{ name: 'features' }">Features</v-btn>
-    <v-btn variant="plain" class="mx-1 text-capitalize" :to="{ name: 'pricing' }">Pricing</v-btn>
-    <v-btn variant="plain" class="mx-1 text-capitalize" :to="{ name: 'testimonial' }">Testimonial</v-btn>
-    <v-btn variant="plain" class="mx-1 text-capitalize mr-n15" :to="{ name: 'testimonial' }">FAQ</v-btn>
+    <v-btn variant="plain" class="mx-1 text-capitalize" :to="{ hash: '#features' }">Features</v-btn>
+    <v-btn variant="plain" class="mx-1 text-capitalize" :to="{ hash: '#testimonial' }">Testimonial</v-btn>
+    <v-btn variant="plain" class="mx-1 text-capitalize" :to="{ hash: '#how-it-works' }">How it works</v-btn>
+    <v-btn variant="plain" class="mx-1 text-capitalize mr-n15" :to="{ hash: '#faq' }">FAQ</v-btn>
     <v-spacer></v-spacer>
     <v-btn variant="text" icon="mdi-weather-sunny" class="mr-10" @click="setColorMode" v-if="name == 'dark'"></v-btn>
     <v-btn variant="text" icon="mdi-weather-night" class="mr-10" @click="setColorMode" v-else></v-btn>
@@ -48,6 +47,7 @@ function setColorMode() {
 </script>
 
 <style scoped>
+
 #contact-staff {
   position: fixed;
   bottom: 25px;

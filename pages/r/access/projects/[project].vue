@@ -22,7 +22,7 @@
             <div class="d-flex flex-column">
                 <v-icon style="transform: rotate(25deg);" size="200" color="white">mdi-lightning-bolt</v-icon>
                 <h4 class="text-center text-white my-15 mt-5">No project found</h4>
-                <v-btn class="text-capitalize">Create new project</v-btn>
+                <v-btn class="text-capitalize" @click="$project.store">Create new project</v-btn>
                 <h4 class="text-center font-weight-regular text-white mt-5">No available templates</h4>
             </div>
         </v-card>
@@ -42,6 +42,7 @@ definePageMeta({
 const { project, projects } = storeToRefs(useProjectStore())
 const $project = useProjectStore()
 const route = useRoute()
+const router = useRouter()
 const saving_loading = ref(false)
 function updateLoading(value: boolean) {
     saving_loading.value = value
@@ -68,6 +69,13 @@ function setTask(route: RouteLocationNormalizedLoaded) {
     } else {
         selectedTask.value = null
         selectedSection.value = null
+    }
+}
+
+async function newProject(){
+    const {data} = await $project.store()
+    if(data.value){
+        router.push({name:''})
     }
 }
 

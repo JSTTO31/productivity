@@ -87,7 +87,7 @@
                         <v-card v-for="member, n in project?.members" :key="member._id" class="rounded-circle mr-n4">
                             <v-avatar class="border" size="30">
                                 <v-img
-                                    :src="'https://source.unsplash.com/random/100x100/?person&' + member._id"></v-img>
+                                    :src="member.user.picture"></v-img>
                             </v-avatar>
                         </v-card>
                     </div>
@@ -98,7 +98,7 @@
                         <v-divider class="my-2"></v-divider>
                         <v-list-item class="pa-2 pr-5 rounde-lg text-caption mb-2" v-for="member in project.members"
                             :key="member._id"
-                            :prepend-avatar="'https://source.unsplash.com/random/100x100/?person&' + member._id"
+                            :prepend-avatar="member.user.picture"
                             :append-icon="member.role == 'owner' ? 'mdi-account-tie' : member.role == 'admin' ? 'mdi-account-key' : 'mdi-account'">
                             <template #title>{{ member.user.name }}</template>
                             <!-- <template #subtitle>{{ member.user.email }}</template> -->

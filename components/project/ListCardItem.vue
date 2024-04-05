@@ -31,10 +31,10 @@
                     v-else>{{ task.priority }}</v-chip>
             </div>
             <v-divider class="my-1"></v-divider>
-            <div class="d-flex align-center">
-                <v-card v-for="assignee in  task.assignees" :key="assignee" class="rounded-circle mr-n5 border" flat>
+            <div class="d-flex align-center" v-if="task.assignees.length > 0">
+                <v-card v-for="assignee in  task.assignees" :key="assignee.email" class="rounded-circle mr-n5 border" flat>
                     <v-avatar class="border" size="30">
-                        <v-img :src="'https://source.unsplash.com/random/100x100/?person&' + assignee"></v-img>
+                        <v-img :src="assignee.picture"></v-img>
                     </v-avatar>
                 </v-card>
                 <v-spacer></v-spacer>
@@ -59,7 +59,7 @@ const title = computed(() => props.task.title.length > 25 ? props.task.title.sub
 const description = computed(() => props.task.description.length > 70 ? props.task.description.substring(0, 70) + '...' : props.task.description)
 const { user } = storeToRefs(useUserStore())
 const { role } = storeToRefs(useProjectStore())
-const havePermission = computed(() => props.task.assignees.some(item => item == user.value?._id || role.value == 'admin' || role.value == 'owner'))
+const havePermission = computed(() => props.task.assignees.some(item => item._id == user.value?._id || role.value == 'admin' || role.value == 'owner'))
 const $notification = useNotificationStore()
 const ToggleCompleted = () => {
     if (props.task.completed) {

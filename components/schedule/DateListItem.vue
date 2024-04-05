@@ -1,14 +1,13 @@
 <template>
-     <v-card density="compact" :color="schedule.tags[0]?.color || ''" class="border mb-2 rounded text-subtitle-2 font-weight-regular text-capitalize"  flat>
-        <v-card-title  class="d-flex pb-0">
+     <v-card density="compact" :color="schedule.tags[0]?.color || 'background'" class="border mb-2 rounded text-subtitle-2 font-weight-regular text-capitalize h-100 d-flex flex-column pa-2 px-4 pb-4"  flat>
+        <v-card-title  class="d-flex pb-0 px-0">
             <h5  :class="schedule.finished ? 'text-decoration-line-through' : ''" class="text-wrap">
                 {{ schedule.title }}
             </h5>
             <v-spacer></v-spacer>
-            <v-btn variant="text" size="x-small" icon="mdi-pencil-outline" @click="showDetails = true"></v-btn>
-            <v-btn variant="text" size="x-small" icon="mdi-trash-can-outline" @click="showDelete = true"></v-btn>
+            <v-btn variant="text" size="x-small" icon="mdi-pencil-outline" @click="$router.push({query: {edit: schedule._id}})"></v-btn>
+            <v-btn variant="text" size="x-small" icon="mdi-trash-can-outline" @click="$router.push({query: {delete: schedule._id}})"></v-btn>
         </v-card-title>
-        <v-card-text class="">
             <div class="d-flex align-center  text-lowercase" style="opacity: .8">
                 <v-icon size="18" class="mr-4">mdi-clock</v-icon>
                 {{ time }}
@@ -24,20 +23,20 @@
             <div class="d-flex py-5 pb-0 flex-wrap" style="gap: 5px"  v-if="schedule.tags.length > 1">
                 <v-chip variant="flat" class="text-capitalize rounded" v-for="tag in schedule.tags.slice(1)" :color="tag.color">{{ tag.label }}</v-chip>
             </div>
+            <v-spacer></v-spacer>
             <div class="mt-4 pb-0 d-flex align-center" style="gap: 5px;">
                 <v-btn @click.stop="finished" variant="outlined" class="text-capitalize" size="small" prepend-icon="mdi-checkbox-marked" v-if="!schedule.finished">Finished</v-btn>
                 <v-btn @click.stop="finished" variant="outlined" class="text-capitalize" size="small" prepend-icon="mdi-checkbox-blank" v-else>Unfinished</v-btn>
-                <v-btn @click.stop="goToMeet" variant="flat" class="text-capitalize" size="small" prepend-icon="mdi-video" color="blue" v-if="schedule.link">Meeting</v-btn>
+                <v-btn @click.stop="goToMeet" variant="flat" class="text-capitalize" size="small" prepend-icon="mdi-video" color="blue" v-if="schedule.link">Join Meeting</v-btn>
             </div>
-        </v-card-text>
     </v-card>
-    <v-dialog v-model="showDetails" contained>
+    <v-dialog scrim="transparent" style="position: fixed" v-model="showDetails" contained>
         <v-card class="pa-4 pt-1" >
             <v-card-title class="px-0 text-subtitle-1">Edit Schedule</v-card-title>
             <schedule-edit-schedule-card :schedule="schedule" v-model:menu="showDetails"></schedule-edit-schedule-card>
         </v-card>
     </v-dialog>
-    <v-dialog  v-model="showDelete" scrim="transparent" contained>
+    <v-dialog style="position: fixed" width="400" v-model="showDelete" scrim="transparent" contained>
         <v-card class="pa-5 px-10 d-flex flex-column align-center" :loading="loading" :disabled="loading">
             <v-avatar size="50" style="border: 2px solid rgba(var(--v-theme-error));opacity: .5">
                 <v-icon size="25" color="error">mdi-trash-can-outline</v-icon>

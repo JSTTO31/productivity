@@ -12,7 +12,7 @@
                 <transition-group name="slide">
                     <schedule-upcoming-schedule-card class="mb-2" :style="`transition-delay: ${n / 5}s`" v-for="schedule, n in upcommingSchedules" :id="schedule._id" :key="schedule._id" :schedule="schedule"></schedule-upcoming-schedule-card>
                 </transition-group>
-                <v-list-item class="text-center font-weight-light text-caption" v-if="upcommingSchedules.length < 1">
+                <v-list-item class="text-center " v-if="upcommingSchedules.length < 1">
                     No upcoming schedule
                 </v-list-item>
             </v-list>

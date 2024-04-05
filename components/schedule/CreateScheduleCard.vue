@@ -15,10 +15,10 @@
         <v-text-field :error-messages="$v.link.$errors[0]?.$message.toString() || ''" v-model="$v.link.$model" flat label="Video meeting link" single-line variant="solo-filled"
             density="compact" prepend-inner-icon="mdi-link-variant"></v-text-field>
         <schedule-tag-field v-model:tags="$v.tags.$model"></schedule-tag-field>
-        <div class="d-flex pa-1" style="gap: 5px;">
+        <div class="d-flex pt-2" style="gap: 5px;">
             <v-btn prepend-icon="mdi-plus" type="submit" flat :loading="loading" class="w-50 text-capitalize" color="primary">Add
                 </v-btn>
-            <v-btn prepend-icon="mdi-cancel" flat class="w-50 text-capitalize border" @click="emits('update:menu', false)">Cancel
+            <v-btn prepend-icon="mdi-cancel" flat class="w-50 text-capitalize border" @click="emits('close')">Cancel
                 </v-btn>
         </div>
     </v-form>
@@ -27,15 +27,18 @@
 <script setup lang="ts">
 import { required, helpers } from '@vuelidate/validators';
 import useVuelidate from '@vuelidate/core';
-const props = defineProps(['menu', 'startAt', 'endAt'])
-const emits = defineEmits(['update:menu'])
+const props = defineProps(['startAt'])
+const emits = defineEmits(['close'])
 const route = useRoute()
 //@ts-ignore
 const date = ref(new Date(props.startAt))
+const endAt = new Date()
+endAt.setHours(22)
+endAt.setMinutes(0)
 const schedule = reactive({
     title: '',
     startAt: new Date(props.startAt),
-    endAt: new Date(props.endAt),
+    endAt: new Date(endAt),
     location: '',
     link: '',
     recurrence: 'weekly',
@@ -85,13 +88,6 @@ function gmeetZoom(value: string){
     return regex.test(value)
 }
 
-function noInterception(){
-    // const startAt = 
-    // if(!value){
-
-    // }
-}
-
 const rules = {
     title: { required },
     startAt: { required, lowerThan: helpers.withMessage('The field must before end date!', startAtShouldLowerEndAt), mustHaveDistance:  helpers.withMessage('The field must have atleast 15 minutes distance!', dateMustHave30minutesDistance)},
@@ -119,13 +115,13 @@ const loading = ref(false)
 
 const $schedule = useScheduleStore()
 const router = useRouter()
-
+const {schedules} = storeToRefs(useScheduleStore())
 async function submit() {
     if (!await $v.value.$validate()) return
     loading.value = true
     $schedule.create(schedule).then(() => {
         loading.value = false
-        emits('update:menu', false)
+        emits('close')
     })
 }
 </script>

@@ -4,6 +4,7 @@ export type userType = {
     _id: String,
     name: String;
     email: String;
+    picture: string;
     createdAt: String;
     updatedAt: String
 } 

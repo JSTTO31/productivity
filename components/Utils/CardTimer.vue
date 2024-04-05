@@ -162,10 +162,6 @@ onMounted(() => {
 
         observer.observe(content)
     }
-
-    if (Notification.permission == 'default') {
-        Notification.requestPermission()
-    }
 })
 
 </script>

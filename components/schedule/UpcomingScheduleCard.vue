@@ -1,5 +1,5 @@
 <template>
-     <v-alert flat class="pa-0 py-3 rounded" variant="flat"  :color="schedule.tags[0]?.color || 'grey'" >
+     <v-card flat class="pa-0 py-3 rounded border" variant="flat"  :color="schedule.tags[0]?.color || 'background'" >
         <v-card-subtitle class="text-caption">{{ time }}</v-card-subtitle>
         <v-card-title class="text-subtitle-1 mt-n2">
             {{schedule.title}}
@@ -7,11 +7,11 @@
         <v-card-text class="d-flex pb-0" style="gap: 5px">
             <!-- <v-btn size="small" class="text-capitalize rounded mr-2" variant="outlined" prepend-icon="mdi-information" flat>Details</v-btn> -->
             <v-btn size="small" class="text-capitalize rounded" :prepend-icon="!schedule.finished ? 'mdi-checkbox-marked' : 'mdi-square-rounded'" variant="outlined" flat @click="finished">finished</v-btn>
-            <v-btn size="small" class="text-capitalize rounded" color="blue" prepend-icon="mdi-video" variant="elevated" flat @click="goToMeet" v-if="schedule.link">Meeting</v-btn>
+            <v-btn size="small" class="text-capitalize rounded" color="blue" prepend-icon="mdi-video" variant="elevated" flat @click="goToMeet" v-if="schedule.link">Join Meeting</v-btn>
         </v-card-text>
         <v-chip size="x-small" prepend-icon="mdi-clock-time-nine-outline" style="position: absolute;top: 10px;right: 10px;" v-if="ongoing">Ongoing</v-chip>
         <v-chip size="x-small" prepend-icon="mdi-clock-outline" style="position: absolute;top: 10px;right: 10px;" v-else>{{ timeAgo }}</v-chip>
-    </v-alert>
+    </v-card>
 </template>
 
 <script setup lang="ts">

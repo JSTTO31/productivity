@@ -20,7 +20,7 @@
         <schedule-tag-field v-model:tags="$v.tags.$model"></schedule-tag-field>
         <div class="d-flex pt-2" style="gap: 5px;">
             <v-btn prepend-icon="mdi-pencil-outline" type="submit" flat :loading="loading" class="w-50 text-capitalize" color="primary">Edit</v-btn>
-            <v-btn prepend-icon="mdi-cancel" @click="emits('update:menu', false)" flat class="w-50 text-capitalize border">Cancel
+            <v-btn prepend-icon="mdi-cancel" @click="emits('close')" flat class="w-50 text-capitalize border">Cancel
                 </v-btn>
         </div>
     </v-form>
@@ -29,9 +29,8 @@
 <script setup lang="ts">
 import { required, helpers } from '@vuelidate/validators';
 import useVuelidate from '@vuelidate/core';
-const route = useRoute()
-const props = defineProps<{schedule: ScheduleData, menu: Boolean}>()
-const emits = defineEmits(['update:menu'])
+const props = defineProps<{schedule: ScheduleData}>()
+const emits = defineEmits(['close'])
 //@ts-ignore
 const date = ref(new Date(props.schedule.startAt))
 watch(date, () => {
@@ -47,7 +46,6 @@ watch(date, () => {
     schedule.endAt = newEndAt
     
 })
-const showDeleteMenu = ref(false)
 const schedule = reactive({
     title: props.schedule?.title || '',
     startAt: props.schedule?.startAt || new Date(),
@@ -122,7 +120,7 @@ async function submit() {
         //@ts-ignore
         $schedule.update(props.schedule._id, schedule).then(() => {
             loading.value = false
-            emits('update:menu', false)
+            emits('close')
         })
     }
 }

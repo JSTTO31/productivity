@@ -1,6 +1,6 @@
 <template>
     <v-main class="h-100">
-      <v-carousel :show-arrows="false" class="h-100 w-100">
+      <v-carousel :show-arrows="false" class="h-100 w-100" hide-delimiter-background hide-delimiters>
         <v-carousel-item>
           <v-card class="bg-transparent rounded-lg d-flex justify-center flex-column align-center h-100" flat>
             <h1 class="text-white" style="line-height: 1;font-family: 'Orbitron', sans-serif;font-weight:200;font-size: 100px;opacity: .8;">

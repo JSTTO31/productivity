@@ -1,5 +1,5 @@
 <template>
-   <v-list-item class="pa-3 rounded-0 mb-2 border-b" :prepend-avatar="'https://source.unsplash.com/random/35x35/?person&' + member.user._id" :title="member.user.email.toString()" :subtitle="member.user.name.toString()">
+   <v-list-item class="pa-3 rounded-0 mb-2 border-b" :prepend-avatar="member.user.picture" :title="member.user.email.toString()" :subtitle="member.user.name.toString()">
         <template #append>
             <v-select density="compact" hide-details single-line variant="plain" v-model="role" :items="['admin', 'member']"></v-select>
         </template>

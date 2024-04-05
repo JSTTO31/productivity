@@ -14,13 +14,13 @@
                 </v-text-field>
             </div>
             <v-list style="overflow: auto;height: 300px;">
-                <project-member-list-item disabled key="'owner'" :member="
+                <project-member-list-item :members="filteredMembers" disabled key="'owner'" :member="
                     //@ts-ignore
                     owner"></project-member-list-item>
-                <project-member-list-item v-if="current?._id != owner?._id" disabled key="current" :member="
+                <project-member-list-item :members="filteredMembers" v-if="current?._id != owner?._id" disabled key="current" :member="
                     //@ts-ignore
                     current"></project-member-list-item>
-                <project-member-list-item v-model:members="members" v-for="member in filteredMembers" :key="member._id" :member="member"></project-member-list-item>
+                <project-member-list-item :members="filteredMembers" v-model:members="members" v-for="member in filteredMembers" :key="member._id" :member="member"></project-member-list-item>
             </v-list>
             <div class="mt-5">
                 <v-btn @click="changeRoles" prepend-icon="mdi-account-cog" variant="elevated" class="text-capitalize" flat color="primary" :disabled="!isDirty" :loading="loading">Update Roles</v-btn>

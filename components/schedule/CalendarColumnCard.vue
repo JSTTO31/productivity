@@ -1,23 +1,13 @@
 <template>
-    <v-menu location="end" v-model="menu" :close-on-content-click="false" persistent no-click-animation key="parent">
+    <v-menu location="end" v-model="menu" :close-on-content-click="false" key="parent">
         <template #activator="{props}">
-            <v-card  v-bind="props" :height="height" variant="elevated" class="pa-3 d-flex flex-column"  @click="" :color="schedule.tags[0]?.color || 'surface'" style="user-select: none" >
+            <v-card  v-bind="props" :height="height" variant="elevated" class="pa-3 d-flex flex-column" :color="schedule.tags[0]?.color || 'surface'" style="user-select: none" >
                 <h4 class="text-subtitle-1 font-weight-medium">{{ schedule.title.length > 12 ? schedule.title.substring(0, 12) + '...' : schedule.title }}</h4>
                 <h5 class=" font-weight-regular text-caption text-lowercase" v-if="height >= (170 / 2)">{{ time }}</h5>
             </v-card>
         </template>
         <v-card width="345" class="mx-2 pa-1">
-            <div v-if="showEdit">
-                <v-card-title class=" d-flex align-center" style="font-size: 18px">
-                    Edit Schedule
-                    <v-spacer></v-spacer>
-                    <v-btn icon="mdi-close" size="small" flat @click="menu = false"></v-btn>
-                </v-card-title>
-                <v-card-text>
-                    <schedule-edit-schedule-card :schedule="schedule" v-model:menu="menu" ></schedule-edit-schedule-card>
-                </v-card-text>
-            </div>
-            <div v-else>
+            <div>
                 <v-card-title class="d-flex" style="font-size: 18px">
                     <v-icon class="mr-3 mt-1" :color="schedule.tags[0]?.color || 'grey'" @click="">mdi-square-rounded</v-icon>
                     <div class="d-flex flex-column text-wrap text-capitalize">
@@ -30,11 +20,11 @@
                             <v-btn icon="mdi-dots-vertical" v-bind="props" flat size="small"></v-btn>
                         </template>
                         <v-list class="rounded">
-                            <v-list-item @click="showEdit = true" prepend-icon="mdi-pencil-outline" density="compact" class="text-capitalize text-caption">Edit</v-list-item>
+                            <v-list-item @click="showEdit" prepend-icon="mdi-pencil-outline" density="compact" class="text-capitalize text-caption">Edit</v-list-item>
                             <v-list-item @click="finished" prepend-icon="mdi-flag" density="compact" class="text-capitalize text-caption" v-if="!schedule.finished">Mark as finished</v-list-item>
                             <v-list-item v-else @click="finished" prepend-icon="mdi-flag-remove" density="compact" class="text-capitalize text-caption">Mark as unfinished</v-list-item>
                             <v-list-item @click="menu = false" prepend-icon="mdi-close" density="compact" class="text-capitalize text-caption">Close</v-list-item>
-                            <v-list-item @click="removeSchedule" prepend-icon="mdi-trash-can-outline" density="compact" class="text-capitalize text-caption text-error">Delete</v-list-item>
+                            <v-list-item @click="$router.push({query: {delete: schedule._id}})" prepend-icon="mdi-trash-can-outline" density="compact" class="text-capitalize text-caption text-error">Delete</v-list-item>
                         </v-list>
                     </v-menu>
                 </v-card-title>
@@ -69,14 +59,6 @@
                         <v-chip variant="flat" class="text-capitalize rounded" v-for="tag in schedule.tags" :color="tag.color">{{ tag.label }}</v-chip>
                     </div>
                     <v-btn v-if="schedule.link" @click="goToMeet" block variant="flat" class="text-capitalize mt-2" prepend-icon="mdi-video-outline" color="blue">Video Meeting</v-btn>
-                    <!-- <div class="py-2">
-                       
-                        <v-btn block variant="outlined" color="success" class="text-capitalize mb-2" prepend-icon="mdi-flag-outline">Finished Schedule</v-btn>
-                        <div class="d-flex pr-3" style="gap: 10px">
-                            <v-btn variant="flat" color="blue" @click="showEdit = true" class="text-capitalize w-50"  prepend-icon="mdi-pencil-outline">Edit</v-btn>
-                            <v-btn  variant="outlined" class="text-capitalize w-50"  prepend-icon="mdi-close" @click="menu=false">Close</v-btn>
-                        </div>
-                    </div> -->
                 </v-card-text>
             </div>
         </v-card>
@@ -86,7 +68,6 @@
 <script setup lang="ts">
 const $schedule = useScheduleStore()
 const props = defineProps<{schedule: ScheduleData}>()
-const showEdit = ref(false)
 const status = computed(() => {
     const now = new Date()
     const startAt = new Date(props.schedule.startAt)
@@ -94,9 +75,6 @@ const status = computed(() => {
     return props.schedule.finished ? 'finished' : now > startAt && now < endAt ? 'ongoing' : now < startAt ? 'upcoming' : 'not finished'  
 })
 const menu = ref(false)
-watch(menu, () => {
-    if(!menu.value) showEdit.value = false
-})
 const time = computed(() => new Date(props.schedule.startAt).toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'}) + ' - ' + new Date(props.schedule.endAt).toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'}))
 const height = computed(() => {
     const startAt = new Date(props.schedule.startAt)
@@ -106,7 +84,7 @@ const height = computed(() => {
     const hours = Math.floor(difference / (1000 * 60 * 60))
     const minutes = (difference / (1000 * 60)) % 60
     const minutesPercentHour  = minutes / 60
-    let height = (170 * hours) + (170 * minutesPercentHour) 
+    let height = (90 * hours) + (90 * minutesPercentHour) 
     
     if(hours > 1){
         height += (hours - 1) * 5
@@ -128,6 +106,13 @@ function removeSchedule(){
     menu.value = false
     })
 }
+
+const router = useRouter()
+function showEdit(){
+    menu.value = false;
+    router.push({query: {edit: props.schedule._id}})
+}
+
 </script>
 
 <style scoped>

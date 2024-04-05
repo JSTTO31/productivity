@@ -1,7 +1,7 @@
 <template>
   <v-app class="h-screen w-screen">
     <NuxtLoadingIndicator></NuxtLoadingIndicator>
-    <ClientOnly>
+    <ClientOnly v-if="!mobile">
       <NuxtLayout>
         <NuxtPage></NuxtPage>
       </NuxtLayout>
@@ -9,10 +9,22 @@
         <Loading></Loading>
       </template>
     </ClientOnly>
+    <ClientOnly v-else>
+      <div>
+        <v-dialog persistent scrim="error" :model-value="mobile">
+          <v-card color="error" class="rounded pa-15 d-flex justify-center align-center">
+            <v-icon size="150" >mdi-alert-circle</v-icon>
+            <h2>Device Not Supported</h2>
+            <p class="text-center">Sorry, our app is currently optimized for desktop use only. For the best experience, please access it from a desktop or laptop computer.</p>
+          </v-card>
+        </v-dialog>
+      </div>
+    </ClientOnly>
   </v-app>
 </template>
 <script setup>
 import { useColorStore } from './stores/color';
+const {mobile} = useDisplay()
 useHead({
   titleTemplate: (titleChunk) => {
     return titleChunk ? titleChunk + ' | Efficiently' : 'Efficiently'
@@ -54,6 +66,10 @@ watch(selectedBackgroundColor, (current) => {
 
 </script>
 <style>
+body{
+  scroll-behavior: smooth;
+}
+
 .scale-enter-from,
 .scale-leave-to {
 

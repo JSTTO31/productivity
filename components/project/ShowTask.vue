@@ -76,7 +76,7 @@
               <v-menu :close-on-content-click="false">
                 <template #activator="{ props }">
                   <v-list-item v-bind="props" variant="tonal" class="rounded w-75" append-icon="mdi-chevron-down"
-                    density="compact" prepend-avatar="https://source.unsplash.com/random/50x50/?person"
+                    density="compact" :prepend-avatar="findFirstAssignee.user.picture"
                     v-if="findFirstAssignee">{{ findFirstAssignee.user.name }}</v-list-item>
                   <v-list-item v-bind="props" variant="tonal" class="rounded w-75 pa-1 py-2"
                     append-icon="mdi-chevron-down" density="compact" prepend-icon="mdi-account"
@@ -86,8 +86,8 @@
                   <v-list-item @click="
       //@ts-ignore
       toggleAssignee(member.user._id)
-      " :active="task.assignees.some((item) => item == member.user._id)
-      " color="primary" prepend-avatar="https://source.unsplash.com/random/50x50/?person"
+      " :active="task.assignees.some((item) => item._id == member.user._id)
+      " color="primary"  :prepend-avatar="member.user.picture"
                     class="text-capitalize text-caption py-2 border-b font-weight-regular" density="compact"
                     v-for="member in project.members" :key="member._id">{{ member.user.name }}</v-list-item>
                 </v-list>
@@ -135,7 +135,7 @@ const isWatcher = computed(() => props.task.watchBy.some(item => item == user.va
 const findFirstAssignee = computed(
   () =>
     project.value?.members.find(
-      (item) => item.user._id == props.task.assignees[0]
+      (item) => item.user._id == props.task.assignees[0]._id
     ) || null
 );
 const $notification = useNotificationStore()
@@ -186,10 +186,10 @@ function ToggleCompleted() {
 }
 
 const toggleAssignee = (value: string) => {
-  const index = props.task.assignees.findIndex((item: string) => item == value);
+  const index = props.task.assignees.findIndex((item) => item._id == value);
 
   if (index == -1) {
-    props.task.assignees.push(value);
+    props.task.assignees.push(props.task.assignees[index]);
   } else {
     props.task.assignees.splice(index, 1);
   }

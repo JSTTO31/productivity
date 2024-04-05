@@ -1,31 +1,34 @@
 <template>
     <v-card id="table-container" class="h-100 rounded-0 w-100 text-white" color="transparent" flat  style="overflow-y: auto;">
-        <v-container fluid class="container pa-0 h-100 pr-2">
-            <v-row>
-                <div style="width: 100px;"></div>
-                <v-col class="col pa-0" v-for="day, n in weekDays" :key="day.getDate()"
-                    style="">
-                    <v-card flat class="rounded-0 h-100 text-white"
-                        :class="day.toDateString() == today.toDateString() ? 'section-active' : 'bg-transparent'">
-                        <div class="py-5">
-                            <h6 class="text-center text-capitalize font-weight-regular">{{ weekNames[n] }}</h6>
-                            <h1 class="text-center text-h3 font-weight-bold">{{ day.getDate() }}</h1>
-                        </div>
-                    </v-card>
-                </v-col>
-            </v-row>
+        <v-container fluid class="container pa-0 h-100 px-5">
             <v-row class="h-100">
-                <div style="width: 100px;;row-gap: 5px;" class="d-flex pt-2 flex-column pl-5">
-                    <span v-for="n in 19" :style="n == 19 ? 'height: 10px;margin-top: 5px' : 'height: 170px'" class="text-center text-caption">
-                        <div class="mt-n2 d-flex  align-center" style="position: absolute;width: 100%;"  >
-                            <span style="width: 50px;" class="text-subtitle-2">{{ n + 5 }} {{ n + 5 > 11 ? 'PM' : 'AM' }}</span>
-                            <v-divider thickness="2"></v-divider>
-                        </div>
-                    </span>
-                </div>
                 <ScheduleCalendarTableColumn v-for="day, n in weekDays" :key="day.getDate()" :date="day"></ScheduleCalendarTableColumn>
             </v-row>
         </v-container>
+        <div v-if="appbar">
+            <Teleport to="#app-bar-schedule">
+            <v-app-bar-title class="d-flex font-weight-bold align-center">
+                <span class="mr-5">{{ titleDate }}</span>
+                <v-btn size="small" @click="$router.push({query: {date: new Date().toISOString()}})" variant="flat" class=" mr-2 text-capitalize px-3" append-icon="mdi-plus-circle-outline" color="primary">Create</v-btn>
+            </v-app-bar-title>
+            <v-spacer></v-spacer>
+            <v-btn :to="{ name: 'r-access-schedules-monthly' }"
+                :variant="$route.name == 'r-access-schedules-monthly' ? 'flat' : 'tonal'" class="text-capitalize mr-2"
+                size="small">Monthly</v-btn>
+            <v-btn :to="{ name: 'r-access-schedules' }" class="text-capitalize mr-2" size="small"
+                :variant="$route.name == 'r-access-schedules' ? 'flat' : 'tonal'" :active="false">Weekly</v-btn>
+            <v-btn :to="{ name: 'r-access-schedules-daily' }"
+                :variant="$route.name == 'r-access-schedules-daily' ? 'flat' : 'tonal'" class="text-capitalize"
+                size="small">Daily</v-btn>
+            <v-divider inset vertical class="mx-3"></v-divider>
+            <v-btn size="x-small" variant="tonal" class="rounded-lg mr-2" icon="mdi-chevron-left"
+                @click="decreaseDate"></v-btn>
+            <v-btn @click="reset" class="text-capitalize mr-2"
+                size="small">Today</v-btn>
+            <v-btn size="x-small" variant="tonal" class="rounded-lg" icon="mdi-chevron-right"
+                @click="increaseDate"></v-btn>
+            </Teleport>
+        </div>
     </v-card>
 </template>
 
@@ -36,14 +39,34 @@ definePageMeta({
         mode: 'out-in'
     }
 })
-const props = defineProps<{ currentDate: Date }>()
-const weekNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-const today = new Date()
+const appbar = inject('appbar')
+const currentDate = ref(new Date());
+const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+];
+const titleDate = computed(() => {
+    const date = new Date(currentDate.value.toISOString())
+    date.setDate(date.getDate() - date.getDay())
+    const startMonth = date.getMonth()
+    date.setDate(date.getDate() + 6)
+    const endMonth = date.getMonth()
+    return (startMonth == endMonth ? months[startMonth] : months[startMonth] + ' - ' + months[endMonth]) + ' ' + date.getFullYear()
+})
 const weekDays = computed(() => {
-    const currentDate = props.currentDate
-    const day = currentDate.getDay()
+    const day = currentDate.value.getDay()
 
-    const startDay = new Date(currentDate)
+    const startDay = new Date(currentDate.value)
     startDay.setDate(startDay.getDate() - day)
 
     const weekNumber = 6
@@ -58,6 +81,25 @@ const weekDays = computed(() => {
 
     return container
 })
+
+function decreaseDate() {
+    const newDate = new Date(currentDate.value)
+    newDate.setDate(newDate.getDate() - 7)
+    currentDate.value = newDate
+}
+
+function increaseDate() {
+    const newDate = new Date(currentDate.value)
+    newDate.setDate(newDate.getDate() + 7)
+    currentDate.value = newDate
+}
+
+function reset() {
+    const newDate = new Date()
+    newDate.setDate(newDate.getDate() - newDate.getDay())
+    currentDate.value = newDate
+}
+
 
 </script>
 

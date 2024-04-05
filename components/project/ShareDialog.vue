@@ -26,7 +26,7 @@
                                 </v-list-item>
                             </v-list>
                             <v-list v-else style="overflow-y: auto;" class="pa-2">
-                                <v-list-item :active="members.some(item => item.email == user.email)" class="py-2 rounded-lg mb-1" :prepend-avatar="'https://source.unsplash.com/random/35x35/?person&' + user.email" v-for="user in users" :key="user.email" :title="user.email" :subtitle="user.name" @click="toggleMember({email: user.email, name: user.name, role: 'member'})"></v-list-item>
+                                <v-list-item :active="members.some(item => item.email == user.email)" class="py-2 rounded-lg mb-1" :prepend-avatar="user.picture" v-for="user in users" :key="user.email" :title="user.email" :subtitle="user.name" @click="toggleMember({email: user.email, name: user.name, role: 'member'})"></v-list-item>
                                 
                             </v-list>
                     </v-menu>
