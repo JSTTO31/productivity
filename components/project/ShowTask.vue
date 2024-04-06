@@ -37,11 +37,6 @@
     </v-app-bar>
     <v-main style="overflow-y: hidden">
       <v-card class="pa-5 rounded-0 h-100" style="overflow-y: auto">
-        <v-card v-if="false" class="rounded mb-3" flat>
-          <v-img :src="'https://source.unsplash.com/random/500x200/?collaboration&' +
-      task.title
-      "></v-img>
-        </v-card>
         <div style="gap: 5px" class="mb-5 w-100">
           <input variant="plain" class="w-100" v-model="task.title" style="
               font-size: 22px;
@@ -84,10 +79,10 @@
                 </template>
                 <v-list v-if="project" class=" pa-0">
                   <v-list-item @click="
-      //@ts-ignore
-      toggleAssignee(member.user._id)
-      " :active="task.assignees.some((item) => item._id == member.user._id)
-      " color="primary"  :prepend-avatar="member.user.picture"
+                  //@ts-ignore
+                  toggleAssignee(member.user._id)
+                  " :active="task.assignees.some((item) => item._id == member.user._id)
+                  " color="primary"  :prepend-avatar="member.user.picture"
                     class="text-capitalize text-caption py-2 border-b font-weight-regular" density="compact"
                     v-for="member in project.members" :key="member._id">{{ member.user.name }}</v-list-item>
                 </v-list>
@@ -187,9 +182,10 @@ function ToggleCompleted() {
 
 const toggleAssignee = (value: string) => {
   const index = props.task.assignees.findIndex((item) => item._id == value);
-
   if (index == -1) {
-    props.task.assignees.push(props.task.assignees[index]);
+    const member = project.value?.members.find(item => item.user._id == value)
+    if(!member) return
+    props.task.assignees.push(member.user);
   } else {
     props.task.assignees.splice(index, 1);
   }

@@ -1,9 +1,9 @@
 <template>
     <v-card 
           style="overflow-y: auto;"
-          class="rounded-lg w-33 align-center d-flex justify-center"
-          elevation="3"
+          class="rounded-lg w-33 align-center d-flex justify-center border"
           height="400"
+          flat
           color="primary"
     >
         <v-icon size="250">mdi-play</v-icon>

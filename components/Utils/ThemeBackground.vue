@@ -25,14 +25,14 @@ watch(sounds.value.theme, () => {
 
 onMounted(() => {
   //@ts-ignore
-  // const video : HTMLVideoElement | null = document.getElementById('video')
-  // if(video){
-  //   setTimeout(() => {
-  //     video.muted = false
-  //     video.volume = sounds.value.theme.value / 100
-  //     video.play()
-  //   }, 2500);
-  // }
+  const video : HTMLVideoElement | null = document.getElementById('video')
+  if(video){
+    setTimeout(() => {
+      video.muted = false
+      video.volume = sounds.value.theme.value / 100
+      video.play()
+    }, 2500);
+  }
 })
 </script>
 

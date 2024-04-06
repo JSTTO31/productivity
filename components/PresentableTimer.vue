@@ -1,8 +1,8 @@
 <template>
      <v-card 
           style="overflow-y: auto;"
-          class="rounded-lg w-33 align-center justify-center"
-          elevation="3"
+          class="rounded-lg w-33 align-center justify-center border"
+          flat
           height="400"
      >
         <v-card-text class="d-flex align-center justify-center mt-10">

@@ -3,7 +3,7 @@
     <div>
         <schedule-navigation-drawer :show-navigation="showRightNavigation"></schedule-navigation-drawer>
         <v-app-bar class="d-flex  align-center text-white" density="compact"
-            style="background-color: rgba(0,0,0,.4);z-index: 50 !important;" flat absolute @vnode-mounted="appbar = true">
+            style="background-color: rgba(0,0,0,.4);z-index: 50 !important;" flat absolute @vue:mounted="appbar = true">
             <v-app-bar-nav-icon @click="showRightNavigation = !showRightNavigation"></v-app-bar-nav-icon>
             <div id="app-bar-schedule" class="d-flex align-center w-100 pr-2"></div>
         </v-app-bar>

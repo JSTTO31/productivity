@@ -66,7 +66,7 @@
   
   definePageMeta({
     layout: 'authenticated',
-    middleware: 'auth'
+    middleware: 'auth',
   })
   
   

@@ -81,10 +81,14 @@ definePageMeta({
 const $user = useUserStore()
 const togglePassword = ref(false)
 const information = reactive({
-    "email": "emily.jones@example.com",
-    "name": "Emily Jones",
-    "password": "P@ssw0rd123",
-    "password_confirmation": "P@ssw0rd123"
+    // "email": "emily.jones@example.com",
+    // "name": "Emily Jones",
+    // "password": "P@ssw0rd123",
+    // "password_confirmation": "P@ssw0rd123"
+    "email": "",
+    "name": "",
+    "password": "",
+    "password_confirmation": ""
 })
 const $externalResults = ref({})
 
@@ -115,7 +119,8 @@ const submit = async () => {
     }
 
     if(status.value == 'success'){
-        location.href = "http://localhost:3000/r/access/aD3Vwed6abuoPE2BzInnTKcTKYp"
+        location.href = "http://localhost:3000/r/access/home"
+        // location.href = "/r/access/home"
     }
 }
 
@@ -125,6 +130,7 @@ const $v = useVuelidate(rules, information, {$externalResults})
 
 function signInWithGoogle(){
     location.href = 'http://localhost:8000/auth/google'
+    // location.href = '/auth/google'
 }
 </script>
 

@@ -1,5 +1,5 @@
 
-export const themes = [
+export const themes = [ 
     {
         id: 1,
         label: 'Nature',
@@ -222,11 +222,11 @@ export const themes = [
 ]
 
 export const useThemeStore = defineStore('theme', () => {
-    const selectedTheme = ref(themes[10])
+    const selectedTheme = ref(themes[0])
     const selectedBackground = ref(0)
     const selectedThemeDark = computed(() => selectedTheme.value?.dark || false)
     const hideBar = ref(false)
-    console.log(selectedThemeDark.value);
+    
     
     return {selectedTheme, selectedBackground, selectedThemeDark, hideBar}
 })  

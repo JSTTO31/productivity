@@ -4,8 +4,10 @@ import {useVuelidate} from '@vuelidate/core'
 export default function useAuth(){
     const $user = useUserStore()
     const credentials = reactive({
-        email: 'joshuasotto@example.example',
-        password: 'joshuasotto'
+        // email: 'joshuasotto@example.example',
+        // password: 'joshuasotto'
+        email: '',
+        password: ''
     })
 
     const rules = {

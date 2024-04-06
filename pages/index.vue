@@ -268,6 +268,9 @@
       class="pt-5 pb-15"
     >
       <div class="d-flex flex-column">
+        <h3 class="text-center font-weight-bold mb-2 text-grey-darken-2">
+          Features
+        </h3>
         <h1
           class="text-center text-h4 font-weight-bold"
           style="font-family: 'Lato', sans-serif"
@@ -293,15 +296,15 @@
       </div>
       <div class="d-flex mt-5 pa-0">
         <v-card
-          class="rounded-lg pb-5 w-50 pa-5 align-center justify-center"
-          elevation="3"
+          class="rounded-lg pb-5 w-50 pa-5 align-center justify-center border"
+          flat
           height="400"
         >
           <LIneChart></LIneChart>
         </v-card>
         <span></span>
         <div class="w-50 pl-8">
-          <v-card height="400" elevation="3" class="pa-5 w-100 rounded-lg d-flex flex-column">
+          <v-card height="400"  flat class="pa-5 w-100 rounded-lg d-flex flex-column border">
               <v-progress-circular
                 class="mb-n15 mt-7 mx-auto rounded text-subtitle-1"
                 color="success"

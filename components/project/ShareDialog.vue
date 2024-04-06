@@ -53,7 +53,7 @@
 <script setup lang="ts">
 const props = defineProps<{showDialog: boolean, project: ProjectType}>()
 const emits = defineEmits(['update:showDialog'])
-type UserType = {_id: number, email: string, name: string}
+type UserType = {_id: number, email: string, name: string, picture: string}
 type MemberType = {email: string, name: string, role: 'member' | 'admin'}
 const $user = useUserStore()
 //@ts-ignore
