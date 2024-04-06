@@ -1,16 +1,16 @@
 <template>
-    <v-layout>
-        <v-main style="font-family: 'Roboto', sans-serif;background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-            <v-container fluid class="d-flex" style="padding-inline: 100px;">
-                <v-col cols="6" style="padding-top: 200px;">
-                    <h1 class="text-white text-h2 font-weight-bold" >Set Up Your Workspace</h1>
-                    <h3 class="text-white font-weight-regular mt-5">Welcome to efficiently! Customize your environment and preferences to suit your workflow. Let's optimize your experience for maximum efficiency!</h3>
-                    <div>
-                       <v-btn class="mt-10 text-capitalize" @click="$router.push({name: 'setting-up-background'})" size="large" id="click-any">Click to begin</v-btn>
-                    </div>
+    <v-layout class="h-100">
+        <v-main style="font-family: 'Roboto', sans-serif;">
+            <v-container fluid class="d-flex flex-column align-center h-100" style="padding-inline: 100px;">
+                <v-col cols="8" class="d-flex flex-column" style="padding-top: 150px;z-index: 10;" >
+                    <h1 class="text-center text-h2 font-weight-bold mt-15">Set Up Your Workspace</h1>
+                    <h3 class="text-center font-weight-regular mt-5">Welcome to efficiently! Customize your environment and preferences to suit your workflow. Let's optimize your experience for maximum efficiency!</h3>
+                    <v-btn class="mx-auto text-capitalize mt-5" variant="outlined" size="x-large" @click="$router.push({name: 'setting-up-background'})">Click to begin your journey</v-btn>
                 </v-col>
-                <v-col class="d-flex align-center" style="padding-top: 150px;">
-                    <v-img src="/icons/confetti.png"></v-img>
+                <v-col class="d-flex align-center justify-center mt-n15">
+                    <v-card color="transparent" flat width="500">
+                        <v-img src="/icons/confetti.png" class="w-100"></v-img>
+                    </v-card>
                 </v-col>
             </v-container>
         </v-main>
@@ -23,7 +23,11 @@ useHead({
 })
 definePageMeta({
     layout: false,
-    middleware: 'setting-up'
+    middleware: 'setting-up',
+    pageTransition: {
+        name: 'slide',
+        mode: 'out-in'
+    }
 })
 
 </script>
