@@ -194,5 +194,14 @@ export const useScheduleStore = defineStore('schedule', () => {
         }
     }
 
-    return {schedules, schedule, getAll, create, update, togglePinned, destroy, toggleFinished}
+    async function recommendation(selected: number[]){
+        return await useApiFetch('/schedules/recommendation', {
+            method: 'POST',
+            body: {
+                selected
+            },
+        })
+    }
+
+    return {schedules, schedule, getAll, create, update, togglePinned, destroy, toggleFinished, recommendation}
 })

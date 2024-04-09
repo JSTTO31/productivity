@@ -7,7 +7,7 @@
   <v-app-bar
     class="pa-0 border-b px-5 bg-surface"
     :color="name == 'dark' ? '' : 'primary'"
-    :model-value="!hideBar"
+    :model-value="!preference.hideBar"
     density="compact"
     flat
     v-if="user"
@@ -64,7 +64,8 @@
       class="ml-2"
       variant="text"
       size="small"
-      icon="mdi-volume-high"
+      :icon="!preference.sounds.all.value ? 'mdi-volume-off' : preference.sounds.all.value < 100 ? 'mdi-volume-medium' : 'mdi-volume-high'"
+      @click="toggleMute"
     ></v-btn>
     <v-btn
       class="ml-2"
@@ -113,9 +114,9 @@
 import { useTimeSpentStore } from "../stores/timeSpent";
 const $user = useUserStore();
 const { user } = storeToRefs(useUserStore());
+const {preference} = storeToRefs(usePreferenceStore())
 const { name } = useTheme();
-const { hideBar } = storeToRefs(useThemeStore());
-const { todayTimeSpent, total } = storeToRefs(useTimeSpentStore());
+const { todayTimeSpent } = storeToRefs(useTimeSpentStore());
 const $timespent = useTimeSpentStore();
 function fullscreen() {
   if (document.fullscreenElement) {
@@ -125,7 +126,7 @@ function fullscreen() {
   }
 }
 let interval: null | NodeJS.Timeout = null;
-const duration = computed(() => ((todayTimeSpent.value?.spent || 0) / (1000 * 60 * 60)) >= 2 ? 1000 * 60 * 25 : 1000 * 60 * 1)
+const duration = computed(() => ((todayTimeSpent.value?.spent || 0) / (1000 * 60 * 60)) >= 2 ? 1000 * 60 * 25 : 1000 * 60 * 5)
 onMounted(() => {
   $timespent.getTimeSpent().then(() => {
     interval = setInterval(() => {
@@ -142,10 +143,13 @@ onMounted(() => {
             if(remaining){
               const hours = Math.floor((remaining / (1000 * 60)) / 60)
               const minutes = Math.floor((remaining / (1000 * 60)) % 60)
-              // var notification = new Notification("Daily Usage Reminder", {
-              //   body: `You still have ${Math.floor(hours)}hr and ${Math.floor(minutes)}min remaining time to spend in the app today. Keep up the good work!`,
-              //   icon: "/favicon.png" // Path to the notification icon
-              // });
+              
+              if((hours > 0 || minutes > 0) && preference.value.notifications.dailySpend.value && !preference.value.notifications.all.value){
+                var notification = new Notification("Daily Usage Reminder", {
+                  body: `You still have ${Math.floor(hours)}hr and ${Math.floor(minutes)}min remaining time to spend in the app today. Keep up the good work!`,
+                  icon: "/favicon.png" // Path to the notification icon
+                });
+              }
             }
           }
         })
@@ -165,6 +169,27 @@ onMounted(() => {
       Notification.requestPermission()
   }
 });
+
+function toggleMute(){
+  const allSound = preference.value.sounds.all.value
+  if(!allSound){
+    preference.value.sounds.all.value = 100
+  }else if(allSound < 99){
+    preference.value.sounds.all.value = 100
+  }else{
+    preference.value.sounds.all.value = 0
+  }
+}
+
+watch(() => [preference.value.sounds.celebration.value, preference.value.sounds.all.value], () => {
+  const audionCelebration : HTMLAudioElement = document.getElementById('audio-celebration') as HTMLAudioElement
+  if(audionCelebration){
+    const celebrationSound = preference.value.sounds.celebration.value
+    const allSoundPercent = preference.value.sounds.all.value / 100
+    const reducleCelebration = celebrationSound * allSoundPercent
+    audionCelebration.volume = reducleCelebration / 100
+  }
+})
 </script>
 
 <style>

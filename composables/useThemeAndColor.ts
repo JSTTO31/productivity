@@ -1,5 +1,4 @@
-
-export const themes = [ 
+ const themes = [ 
     {
         id: 1,
         label: 'Nature',
@@ -221,14 +220,43 @@ export const themes = [
     },
 ]
 
-export const useThemeStore = defineStore('theme', () => {
-    const selectedTheme = ref(themes[0])
-    const selectedBackground = ref(0)
-    const selectedThemeDark = computed(() => selectedTheme.value?.dark || false)
-    const hideBar = ref(false)
-    
-    
-    return {selectedTheme, selectedBackground, selectedThemeDark, hideBar}
-})  
+ const colors = [
+    {
+        label: 'System', 
+        value: 'system'
+    },
+    {
+        label: 'Light', 
+        value: 'light'
+    },
+    {
+        label: 'Dark', 
+        value: 'dark'
+    },
+    {
+        label: 'Twilight Violet', 
+        value: 'TwilightViolet'
+    },
+    {
+        label: 'Pastel Serenity', 
+        value: 'PastelSerenity'
+    },
+    {
+        label: 'Emerald Shores', 
+        value: 'EmeraldShores'
+    },
+    {
+        label: 'Rustic Elegance', 
+        value: 'RusticElegance'
+    },
+    {
+        label: 'Moonlit Mist', 
+        value: 'MoonlitMist'
+    },
+    {
+        label: 'Ivory Harmony', 
+        value: 'IvoryHarmony'
+    }
+]
 
-
+export default {colors, themes}

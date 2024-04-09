@@ -1,31 +1,55 @@
 <template>
     <div class="h-screen w-screen d-flex flex-column align-center justify-center">
-        <h2 class="mt-5">Loading...</h2>
+      <v-icon size="120" style="transform: rotate(25deg);">mdi-lightning-bolt</v-icon>
+      <h2 class="mt-10">Please wait...</h2>
     </div>
 </template>
 
 <script setup lang="ts">
-
+const {current} = useTheme()
 </script>
 
 <style scoped>
-/* HTML: <div class="loader"></div> */
-/* HTML: <div class="loader"></div> */
-.loader {
-  width: 50px;
+
+/* HTML:  */
+.loader-light {
+  width: 40px;
   aspect-ratio: 1;
-  display: flex;
-  filter: drop-shadow(0px 0px 1px #8d847f);
-  animation: l3 1s infinite alternate linear;
+  border:2px solid;
+  box-sizing: border-box;
+  color: #fff;
+  background: 
+    radial-gradient(circle 3px, currentColor 95%,#0000),
+    linear-gradient(      currentColor 50%,#0000 0) 50%/3px 80% no-repeat,
+    linear-gradient(90deg,currentColor 50%,#0000 0) 50%/60% 3px no-repeat;
+  position: relative;
 }
+
+.loader-dark {
+  width: 40px;
+  aspect-ratio: 1;
+  border:2px solid;
+  box-sizing: border-box;
+  color: #000;
+  background: 
+    radial-gradient(circle 3px, currentColor 95%,#0000),
+    linear-gradient(      currentColor 50%,#0000 0) 50%/3px 80% no-repeat,
+    linear-gradient(90deg,currentColor 50%,#0000 0) 50%/60% 3px no-repeat;
+  position: relative;
+}
+
 .loader:before {
   content: "";
-  flex: 1;
-  background: #8d847f;
-  border-radius: 50%;
-  -webkit-mask: radial-gradient(circle closest-side at 66% 40%,#0000 115%,#000 118%);
+  position: absolute;
+  height: 50px;
+  inset: 100% 10% auto;
+  background:
+    radial-gradient(circle closest-side at 50% calc(100% - 10px), currentColor 94%,#0000),
+    linear-gradient(currentColor 0 0) top/3px 80% no-repeat;
+  transform-origin: top;
+  animation: l2 2s infinite cubic-bezier(0.5,200,0.5,-200);
 }
-@keyframes l3 {
-  100% {filter:drop-shadow(0px 0px 20px #8d847f)}
+@keyframes l2 {
+  100% {transform: rotate(0.4deg)}
 }
 </style>

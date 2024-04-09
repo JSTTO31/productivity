@@ -99,10 +99,10 @@ export const useProjectStore = defineStore('project', () => {
         })
     }
 
-    async function store(){
+    async function store(name = 'New Project'){
         return await useApiFetch('/projects', {
             method: 'POST',
-            body: {title: 'New Project'},
+            body: {title: name},
             onResponse(event){
                 if(event.response.status != 200) return
                 projects.value.unshift(event.response._data.project)

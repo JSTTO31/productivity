@@ -60,10 +60,8 @@ const { project } = storeToRefs(useProjectStore())
 const {user} = storeToRefs(useUserStore())
 const task = reactive({
     title: 'New Task',
-    description: '',
     dueDate: new Date().toISOString().substring(0, 10),
     priority: 'low',
-    //@ts-ignore
     assignees: [user.value._id] as string[],
 })
 const toggleAssignee = (value: string) => {

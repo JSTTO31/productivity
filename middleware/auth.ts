@@ -7,9 +7,5 @@ export default defineNuxtRouteMiddleware((to, from) => {
         if(!user.value){
             return navigateTo('/')
         }
-        const newUser = localStorage.getItem('newUser')
-        if(!newUser){
-            return navigateTo('/setting-up')
-        }
     }
 })

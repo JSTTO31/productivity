@@ -29,25 +29,22 @@
 </template>
 
 <script setup lang="ts">
-const $color = useColorStore()
 const { name } = useTheme()
 const $user = useUserStore()
 const { user } = storeToRefs(useUserStore())
-const app = ref(false)
+const {preference} = storeToRefs(usePreferenceStore())
 
 function setColorMode() {
   if ((name.value == 'system' || name.value == 'dark')) {
-    $color.setBackgroundColor('light')
+    preference.value.theme.color = 'light'
   } else {
-    $color.setBackgroundColor('dark')
-
+    preference.value.theme.color = 'dark'
   }
 }
 
 </script>
 
 <style scoped>
-
 #contact-staff {
   position: fixed;
   bottom: 25px;

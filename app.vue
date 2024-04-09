@@ -1,29 +1,24 @@
 <template>
   <v-app class="h-screen w-screen">
-    <NuxtLoadingIndicator></NuxtLoadingIndicator>
-    <ClientOnly v-if="!mobile">
+    <NuxtLoadingIndicator color="true"  ></NuxtLoadingIndicator>
+    <ClientOnly>
       <NuxtLayout>
         <NuxtPage></NuxtPage>
+        <v-dialog persistent class="bg-red" :model-value="mobile" v-if="mobile">
+          <v-card color="error" variant="outlined" class="rounded-lg bg-white pa-15 d-flex justify-center align-center">
+            <v-icon size="150" color="error">mdi-alert-circle-outline</v-icon>
+            <h2>Device Not Supported</h2>
+            <p class="text-center text-subtitle-2 font-weight-regular">Sorry, our app is currently optimized for desktop use only. For the best experience, please access it from a desktop or laptop computer.</p>
+          </v-card>
+        </v-dialog>
       </NuxtLayout>
       <template #fallback>
         <Loading></Loading>
       </template>
     </ClientOnly>
-    <ClientOnly v-else>
-      <div>
-        <v-dialog persistent scrim="error" :model-value="mobile">
-          <v-card color="error" class="rounded pa-15 d-flex justify-center align-center">
-            <v-icon size="150" >mdi-alert-circle</v-icon>
-            <h2>Device Not Supported</h2>
-            <p class="text-center">Sorry, our app is currently optimized for desktop use only. For the best experience, please access it from a desktop or laptop computer.</p>
-          </v-card>
-        </v-dialog>
-      </div>
-    </ClientOnly>
   </v-app>
 </template>
 <script setup>
-import { useColorStore } from './stores/color';
 const {mobile} = useDisplay()
 useHead({
   titleTemplate: (titleChunk) => {
@@ -53,23 +48,38 @@ useHead({
     }
   ]
 })
-const { setBackgroundColor } = useColorStore()
-const { selectedBackgroundColor } = storeToRefs(useColorStore())
+const $user = useUserStore()
+const {user} = storeToRefs(useUserStore())
+const {preference} = storeToRefs(usePreferenceStore())
+const $preference = usePreferenceStore()
+let timeout = null
 
 onMounted(() => {
-  setBackgroundColor(selectedBackgroundColor.value)
+  $preference.setBackgroundColor()
+  if(!!user.value){
+    preference.value = user.value.preference
+    watch(() => user.value.preference, () => {
+      if(timeout) clearTimeout(timeout)
+      timeout = setTimeout(() => {
+        $user.updatePreference().then(() => {
+          clearTimeout(timeout)
+        })
+      }, 1000);
+    }, {deep: true})
+
+  }
 })
 
-watch(selectedBackgroundColor, (current) => {
-  setBackgroundColor(current)
+watch(() => preference.value.theme.color, () => {
+  $preference.setBackgroundColor()
 })
+
 
 </script>
 <style>
 body{
   scroll-behavior: smooth;
 }
-
 .scale-enter-from,
 .scale-leave-to {
 

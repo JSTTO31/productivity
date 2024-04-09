@@ -80,6 +80,7 @@ const emits = defineEmits(['update:showTimer'])
 const { start_session, is_break, progress, number_of_session, duration, showAlert } = storeToRefs(useTimerStore())
 const { start, afterBreak, stop, setAlert } = useTimerStore()
 const { sounds } = storeToRefs(useAppStore())
+const {preference} = storeToRefs(usePreferenceStore())
 const progressCircularSize = ref(width)
 const progressCircularWidth = ref(10)
 
@@ -87,8 +88,11 @@ watch(is_break, (current) => {
     if (!current && start_session.value) {
         //@ts-ignore
         const audioBreak: HTMLAudioElement = document.getElementById('audio-break')
+        const celebrationSound = preference.value.sounds.celebration.value
+        const allSoundPercent = preference.value.sounds.all.value / 100
+        const reduceClockSound = celebrationSound * allSoundPercent
         audioBreak.play()
-        audioBreak.volume = 1
+        audioBreak.volume = reduceClockSound / 100
         emits('update:showTimer', true)
     } else {
         emits('update:showTimer', false)
@@ -96,11 +100,14 @@ watch(is_break, (current) => {
 
 })
 
-watch(() => sounds.value.clock.value, () => {
+watch(() => [preference.value.sounds.clock.value, preference.value.sounds.all.value], () => {
     //@ts-ignore
     const audioTictac: HTMLAudioElement | null = document.getElementById('audio-tictac')
     if (audioTictac) {
-        audioTictac.volume = sounds.value.clock.value / 100
+        const clockSound = preference.value.sounds.clock.value
+        const allSoundPercent = preference.value.sounds.all.value / 100
+        const reduceClockSound = clockSound * allSoundPercent
+        audioTictac.volume = reduceClockSound / 100
     }
 })
 
@@ -108,6 +115,10 @@ watch(() => showAlert.value, (current) => {
     //@ts-ignore
     const audioAlarm: HTMLAudioElement | null = document.getElementById('audio-alarm')
     if (audioAlarm) {
+        const alarmSound = preference.value.sounds.alarm.value
+        const allSoundPercent = preference.value.sounds.all.value / 100
+        const reduceAlarmSound = alarmSound * allSoundPercent
+        audioAlarm.volume = reduceAlarmSound / 100
         if (!current) {
             audioAlarm.pause()
             audioAlarm.currentTime = 0

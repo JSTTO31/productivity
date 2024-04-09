@@ -9,6 +9,7 @@ export const useTimerStore = defineStore('timer', () => {
     const is_break = ref(false)
     const progress = computed(() => (number_of_session.value - remaining_session.value) / number_of_session.value * 100) 
     const showAlert = ref(false)
+    const {preference} = storeToRefs(usePreferenceStore())
     
     let interval : NodeJS.Timeout | null = null
     let timeout : NodeJS.Timeout | null = null
@@ -64,13 +65,15 @@ export const useTimerStore = defineStore('timer', () => {
             return
         }
         
-        if(Notification.permission === 'granted' && document.visibilityState == 'hidden'){
+        
+        if(Notification.permission === 'granted' && document.visibilityState == 'hidden' && preference.value.notifications.timeBreak.value && !preference.value.notifications.all.value){
             const body = "Break time's up! ⏰ Take a deep breath, stretch a little, and get ready to dive back into productivity. You got this!"
             const icon = '/logo1.png'
             const notification = new Notification("End of 5-Minute break", {
               body, icon
             })
         }
+        
         setAlert()
     }
 

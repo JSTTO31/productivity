@@ -14,6 +14,9 @@
                 </v-col>
             </v-container>
         </v-main>
+        <span id="step-indicator" class="text-h6  font-weight-regular">
+            Let's begin your journey (1 of 4)
+        </span>
     </v-layout>
 </template>
 
@@ -45,12 +48,22 @@ body::-webkit-scrollbar {
     transition: .25s ease;
 }
 
+#step-indicator{
+    position: fixed;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 .slide-enter-active,
 .slide-leave-active {
   transition: transform .55s ease;
 }
 
-.slide-enter-from,
+.slide-enter-from{
+  transform: translateX(100%);
+
+}
 .slide-leave-to {
   transform: translateX(-100%);
 }
