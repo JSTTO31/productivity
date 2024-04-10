@@ -46,9 +46,9 @@ export default function useAuth(){
                 }
             }
 
-            // if(status.value == 'success'){
-            //     location.href = "/r/access/home"
-            // }
+            if(status.value == 'success'){
+                location.href = "/r/access/home"
+            }
 
 
         } catch (error) {
