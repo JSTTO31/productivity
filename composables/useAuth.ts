@@ -47,7 +47,7 @@ export default function useAuth(){
             }
 
             if(status.value == 'success'){
-                location.href = "/r/access/home"
+                // location.href = "/r/access/home"
             }
 
 
