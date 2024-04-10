@@ -69,7 +69,7 @@ const showTextField = ref(false)
 
 
 function signInWithGoogle(){
-    location.href = 'http://localhost:8000/auth/google'
+    // location.href = 'http://localhost:8000/auth/google'
     // location.href = '/auth/google'
 }
 </script>

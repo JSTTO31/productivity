@@ -12,6 +12,11 @@ export default defineNuxtConfig({
   pinia: {
     storesDirs: ['./stores/**'],
   },
+  runtimeConfig: {
+    public: {
+      apiBase: process.env.BACKEND_URL + 'api'
+    }
+  },
   app: {
     // pageTransition: {name: 'page', mode: 'out-in'}
   },
