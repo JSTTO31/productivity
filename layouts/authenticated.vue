@@ -79,7 +79,7 @@
       id="expand-button"
     ></v-btn>
     <NotificationMenuCard v-slot="props">
-      <v-badge v-bind="props" dot color="red" class="ml-2">
+      <v-badge v-bind="props" dot color="red" class="ml-2" :model-value="false">
         <v-btn variant="text" id="notification-button" size="small" icon="mdi-bell"></v-btn>
       </v-badge>
     </NotificationMenuCard>
