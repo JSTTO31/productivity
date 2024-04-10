@@ -118,8 +118,14 @@ const submit = async () => {
         },{}) 
     }
 
+    const config = useRuntimeConfig()
+
+
     if(status.value == 'success'){
-        location.href = "http://localhost:3000/r/access/home"
+        // location.href = "http://localhost:3000/r/access/home"
+        location.href = config.public.apiBase + '/r/access/home'
+
+        
         // location.href = "/r/access/home"
     }
 }
@@ -129,8 +135,10 @@ const $v = useVuelidate(rules, information, {$externalResults})
 
 
 function signInWithGoogle(){
-    location.href = 'http://localhost:8000/auth/google'
+    const config = useRuntimeConfig()
+    // location.href = 'http://localhost:8000/auth/google'
     // location.href = '/auth/google'
+    location.href = config.public.apiBase + '/auth/google'
 }
 </script>
 

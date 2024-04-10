@@ -69,8 +69,10 @@ const showTextField = ref(false)
 
 
 function signInWithGoogle(){
+    const config = useRuntimeConfig()
     // location.href = 'http://localhost:8000/auth/google'
     // location.href = '/auth/google'
+    location.href = config.public.apiBase + '/auth/google'
 }
 </script>
 
