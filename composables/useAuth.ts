@@ -48,8 +48,8 @@ export default function useAuth(){
 
             if(status.value == 'success'){
                 const config = useRuntimeConfig()
-                // location.href = "http://localhost:3000/r/access/home"
-                location.href = config.public.apiBase + '/r/access/home'
+                location.href = "/r/access/home"
+                // location.href = config.public.apiBase + '/r/access/home'
 
             }
 
