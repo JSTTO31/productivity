@@ -24,10 +24,9 @@
                   :model-value="timespentProgress"
                   color="warning"
                   class="rounded mt-2 mb-n5"
-                  > {{timeSpendToString}}</v-progress-linear
+                  > {{ timespentProgress >= 100 ?  'Daily Spend Completed' : timeSpendToString}}</v-progress-linear
                 >
               </div>
-             
             </v-card>
           </v-col>
           <v-col>
@@ -80,7 +79,7 @@
           <v-col cols="8">
             <v-card id="monthly-usage" height="400" class=" rounded-lg w-100 pa-5 pb-15">
               <v-card-title class="pa-0 pb-4">Time spent</v-card-title>
-              <LIneChart></LIneChart>
+              <MonthlyUsageLineChart :data="data"></MonthlyUsageLineChart>
             </v-card>
           </v-col>
           <v-col cols="4" class="pb-0 d-flex flex-column">
@@ -128,14 +127,20 @@ const {minutes, todayTimeSpent} = storeToRefs(useTimeSpentStore())
 const { schedules } = storeToRefs(useScheduleStore());
 const {projects} = storeToRefs(useProjectStore())
 const $project = useProjectStore()
-const timespentProgress = computed(() => (((todayTimeSpent.value?.spent || 0) / 1000 * 60) % 60) / 2)
+const date = new Date()
+const timespentProgress = computed(() => {
+  if(!todayTimeSpent.value) return 0
+  const toSpendTime = 1000 * 60 * 60 * 2 // 2 hours
+  return todayTimeSpent.value.spent / toSpendTime * 100
+})
 const timeSpendToString = computed(() => {
   if(!todayTimeSpent.value) return ''
   const hours = Math.floor((todayTimeSpent.value?.spent / (1000 * 60)) / 60)
   const minutes = Math.floor((todayTimeSpent.value?.spent / ((1000 * 60) ) % 60))
-
   return `${hours} hours and ${minutes} minutes`
 })
+
+const data = computed(() => [0,0,0,minutes.value,0,0,0,0])
 
 
 $project.getAll()
