@@ -14,7 +14,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      apiBase: process.env.BACKEND_URL + 'api'
+      apiBase: process.env.BACKEND_URL + '/api'
     }
   },
   app: {
