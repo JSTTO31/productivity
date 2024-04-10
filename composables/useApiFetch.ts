@@ -2,7 +2,7 @@ import type { UseFetchOptions } from "nuxt/dist/app/composables"
 
 
 export default (url: string, options: UseFetchOptions<ResponseType>) => {
-    return useFetch('http://localhost:8000/api' + url, {
+    return useFetch('https://productivity-api-g58l.onrender.com/api' + url, {
         watch: false,
         onResponseError(event){
             const $notification = useNotificationStore()
