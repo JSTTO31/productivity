@@ -72,13 +72,6 @@ function setTask(route: RouteLocationNormalizedLoaded) {
     }
 }
 
-async function newProject(){
-    const {data} = await $project.store()
-    if(data.value){
-        router.push({name:''})
-    }
-}
-
 await $project.findById(route.params.project.toString()).then(() => {
     setTask(route)
 })

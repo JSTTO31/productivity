@@ -2,8 +2,7 @@
     <utils-card :show-card="showEditor" title="Text Editor" icon="mdi-tune" :width="width" :height="height" key="sound"
         @close="emits('update:showEditor', false)" @minimize="emits('update:showEditor', false)">
         <template #title>
-            <v-card id="card-title" class="rounded-t-lg rounded-b-0 bg-surface pb-5  pa-0" style="z-index: 200;">
-                <v-divider class="mb-5"></v-divider>
+            <v-card id="card-title" class="rounded-t-lg rounded-0 bg-surface pb-5  pa-0" style="z-index: 200;">
                 <div class=" w-100 px-5 py-0" style="display: flex;flex-wrap: wrap;row-gap: 10px;row">
                     <div class="mr-2">
                         <span>
@@ -119,6 +118,7 @@
                         placeholder="Write here...">
                     </div>
                 </v-card>
+                <v-alert type="warning" variant="tonal" id="message" text="Currently in development. Thank you for your patience."></v-alert>
             </v-card>
         </template>
     </utils-card>
@@ -131,6 +131,13 @@ const { current } = useTheme()
 const { fontFamilies, markColor, toggleCode, textColor, selectedMarkColor, selectedTextColor, history, advanceOption } = useFormat('text-input')
 
 onMounted(() => {
+    const container = document.getElementById('Text Editor-container')
+    
+    if (container) {
+        container.style.position = 'fixed';
+        container.style.top = '15%';
+        container.style.left = '27%';
+    }
 })
 
 const _export = () => {
@@ -158,6 +165,12 @@ const _export = () => {
      padding: 1in;
  }
 
+ #message{
+    position: sticky;
+    left: 25px;
+    bottom: 25px;
+    width: 450px
+ }
 
  /* #card::-webkit-scrollbar{
     height: 0px;

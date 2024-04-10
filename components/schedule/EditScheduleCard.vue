@@ -53,7 +53,7 @@ const schedule = reactive({
     location: props.schedule?.location || '',
     recurrence: props.schedule?.recurrence || 'weekly',
     tags: props.schedule?.tags.map(item => item._id) || [],
-    link: props.schedule?.location || '',
+    link: props.schedule?.link || '',
     reminder: props.schedule?.reminder || '1 day before'
 })
 

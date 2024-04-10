@@ -1,15 +1,15 @@
 <template>
-    <v-navigation-drawer  :model-value="showNavigation" class="border-e" style="z-index: 50 !important;" floating width="280">
-        <v-layout class="h-100">
+    <v-navigation-drawer :model-value="showNavigation" class="border-e" style="z-index: 50 !important;" floating width="280">
+        <v-layout class="h-100" id="project-container">
             <v-app-bar density="compact" class="border-b ml-0 pl-2" flat>
                 <v-text-field label="Search..." variant="solo-filled" flat hide-details single-line density="compact" prepend-inner-icon="mdi-filter-variant"></v-text-field>
                 <v-menu>
                     <template #activator="{props}">
-                        <v-btn icon="mdi-plus" v-bind="props" size="small" class="ml-2" rounded flat color="primary" variant="elevated" @click="showCreateProjectDialog = true"></v-btn>
+                        <v-btn id="project-create-button" icon="mdi-plus" v-bind="props" size="small" class="ml-2" rounded flat color="primary" variant="elevated" @click="showCreateProjectDialog = true"></v-btn>
                     </template>
                     <v-card class="rounded-lg pa-2">
                         <v-list>
-                            <v-list-item @click="$project.store" density="compact" class="rounded-lg mb-2 text-subtitle-2 text-caption text-left font-weight-regular">
+                            <v-list-item @click="newProject" density="compact" class="rounded-lg mb-2 text-subtitle-2 text-caption text-left font-weight-regular">
                                 <v-icon class="mb-1 mr-2">mdi-plus</v-icon>New project</v-list-item>
                             <v-divider class="my-2"></v-divider>
                             <v-list-item density="compact" class="rounded-lg mb-2 text-caption text-center font-weight-regular">Sorry no templates available</v-list-item>
@@ -35,6 +35,15 @@ import { useProjectStore } from '~/stores/project';
 const props = defineProps(['showNavigation'])
 const showCreateProjectDialog = ref(true)
 const $project = useProjectStore()
+const router = useRouter()
+async function newProject(){
+    const { data } = await $project.store()
+    if(data.value){
+        //@ts-ignore
+        router.push({name: 'r-access-projects-project', params: {project: data.value.project._id}})
+
+    }
+}
 </script>
 
 <style scoped>

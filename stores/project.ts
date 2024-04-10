@@ -107,6 +107,7 @@ export const useProjectStore = defineStore('project', () => {
                 if(event.response.status != 200) return
                 projects.value.unshift(event.response._data.project)
                 $notification.addSnackbar('Project successfully added!')
+                return event
             }
         })
     }

@@ -7,26 +7,30 @@
         </v-container>
         <div v-if="appbar">
             <Teleport to="#app-bar-schedule">
-            <v-app-bar-title class="d-flex font-weight-bold align-center">
-                <span class="mr-5">{{ titleDate }}</span>
-                <v-btn size="small" @click="$router.push({query: {date: new Date().toISOString()}})" variant="flat" class=" mr-2 text-capitalize px-3" append-icon="mdi-plus-circle-outline" color="primary">Create</v-btn>
-            </v-app-bar-title>
-            <v-spacer></v-spacer>
-            <v-btn :to="{ name: 'r-access-schedules-monthly' }"
-                :variant="$route.name == 'r-access-schedules-monthly' ? 'flat' : 'tonal'" class="text-capitalize mr-2"
-                size="small">Monthly</v-btn>
-            <v-btn :to="{ name: 'r-access-schedules' }" class="text-capitalize mr-2" size="small"
-                :variant="$route.name == 'r-access-schedules' ? 'flat' : 'tonal'" :active="false">Weekly</v-btn>
-            <v-btn :to="{ name: 'r-access-schedules-daily' }"
-                :variant="$route.name == 'r-access-schedules-daily' ? 'flat' : 'tonal'" class="text-capitalize"
-                size="small">Daily</v-btn>
-            <v-divider inset vertical class="mx-3"></v-divider>
-            <v-btn size="x-small" variant="tonal" class="rounded-lg mr-2" icon="mdi-chevron-left"
-                @click="decreaseDate"></v-btn>
-            <v-btn @click="reset" class="text-capitalize mr-2"
-                size="small">Today</v-btn>
-            <v-btn size="x-small" variant="tonal" class="rounded-lg" icon="mdi-chevron-right"
-                @click="increaseDate"></v-btn>
+                <v-app-bar-title class="d-flex font-weight-bold align-center" id="app-bar-schedule-title">
+                    <span class="mr-5">{{ titleDate }}</span>
+                    <v-btn size="small" @click="$router.push({query: {date: new Date().toISOString()}})" variant="flat" class=" mr-2 text-capitalize px-3" append-icon="mdi-plus-circle-outline" color="primary" id="schedule-create-button">Create</v-btn>
+                </v-app-bar-title>
+                <v-spacer></v-spacer>
+                <div id="schedule-view-options">
+                    <v-btn :to="{ name: 'r-access-schedules-monthly' }"
+                        :variant="$route.name == 'r-access-schedules-monthly' ? 'flat' : 'tonal'" class="text-capitalize mr-2"
+                        size="small">Monthly</v-btn>
+                    <v-btn :to="{ name: 'r-access-schedules' }" class="text-capitalize mr-2" size="small"
+                        :variant="$route.name == 'r-access-schedules' ? 'flat' : 'tonal'" :active="false">Weekly</v-btn>
+                    <v-btn :to="{ name: 'r-access-schedules-daily' }"
+                        :variant="$route.name == 'r-access-schedules-daily' ? 'flat' : 'tonal'" class="text-capitalize"
+                        size="small">Daily</v-btn>
+                </div>
+                <v-divider inset vertical class="mx-3"></v-divider>
+                <div id="schedule-actions">
+                    <v-btn size="x-small" variant="tonal" class="rounded-lg mr-2" icon="mdi-chevron-left"
+                    @click="decreaseDate"></v-btn>
+                    <v-btn @click="reset" class="text-capitalize mr-2"
+                        size="small">Today</v-btn>
+                    <v-btn size="x-small" variant="tonal" class="rounded-lg" icon="mdi-chevron-right"
+                        @click="increaseDate"></v-btn>
+                </div>
             </Teleport>
         </div>
     </v-card>

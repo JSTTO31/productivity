@@ -25,6 +25,7 @@ export const useTimerStore = defineStore('timer', () => {
     function unsetAlert(){
         if(timeout) clearTimeout(timeout)
         showAlert.value = false
+        is_break.value = false
     }
 
     const timer = () => {
@@ -42,18 +43,22 @@ export const useTimerStore = defineStore('timer', () => {
         start_session.value = true
         duration.value = 25
         remaining_session.value = number_of_session.value
-        interval = setInterval(timer, 1000)
+        interval = setInterval(timer, 1000 * 60)
         setAlert()
     }
 
     const stop = () => {
         duration.value = 30
-        start_session.value = false
         remaining_session.value = 0
+        start_session.value = false
         if(interval){
             clearInterval(interval)
         }
         unsetAlert()
+        start_session.value = false
+        is_break.value = false
+
+
     }
 
     const afterBreak = () => {
@@ -85,5 +90,5 @@ export const useTimerStore = defineStore('timer', () => {
     }
 
 
-    return {progress, number_of_session, remaining_session, is_break, timer, start, stop, afterBreak, start_session, duration, showAlert, setAlert}
+    return {progress, number_of_session, remaining_session, is_break, timer, start, stop, afterBreak, start_session, duration, showAlert, setAlert, unsetAlert}
 })

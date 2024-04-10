@@ -1,7 +1,7 @@
 <template>
     <v-card class="mb-3 rounded bg-surface task" :disabled="!havePermission" style="z-index: 100 !important;cursor:pointer"
         :id="task._id || task.tempId"
-        @click="$router.push({ query: { task: task?._id || task.tempId, section: section?._id || section.tempId } })">
+        @click.stop="$router.push({ query: { task: task?._id || task.tempId, section: section?._id || section.tempId } })" v-ripple="false">
         <!-- <v-card class="rounded-lg ma-2 mt-2 mb-3" flat>
             <v-img :src="'https://source.unsplash.com/random/500x200/?collaboration&' + task.title"></v-img>
         </v-card> -->
@@ -32,9 +32,9 @@
             </div>
             <v-divider class="my-1"></v-divider>
             <div class="d-flex align-center" v-if="task.assignees.length > 0">
-                <v-card v-for="assignee in  task.assignees" :key="assignee.email" class="rounded-circle mr-n5 border" flat>
+                <v-card v-for="assignee in  task.assignees" :key="assignee.email.toString()" class="rounded-circle mr-n5 border" flat>
                     <v-avatar class="border" size="30">
-                        <v-img :src="assignee.picture"></v-img>
+                        <img class="w-100" :src="assignee.picture" />   
                     </v-avatar>
                 </v-card>
                 <v-spacer></v-spacer>
@@ -60,6 +60,7 @@ const description = computed(() => props.task.description && props.task.descript
 const { user } = storeToRefs(useUserStore())
 const { role } = storeToRefs(useProjectStore())
 const havePermission = computed(() => props.task.assignees.some(item => item._id == user.value?._id || role.value == 'admin' || role.value == 'owner'))
+const showProjectsNavigation : Ref<Boolean> = inject('showProjectsNavigation') as Ref<Boolean>
 const $notification = useNotificationStore()
 const ToggleCompleted = () => {
     if (props.task.completed) {
@@ -82,7 +83,6 @@ function mousedown(e: MouseEvent) {
     const sectionsContainer = document.getElementById('sections-container')
     //@ts-ignore
     const card: HTMLElement = document.getElementById(props.task?._id || props.task?.tempId) as HTMLElement
-    //@ts-ignore
     const handle = card.querySelector('.handle') as HTMLElement
     //@ts-ignore
     const parentSection: HTMLElement = document.getElementById(props.section?._id || props.section?.tempId) as HTMLElement
@@ -90,8 +90,8 @@ function mousedown(e: MouseEvent) {
     let pos1: number, pos2: number, pos3: number, pos4: number
     let currentPositionLeft = card.getBoundingClientRect().x
     let currentPositionTop = card.getBoundingClientRect().y
-    let beforeSectionIndex = Math.floor(currentPositionLeft / card.clientWidth)
-    let afterSectionIndex = Math.floor(currentPositionLeft / card.clientWidth)
+    let beforeSectionIndex = Math.floor((!showProjectsNavigation.value ? (currentPositionLeft + card.clientWidth) : currentPositionLeft) / card.clientWidth)
+    let afterSectionIndex = Math.floor((!showProjectsNavigation.value ? (currentPositionLeft + card.clientWidth) : currentPositionLeft) / card.clientWidth)
     pos1 = e.clientX
     pos2 = e.clientY
 
@@ -99,7 +99,6 @@ function mousedown(e: MouseEvent) {
     card.style.transform = 'rotate(-5deg)'
     card.style.zIndex = '1000'
     handle.style.cursor = 'grabbing'
-
 
     document.onmousemove = dragElement
     document.onmouseup = (e) => {
@@ -112,8 +111,9 @@ function mousedown(e: MouseEvent) {
         card.style.transform = 'rotate(0deg)'
         card.style.boxShadow = 'none'
         card.style.zIndex = '100'
+        card.style.width = 'auto'
         handle.style.cursor = 'default'
-
+        
         parentSection.style.zIndex = '100'
 
         // remove dummy and push new position
@@ -153,10 +153,9 @@ function mousedown(e: MouseEvent) {
         card.style.left = (currentPositionLeft) + 'px'
 
         beforeSectionIndex = afterSectionIndex
-        afterSectionIndex = Math.floor((currentPositionLeft + (sectionsContainer?.scrollLeft || 0) - (card.clientWidth / 2)) / card.clientWidth)
+        afterSectionIndex = Math.floor(((!showProjectsNavigation.value ? (currentPositionLeft + card.clientWidth) : currentPositionLeft) + (sectionsContainer?.scrollLeft || 0) - (card.clientWidth / 2)) / card.clientWidth)
 
         const currentSection = sections[afterSectionIndex]
-
 
         if (currentSection) {
             const currentSectionTaskContainer = currentSection.querySelector('.task-container')

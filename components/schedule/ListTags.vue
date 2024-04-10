@@ -1,8 +1,8 @@
 <template>
     <v-list-item title="My Tags" :append-icon="showListTags ? 'mdi-chevron-up' : 'mdi-chevron-down'"
-        class="pa-3 px-5 ma-0 w-100 border-b" @click="showListTags = !showListTags">
+        class="pa-3 px-5 ma-0 w-100 border-b" @click="showListTags = !showListTags" id="list-tags-title">
     </v-list-item>
-    <v-list class="w-100" v-if="showListTags">
+    <v-list class="w-100" v-if="showListTags" id="list-tags">
         <div v-if="tags.length > 0">
             <v-hover v-for="tag in tags" :key="tag.label" v-slot="{ props, isHovering }">
                 <v-list-item class="px-5 text-subtitle-2 border-b font-weight-regular w-100" :active="isHovering"
@@ -25,7 +25,7 @@
         </div>
     </v-list>
     <div class="pa-2">
-        <v-text-field density="compact" @focus="focus = true" @blur="focus = false" flat prepend-inner-icon="mdi-tag-plus" :variant="focus ? 'outlined' : 'solo'"  label="Add tag"
+        <v-text-field id="list-tag-text-field" density="compact" @focus="focus = true" @blur="focus = false" flat prepend-inner-icon="mdi-tag-plus" :variant="focus ? 'outlined' : 'solo'"  label="Add tag"
         single-line @keyup.enter="create" v-model="text" ref="textField"></v-text-field>
     </div>
 </template>

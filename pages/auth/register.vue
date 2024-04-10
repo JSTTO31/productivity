@@ -1,7 +1,7 @@
 <template>
-    <v-main class="d-flex justify-center align-center">
+    <v-main class="d-flex justify-center align-center bp-15">
         <client-only>
-            <v-card flat class="rounded-xl px-5 d-flex mt-5 flex-column px-10" width="550">
+            <v-card flat class="rounded-xl px-5 d-flex mt-5 mb-15 flex-column px-10" color="transparent" width="550">
                 <v-avatar @click="$router.push({ name: 'index' })" class="mx-auto" size="75"
                     style="transform: rotate(25deg);cursor: pointer;">
                     <v-icon size="75">mdi-lightning-bolt</v-icon>

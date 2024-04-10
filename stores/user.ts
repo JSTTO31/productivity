@@ -31,6 +31,14 @@ export type SessionTYpe = {
     updatedAt: string
 }
 
+export type GuideType = {
+    tips: boolean,
+    home: boolean,
+    project: boolean,
+    schedule: boolean,
+    performance: boolean,
+}
+
 export type userType = {
     _id: String,
     name: String;
@@ -38,6 +46,7 @@ export type userType = {
     picture: string;
     preference: PreferenceType,
     setup: Boolean,
+    guide: GuideType,
     sessions: SessionTYpe[],
     createdAt: String;
     updatedAt: String
@@ -176,8 +185,15 @@ export const useUserStore = defineStore('user', () => {
         })
     }
 
+    async function updateGuide(){
+        return await useApiFetch('/users/guide', {
+            method: 'PUT',
+            body: {guide: user.value?.guide}
+        })
+    }
+
 
     return {
-        login, checkUserIfAuthenticated, logout, checkUser, register, getAll,setupComplete, updatePreference,updateInfo, changePassword, logoutOtherSessions, deleteAccount,
+        login, checkUserIfAuthenticated, logout, checkUser, register, getAll,setupComplete, updatePreference,updateInfo, changePassword, logoutOtherSessions, deleteAccount,updateGuide,
         user, token}
 })

@@ -1,5 +1,5 @@
 <template>
-    <v-layout class="h-100 w-100 bg-surface" style="z-index: 300;">
+    <v-layout class="h-100 w-100 bg-surface" style="z-index: 300;" id="project-team-chat-box">
         <v-app-bar density="compact" class="pl-5 border-b" flat>
             <h4>
                 <v-icon>mdi-chat</v-icon>

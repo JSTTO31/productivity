@@ -32,12 +32,15 @@ onMounted(() => {
   if(video){
     setTimeout(() => {
       document.onclick = () => {
-        const themeSound = preference.value.sounds.theme.value
-        const allSoundPercent = preference.value.sounds.all.value / 100
-        const reduceThemeSoundByAllSound = themeSound * allSoundPercent
-        video.muted = false
-        video.volume = reduceThemeSoundByAllSound / 100
-        video.play()
+        //@ts-ignore
+        if(selectedTheme.type == 'video'){
+          const themeSound = preference.value.sounds.theme.value
+          const allSoundPercent = preference.value.sounds.all.value / 100
+          const reduceThemeSoundByAllSound = themeSound * allSoundPercent
+          video.muted = false
+          video.volume = reduceThemeSoundByAllSound / 100
+          video.play()
+        }
         document.onclick = null
       }
     }, 1000);

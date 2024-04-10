@@ -8,6 +8,7 @@
             <v-card
               height="150"
               class="d-flex h-100 align-center rounded-lg pa-5"
+              id="daily-spend"
             >
               <v-avatar
                 size="90"
@@ -35,6 +36,7 @@
               class="d-flex pa-5 align-center rounded-lg"
               style="gap: 5px"
               flat
+              id="statistics"
             >
               <v-tooltip >
                 <template #activator="{props}">
@@ -76,13 +78,13 @@
         </v-row>
         <v-row class="h-75 mt-6">
           <v-col cols="8">
-            <v-card height="400" class=" rounded-lg w-100 pa-5 pb-15">
+            <v-card id="monthly-usage" height="400" class=" rounded-lg w-100 pa-5 pb-15">
               <v-card-title class="pa-0 pb-4">Time spent</v-card-title>
               <LIneChart></LIneChart>
             </v-card>
           </v-col>
           <v-col cols="4" class="pb-0 d-flex flex-column">
-            <v-card height="400" class="pa-5 rounded-lg d-flex flex-column">
+            <v-card id="tasks-completion" height="400" class="pa-5 rounded-lg d-flex flex-column">
               <v-card-title class="pa-0 text-capitalize" style="font-size: 18px"
                 >task completion rate</v-card-title
               >
@@ -110,6 +112,8 @@
 </template>
 
 <script setup lang="ts">
+import { driver } from "driver.js";
+import "driver.js/dist/driver.css";
 import { useTimeSpentStore } from '~/stores/timeSpent';
 
 useHead({
@@ -119,7 +123,8 @@ definePageMeta({
   layout: "authenticated",
   middleware: ["auth"],
 });
-const {total, hours, minutes, todayTimeSpent} = storeToRefs(useTimeSpentStore())
+const {user} = storeToRefs(useUserStore())
+const {minutes, todayTimeSpent} = storeToRefs(useTimeSpentStore())
 const { schedules } = storeToRefs(useScheduleStore());
 const {projects} = storeToRefs(useProjectStore())
 const $project = useProjectStore()
@@ -155,6 +160,63 @@ const completion = computed(() => {
 })
 
 const color = computed(() => completion.value > 49 ? 'success' : completion.value > 15 ? 'warning' : 'error')
+onMounted(() => {
+  if(user.value && !user.value.guide.performance){
+    const driverObj = driver({
+          showProgress: true,
+          steps: [
+              {
+                element: '#daily-spend',
+                popover: {
+                  title: "Fulfill Your Daily Spend",
+                  description: "Stay on track with your daily spend goal to ensure productive and efficient use of your time while using the app. By fulfilling your daily spend, you can maximize your productivity and achieve your academic goals more effectively."
+                }
+              },
+              {
+                element: '#statistics',
+                popover: 
+                {
+                  title: "Track Your Progress",
+                  description: "Monitor the number of projects you've created, your scheduled tasks, and your total usage time within the app. Tracking your progress allows you to stay organized and make informed decisions about managing your time effectively."
+                }
+              },
+              {
+                element: '#monthly-usage',
+                popover: 
+                {
+                  title: "Track Your Progress",
+                  description: "Monitor the number of projects you've created, your scheduled tasks, and your total usage time within the app. Tracking your progress allows you to stay organized and make informed decisions about managing your time effectively."
+                }
+              },
+              {
+                element: '#tasks-completion',
+                popover: {
+                  title: "Tasks Completion Progress",
+                  description: "Track your progress with a visual representation of tasks completion. This progress bar shows you how many tasks you've completed compared to your total tasks, helping you stay motivated and focused on achieving your goals.",
+                  onNextClick(){
+                    if(user.value){
+                        user.value.guide.performance = true
+                    }
+                    driverObj.destroy();
+
+                  }
+                }
+              },
+          ],
+          onDestroyStarted: () => {
+              if (!driverObj.hasNextStep() || confirm("Do you want to skip this all?")) {
+                  if(user.value){
+                      user.value.guide.performance = true
+                  }
+                  driverObj.destroy();
+                  
+              }
+          },
+      });
+
+      driverObj.drive()
+  }
+})
 </script>
 
 <style scoped></style>

@@ -13,7 +13,7 @@
                         <template #activator="{ props }">
                             <v-list-item v-bind="props" variant="tonal" class="rounded w-100 pa-1"
                                 append-icon="mdi-chevron-down" density="compact"
-                                prepend-avatar="https://source.unsplash.com/random/50x50/?person" v-if="findFirstAssignee">{{findFirstAssignee.user.name}}</v-list-item>
+                                :prepend-avatar="findFirstAssignee.user.picture" v-if="findFirstAssignee">{{findFirstAssignee.user.name}}</v-list-item>
                             <v-list-item v-bind="props" variant="tonal" class="rounded w-100 pa-1 py-2"
                             append-icon="mdi-chevron-down" density="compact"
                             prepend-icon="mdi-account" v-else>Assignees</v-list-item>
@@ -21,8 +21,8 @@
                         <v-list v-if="project" class="rounded mt-2 pa-0">
                             <v-list-item @click="
                                 //@ts-ignore
-                                toggleAssignee(member.user._id)" :active="task.assignees.some(item => item == member.user._id)" color="primary"
-                                prepend-avatar="https://source.unsplash.com/random/50x50/?person"
+                                toggleAssignee(member.user._id)" :active="task.assignees.some(item => item?._id == member.user._id)" color="primary"
+                                :prepend-avatar="member.user.picture"
                                 class="text-capitalize text-caption py-2 border-b font-weight-regular" density="compact"
                                 v-for="member in project.members" :key="member._id">{{ member.user.name }}</v-list-item>
                         </v-list>
@@ -61,26 +61,32 @@ const {user} = storeToRefs(useUserStore())
 const task = reactive({
     title: 'New Task',
     dueDate: new Date().toISOString().substring(0, 10),
+    description: '',
     priority: 'low',
-    assignees: [user.value._id] as string[],
+    assignees: [user.value],
 })
 const toggleAssignee = (value: string) => {
-    const index = task.assignees.findIndex((item: string) => item == value)
-    
-    if(index == -1){
-        task.assignees.push(value)
-    }else{
-        task.assignees.splice(index, 1)
-    }
-}
+  //@ts-ignore
+  const index = task.assignees.findIndex((item) => item._id == value);
+  if (index == -1) {
+    const member = project.value?.members.find(item => item.user._id == value)
+    if(!member) return
+    task.assignees.push(member.user);
+  } else {
+    task.assignees.splice(index, 1);
+  }
+};
 
-const findFirstAssignee = computed(() => project.value?.members.find(item => item.user._id == task.assignees[0]) || null)
+
+
+
+const findFirstAssignee = computed(() => project.value?.members.find(item => item.user._id == task.assignees[0]?._id) || null)
 
 const save = () => {
     if(project.value){
         const section = project.value.sections.find(item => (item._id && item._id == props.section._id) || (item.tempId && item.tempId == props.section.tempId))
         if(section){
-            const watchBy = [...task.assignees.filter(item => item != user.value?._id), user.value?._id]
+            const watchBy = [...task.assignees.filter(item => item?._id != user.value?._id), user.value?._id]
             //@ts-ignore
             section.tasks = section.tasks ? [...section.tasks, {...task, tempId: useTempID(8), watchBy, notes: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()}] : section.tasks
         }

@@ -1,5 +1,5 @@
 <template>
-     <v-card flat class="pa-0 py-3 rounded border" variant="flat"  :color="schedule.tags[0]?.color || 'background'" >
+     <v-card :id="schedule._id" flat class="pa-0 py-3 rounded border" variant="flat"  :color="schedule.tags[0]?.color || 'background'" >
         <v-card-subtitle class="text-caption">{{ time }}</v-card-subtitle>
         <v-card-title class="text-subtitle-1 mt-n2">
             {{schedule.title}}

@@ -32,7 +32,7 @@ const emits = defineEmits(['close'])
 const route = useRoute()
 //@ts-ignore
 const date = ref(new Date(props.startAt))
-const endAt = new Date()
+const endAt = new Date(props.startAt)
 endAt.setHours(22)
 endAt.setMinutes(0)
 const schedule = reactive({

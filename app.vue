@@ -1,6 +1,6 @@
 <template>
   <v-app class="h-screen w-screen">
-    <NuxtLoadingIndicator color="true"  ></NuxtLoadingIndicator>
+    <NuxtLoadingIndicator></NuxtLoadingIndicator>
     <ClientOnly>
       <NuxtLayout>
         <NuxtPage></NuxtPage>

@@ -38,7 +38,7 @@
                             <h1 class="text-center text-h1">{{ duration }} mins</h1>
                             <h4 class="text-center mt-5 font-weight-regular" v-if="number_of_session > 1">up next: 25 mins
                             </h4>
-                            <h4 class="text-center mt-5 font-weight-regular" v-else>up next: Completed </h4>
+                            <h4 class="text-center mt-5 font-weight-regular" v-else>up next: Completed {{is_break}}</h4>
                         </div>
                     </v-progress-circular>
                 </div>

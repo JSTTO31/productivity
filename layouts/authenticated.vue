@@ -14,10 +14,12 @@
   >
     <AppLogo
       style="font-size: 22px"
+      id="logo"
       @click="$router.push({ name: 'index' })"
     ></AppLogo>
     <v-spacer></v-spacer>
     <v-tabs
+      id="navigation-tabs"
       stacked
       style="position: absolute; left: 50%; transform: translateX(-50%)"
     >
@@ -66,6 +68,7 @@
       size="small"
       :icon="!preference.sounds.all.value ? 'mdi-volume-off' : preference.sounds.all.value < 100 ? 'mdi-volume-medium' : 'mdi-volume-high'"
       @click="toggleMute"
+      id="sound-button"
     ></v-btn>
     <v-btn
       class="ml-2"
@@ -73,14 +76,18 @@
       size="small"
       icon="mdi-arrow-expand"
       @click="fullscreen"
+      id="expand-button"
     ></v-btn>
-    <v-badge dot color="red" class="ml-2">
-      <v-btn variant="text" size="small" icon="mdi-bell"></v-btn>
-    </v-badge>
+    <NotificationMenuCard v-slot="props">
+      <v-badge v-bind="props" dot color="red" class="ml-2">
+        <v-btn variant="text" id="notification-button" size="small" icon="mdi-bell"></v-btn>
+      </v-badge>
+    </NotificationMenuCard>
     <v-divider vertical class="mx-4" inset></v-divider>
     <v-menu>
       <template #activator="{ props }">
         <v-avatar
+          id="profile-picture"
           v-bind="props"
           size="35"
           class="border text-caption font-weight-bold ml-2"
@@ -105,7 +112,7 @@
       <v-main> <Loading></Loading></v-main>
     </template>
   </ClientOnly>
-  <navigationDrawerRight></navigationDrawerRight>
+  <tools></tools>
   <NotificationContainer></NotificationContainer>
   <audio id="audio-celebration" src="/audio/celebration.mp3"></audio>
 </template>
@@ -118,6 +125,7 @@ const {preference} = storeToRefs(usePreferenceStore())
 const { name } = useTheme();
 const { todayTimeSpent } = storeToRefs(useTimeSpentStore());
 const $timespent = useTimeSpentStore();
+const $timer = useTimerStore()
 function fullscreen() {
   if (document.fullscreenElement) {
     document.exitFullscreen();
@@ -126,6 +134,7 @@ function fullscreen() {
   }
 }
 let interval: null | NodeJS.Timeout = null;
+let timeout: null | NodeJS.Timeout = null;
 const duration = computed(() => ((todayTimeSpent.value?.spent || 0) / (1000 * 60 * 60)) >= 2 ? 1000 * 60 * 25 : 1000 * 60 * 5)
 onMounted(() => {
   $timespent.getTimeSpent().then(() => {
@@ -137,6 +146,7 @@ onMounted(() => {
   document.onvisibilitychange = () => {
     if (document.visibilityState == "hidden") {
       if (interval) clearInterval(interval);
+      timeout = setTimeout(() => {
         $timespent.update().then(() => {
           if(todayTimeSpent.value){
             const remaining = (1000 * 60 * 60 * 2) - todayTimeSpent.value.spent
@@ -153,7 +163,9 @@ onMounted(() => {
             }
           }
         })
+      }, 1500);
     } else {
+      if(timeout) return clearTimeout(timeout)
       interval = setInterval(() => {
         $timespent.update()
       },  duration.value);
@@ -164,11 +176,23 @@ onMounted(() => {
     $timespent.update()
   }
 
+  window.onmousemove = () => {
+    $timer.unsetAlert()
+  }
   
   if (Notification.permission == 'default') {
       Notification.requestPermission()
   }
+
+  if(user.value){
+    //@ts-ignore
+    watch(() => user.value.guide, () => {
+      $user.updateGuide()
+    }, {deep: true})
+  }
 });
+
+
 
 function toggleMute(){
   const allSound = preference.value.sounds.all.value

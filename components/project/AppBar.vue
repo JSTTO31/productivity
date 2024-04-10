@@ -1,6 +1,6 @@
 <template>
     <v-navigation-drawer v-if="project" style="z-index: 6000" class="d-flex justify-end" width="400"
-        contained transition="slide-x-reverse-transition" location="right" v-model="showChatbox" permanent>
+        contained transition="slide-x-reverse-transition" location="right" id="project-team-chat-box" v-model="showChatbox" permanent>
         <suspense>
             <project-team-chat-box :project="project" @close="showChatbox = false"></project-team-chat-box>
             <template #fallback>
@@ -23,26 +23,26 @@
     <v-app-bar class="d-flex align-center text-white" density="compact" :model-value="!!project"
         style="background-color: rgba(0,0,0,.5);z-index: 50 !important;position: absolute" flat>
         <v-app-bar-nav-icon @click.stop="showNavigation = !showNavigation" class="rounded-0"></v-app-bar-nav-icon>
-        <v-app-bar-title v-if="project" class="font-weight-bold d-flex ml-2 align-center">
+        <v-app-bar-title id="project-app-bar-title" v-if="project" class="font-weight-bold d-flex ml-2 align-center">
             <input class="text-white px-2 rounded" style="outline-color: white" v-model="project.title" />
         </v-app-bar-title>
         <!-- <v-btn active size="small" variant="flat" class="ml-2 text-capitalize">Tasks</v-btn>
             <v-btn size="small" variant="tonal" class="ml-2 text-capitalize">Timeline</v-btn>
             <v-divider vertical inset class="ml-2"></v-divider> -->
         <!-- <v-btn prepend-icon="mdi-plus" size="small" color="primary"  variant="flat" class="ml-2 text-capitalize">Create </v-btn>   -->
-        <v-chip class="rounded" v-if="loading" variant="text">
+        <v-chip  class="rounded" v-if="loading" variant="text">
             Saving
             <template #prepend>
                 <v-progress-circular class="mr-2" size="15" width="2" indeterminate></v-progress-circular>
             </template>
         </v-chip>
-        <v-chip class="rounded" v-else variant="text" prepend-icon="mdi-database">Saved</v-chip>
-        <v-btn size="small" variant="tonal" @click="sectionSort = null" class="ml-2 text-capitalize rounded" prepend-icon="mdi-sort" v-if="sectionSort == 'desc'">Sort</v-btn>
-        <v-btn size="small" variant="tonal" @click="sectionSort = 'asc'" class="ml-2 text-capitalize rounded" prepend-icon="mdi-sort-ascending" v-else-if="sectionSort == null">Sort</v-btn>
-        <v-btn size="small" variant="tonal" @click="sectionSort = 'desc'" class="ml-2 text-capitalize rounded" prepend-icon="mdi-sort-descending" v-else>Sort</v-btn>
+        <v-chip id="project-app-bar-save"  class="rounded" v-else variant="text" prepend-icon="mdi-database">Saved</v-chip>
+        <v-btn id="project-app-bar-sort" size="small" variant="tonal" @click="sectionSort = null" class="ml-2 text-capitalize rounded" prepend-icon="mdi-sort" v-if="sectionSort == 'desc'">Sort</v-btn>
+        <v-btn id="project-app-bar-sort" size="small" variant="tonal" @click="sectionSort = 'asc'" class="ml-2 text-capitalize rounded" prepend-icon="mdi-sort-ascending" v-else-if="sectionSort == null">Sort</v-btn>
+        <v-btn id="project-app-bar-sort" size="small" variant="tonal" @click="sectionSort = 'desc'" class="ml-2 text-capitalize rounded" prepend-icon="mdi-sort-descending" v-else>Sort</v-btn>
         <v-menu :close-on-content-click="false">
             <template #activator="{props}">
-                <v-btn v-bind="props" size="small" variant="tonal" class="ml-2 text-capitalize rounded" prepend-icon="mdi-filter-outline" append-icon="mdi-chevron-down">filter</v-btn>
+                <v-btn id="project-app-bar-filter" v-bind="props" size="small" variant="tonal" class="ml-2 text-capitalize rounded" prepend-icon="mdi-filter-outline" append-icon="mdi-chevron-down">filter</v-btn>
             </template>
             <v-card width="400" class="pa-5 mt-2 rounded-lg">
                 <v-text-field v-model="sectionFilter.search" single-line label="Search task..." prepend-inner-icon="mdi-magnify" hide-details density="compact" variant="outlined"></v-text-field>
@@ -72,22 +72,13 @@
                 </div>
             </v-card>
         </v-menu>
-        <!-- <v-card class=" ml-2" variant="tonal">
-            <v-btn size="small" class="rounded">
-                <v-icon style="transform: rotate(90deg);">mdi-poll</v-icon>
-            </v-btn>
-            <v-btn size="small" class="rounded" variant="tonal" flat>
-                <v-icon style="transform: rotate(180deg);">mdi-view-dashboard</v-icon>
-            </v-btn>
-        </v-card> -->
-        <div class="d-flex mr-6 ml-2">
+        <div class="d-flex mr-6 ml-2" id="project-app-bar-members">
             <v-menu open-on-hover>
                 <template #activator="{ props }">
                     <div style="cursor: pointer;" class="d-flex align-center" v-bind="props">
                         <v-card v-for="member, n in project?.members" :key="member._id" class="rounded-circle mr-n4">
                             <v-avatar class="border" size="30">
-                                <v-img
-                                    :src="member.user.picture"></v-img>
+                                <img class="w-100" :src="member.user.picture" />
                             </v-avatar>
                         </v-card>
                     </div>
@@ -101,7 +92,6 @@
                             :prepend-avatar="member.user.picture"
                             :append-icon="member.role == 'owner' ? 'mdi-account-tie' : member.role == 'admin' ? 'mdi-account-key' : 'mdi-account'">
                             <template #title>{{ member.user.name }}</template>
-                            <!-- <template #subtitle>{{ member.user.email }}</template> -->
                             <template #append>
                                 <v-chip color="purple" size="small" style="width: 80px;" prepend-icon="mdi-account-tie"
                                     class="rounded text-center" v-if="member.role == 'owner'">Owner</v-chip>
@@ -124,7 +114,7 @@
         <v-divider vertical class="mx-2" inset></v-divider>
         <v-tooltip text="Discussion">
             <template #activator="{ props }">
-                <v-btn v-bind="props" variant="text" icon="mdi-forum" class="rounded-lg" size="small"
+                <v-btn id="project-app-bar-chatbox" v-bind="props" variant="text" icon="mdi-forum" class="rounded-lg" size="small"
                     @click="showChatbox = !showChatbox"></v-btn>
             </template>
         </v-tooltip>
@@ -137,7 +127,7 @@
 <script setup lang="ts">
 const showShareDialog = ref(false)
 const showNavigation = inject('showProjectsNavigation')
-const showChatbox = ref(false)
+const showChatbox : Ref<Boolean> = inject('showChatbox') as Ref<Boolean>
 const {priorities, watches, completes} = useSectionFilterObjects
 const { user } = storeToRefs(useUserStore())
 const { project, sectionSort, sectionFilter } = storeToRefs(useProjectStore())

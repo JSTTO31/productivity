@@ -1,29 +1,20 @@
 <template>
-    <!-- <v-navigation-drawer location="left" width="39" id="right-navigation" v-if="true">
-        <v-list class="h-100">
-            <v-list-item prepend-icon="mdi-movie-open" @click="showMedia = !showMedia"
-                :color="showMedia ? 'secondary' : ''"></v-list-item>
-            <v-list-item prepend-icon="mdi-timer-outline" @click="showTimer = !showTimer"
-                :color="showTimer ? 'secondary' : ''"></v-list-item>
-            <v-list-item prepend-icon="mdi-pencil" @click="showTask = !showTask"
-                :color="showTask ? 'secondary' : ''"></v-list-item>
-            <v-spacer></v-spacer>
-            <v-list-item prepend-icon="mdi-cog" @click="showSettings = true"></v-list-item>
-        </v-list>
-    </v-navigation-drawer> -->
     <v-hover v-slot="{props, isHovering}">
-        <div id="tools"  class="pt-8" v-bind="props" style="height: 80px;" :style="{bottom: isHovering ? '6px' : '-40px', transition: '.2s ease'}">
-            <v-card  style="overflow: visible;" class=" justify-space-between rounded-lg pa-2 d-flex" :class="isHovering ? 'pt-2' : 'pt-5'" elevation="5" width="220">
-                <v-card  width="45" flat height="45" @click="showTask = !showTask" class="rounded tool pa-1 bg-transparent">
-                    <v-img src="/tools/notes.png"></v-img>
+        <div id="tools-container"  class="pt-8" v-bind="props" style="height: 80px;" :style="{bottom: isHovering ? '6px' : '-40px', transition: '.2s ease'}">
+            <v-card  style="overflow: visible;" class=" justify-space-between rounded-lg pa-2 d-flex" :class="isHovering ? 'pt-2' : 'pt-5'" elevation="5" width="250" height="100" id="tools">
+                <v-card  width="55" flat height="45" @click="showTextEditor = !showTextEditor" class="rounded tool pa-1 bg-transparent">
+                    <v-img src="/tools/text-box.png"></v-img>
                 </v-card>
-                <v-card  width="45" flat height="45" @click="showTimer = !showTimer" class="rounded tool pa-1 bg-transparent">
+                <v-card  width="55" flat height="45" @click="showTask = !showTask" class="rounded tool pa-1 bg-transparent">
+                    <v-img src="/tools/to-do-list.png"></v-img>
+                </v-card>
+                <v-card  width="55" flat height="45" @click="showTimer = !showTimer" class="rounded tool pa-1 bg-transparent">
                     <v-img src="/tools/stopwatch.png"></v-img>
                 </v-card>
-                <v-card  width="45" flat height="45" @click="showMedia = !showMedia" class="rounded tool pa-1 bg-transparent">
+                <!-- <v-card  width="55" flat height="45" @click="showMedia = !showMedia" class="rounded tool pa-1 bg-transparent">
                     <v-img src="/tools/play-button.png"></v-img>
-                </v-card>
-                <v-card  width="45" flat height="45" @click="showSettings = !showSettings" class="rounded tool pa-1 mr-n2 bg-transparent">
+                </v-card> -->
+                <v-card  width="55" flat height="45" @click="showSettings = !showSettings" class="rounded tool pa-1 mr-n2 bg-transparent">
                     <v-img src="/tools/cogwheel.png"></v-img>
                 </v-card>
             </v-card>
@@ -32,30 +23,26 @@
     <div class="marker">
         <div></div>
     </div>
+  
     <UtilsCardMedia key="media" class="floating-card" v-model:show-media="showMedia"
         @vue:before-update="beforeUpdateElement"></UtilsCardMedia>
-    <UtilsCardSound key="sound" class="floating-card" @vue:before-update="beforeUpdateElement"
-        v-model:show-sound="showSound"></UtilsCardSound>
     <UtilsCardTimer key="timer" class="floating-card" @vue:before-update="beforeUpdateElement"
         v-model:show-timer="showTimer"></UtilsCardTimer>
     <UtilsCardTask key="task" class="floating-card" @vue:before-update="beforeUpdateElement" v-model:show-task="showTask">
     </UtilsCardTask>
-    <UtilsCardTextEditor key="text-editor" class="floating-card" @vue:before-update="beforeUpdateElement"
-        v-model:show-editor="showTextEditor"></UtilsCardTextEditor>
     <UtilsCardSettings key="settings" class="floating-card" @vue:before-update="beforeUpdateElement"
         v-model:show-settings="showSettings"></UtilsCardSettings>
-
+    <UtilsCardTextEditor key="text-editor" class="floating-card" @vue:before-update="beforeUpdateElement"
+        v-model:show-editor="showTextEditor"></UtilsCardTextEditor>
   
 </template>
 <script lang="ts" setup>
 const rail = ref(true)
 const showSettings = ref(false)
-const showNavigation = ref<null | boolean>(null)
 const showTextEditor = ref(false)
 const showTask = ref(false)
 const showTimer = ref(false)
 const showMedia = ref(false)
-const showSound = ref(false)
 
 const toFront = (currentElement: Element) => {
     const cards = document.querySelectorAll('.floating-card')
@@ -130,10 +117,10 @@ onMounted(() => {
 .tool:active{
     transform: scale(1.2);
 }
-#tools{
+#tools-container{
   position: fixed;
   bottom: -50px;
-  height: 60px;
+  height: 180px;
   right: 5%;
   /* transform: translateX(-50%); */
   z-index: 2000;

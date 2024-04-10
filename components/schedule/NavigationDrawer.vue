@@ -1,14 +1,14 @@
 <template>
     <v-navigation-drawer @click.stop @mousedown.stop location="left" width="280"
-        :model-value="showNavigation" style="z-index: 50 !important;" >
+        :model-value="showNavigation" style="z-index: 50 !important;" id="schedule-navigation-drawer">
         <v-card class="h-100" style="overflow-y: scroll" id="upcoming-schedule-container">
-            <v-card class="pa-3 px-5 d-flex align-center border-b rounded-0" color="transparent" flat @click="showUpcomingSchedules = !showUpcomingSchedules">
+            <v-card class="pa-3 px-5 d-flex align-center border-b rounded-0" color="transparent" flat @click="showUpcomingSchedules = !showUpcomingSchedules" id="container">
                 <h4 class="font-weight-regular" style="font-family: 'Roboto', sans-serif;">Today Schedules</h4>
                 <v-spacer></v-spacer>
                 <v-icon v-if="!showUpcomingSchedules">mdi-chevron-down</v-icon>
                 <v-icon v-else>mdi-chevron-up</v-icon>
             </v-card>
-            <v-list class="pa-2" v-if="showUpcomingSchedules">
+            <v-list class="pa-2" v-if="showUpcomingSchedules" id="list-upcoming">
                 <transition-group name="slide">
                     <schedule-upcoming-schedule-card class="mb-2" :style="`transition-delay: ${n / 5}s`" v-for="schedule, n in upcommingSchedules" :id="schedule._id" :key="schedule._id" :schedule="schedule"></schedule-upcoming-schedule-card>
                 </transition-group>

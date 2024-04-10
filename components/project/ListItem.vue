@@ -1,18 +1,18 @@
 <template>
-    <v-list-item density="compact" :prepend-icon="'mdi-file-outline'" v-ripple="false"
+    <v-list-item density="compact" :prepend-icon="'mdi-file-outline'" v-ripple="false" :id="index == 0 ? 'project-list-item' : ''"
         @click="$router.push({ name: 'r-access-projects-project', params: { project: project._id } })"
         class="text-caption py-0 font-weight-regular text-capitalize text-no-wrap"
         :active="project._id == $route.params.project">
         <input type="text" v-model="title" ref="textField" v-if="showRenameDialog" style="width: 98%" />
         <span v-else>{{ title }}</span>
         <template #append>
-            <v-icon v-if="memberType == 'owner'">mdi-account-tie</v-icon>
-            <v-icon v-else-if="memberType == 'admin'">mdi-account-key</v-icon>
-            <v-icon v-else>mdi-account</v-icon>
+            <v-icon :id="index == 0 ? 'project-list-item-indicator' : ''" v-if="memberType == 'owner'">mdi-account-tie</v-icon>
+            <v-icon :id="index == 0 ? 'project-list-item-indicator' : ''" v-else-if="memberType == 'admin'">mdi-account-key</v-icon>
+            <v-icon :id="index == 0 ? 'project-list-item-indicator' : ''" v-else>mdi-account</v-icon>
             <v-menu>
                 <template #activator="{ props }">
                     <v-btn v-bind="props" size="25" flat class="rounded ml-2 bg-transparent"
-                        icon="mdi-dots-horizontal"></v-btn>
+                        icon="mdi-dots-horizontal" id="project-list-item-menu"></v-btn>
                 </template>
                 <v-card width="200" class="pa-2">
                     <!-- If owner -->
@@ -71,7 +71,7 @@
 <script setup lang="ts">
 import { onClickOutside } from '#imports';
 const { user } = storeToRefs(useUserStore())
-const props = defineProps<{ project: ProjectType }>()
+const props = defineProps<{ project: ProjectType, index: number }>()
 const $project = useProjectStore()
 //@ts-ignore
 const memberType = computed(() => props.project.members.find(item => (item.user?._id || item.user) == user.value?._id)?.role || 'member')
