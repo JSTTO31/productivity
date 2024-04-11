@@ -11,7 +11,7 @@
         <v-main>
             <v-card id="chat-box-main" class="rounded-0 h-100 py-5" style="overflow-y: auto;" flat
                 v-if="project.messages.length > 0">
-                <project-list-item-message v-for="message in project.messages" :message="message" :key="message._id" />
+                <project-list-item-message v-for="message in project.messages.filter(item => !item.removedBy.some(id => user && id == user._id))" :message="message" :key="message._id" />
             </v-card>
             <div v-else>
                 <div class="pa-15 mt-5">

@@ -82,7 +82,7 @@ function remove() {
     //@ts-ignore
     if(user.value && !props.message.removedBy.some(item => item == user.value._id)){
         //@ts-ignore
-        props.message.removedBy.push(user.value)
+        props.message.removedBy.push(user.value._id)
     }
 }
 
