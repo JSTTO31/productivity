@@ -81,7 +81,11 @@ onBeforeRouteUpdate((to, from, next) => {
     if (to.params.project != from.params.project) {
         const findProject = projects.value.find(item => item._id == to.params.project)
         if (findProject) {
+            console.log('triggered');
+            
             project.value = { ...findProject }
+             return next()
+
         } else {
             $project.findById(to.params.project.toString())
         }

@@ -11,9 +11,9 @@
                             </template>
                             <v-list>
                                 <v-list-item class="text-caption rounded-lg" density="compact"
-                                    @click="unsent" v-if="!message.unsent">unsent</v-list-item>
+                                    @click="unsent" v-if="!message.unsent">unsend</v-list-item>
                                 <v-list-item class="text-caption rounded-lg" density="compact"
-                                    @click="remove">Remove</v-list-item>
+                                    @click="remove">remove</v-list-item>
                             </v-list>
                         </v-menu>
                     </div>

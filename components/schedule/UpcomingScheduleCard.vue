@@ -6,7 +6,7 @@
         </v-card-title>
         <v-card-text class="d-flex pb-0" style="gap: 5px">
             <!-- <v-btn size="small" class="text-capitalize rounded mr-2" variant="outlined" prepend-icon="mdi-information" flat>Details</v-btn> -->
-            <v-btn size="small" class="text-capitalize rounded" :prepend-icon="!schedule.finished ? 'mdi-checkbox-marked' : 'mdi-square-rounded'" variant="outlined" flat @click="finished">finished</v-btn>
+            <v-btn size="small" class="text-capitalize rounded" :prepend-icon="!schedule.finished ? 'mdi-checkbox-marked' : 'mdi-square-rounded'" variant="outlined" flat @click="finished">completed</v-btn>
             <v-btn size="small" class="text-capitalize rounded" color="blue" prepend-icon="mdi-video" variant="elevated" flat @click="goToMeet" v-if="schedule.link">Join Meeting</v-btn>
         </v-card-text>
         <v-chip size="x-small" prepend-icon="mdi-clock-time-nine-outline" style="position: absolute;top: 10px;right: 10px;" v-if="ongoing">Ongoing</v-chip>

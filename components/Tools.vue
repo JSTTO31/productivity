@@ -2,21 +2,41 @@
     <v-hover v-slot="{props, isHovering}">
         <div id="tools-container"  class="pt-8" v-bind="props" style="height: 80px;" :style="{bottom: isHovering ? '6px' : '-40px', transition: '.2s ease'}">
             <v-card  style="overflow: visible;" class=" justify-space-between rounded-lg pa-2 d-flex" :class="isHovering ? 'pt-2' : 'pt-5'" elevation="5" width="250" height="100" id="tools">
-                <v-card  width="55" flat height="45" @click="showTextEditor = !showTextEditor" class="rounded tool pa-1 bg-transparent">
-                    <v-img src="/tools/text-box.png"></v-img>
-                </v-card>
-                <v-card  width="55" flat height="45" @click="showTask = !showTask" class="rounded tool pa-1 bg-transparent">
-                    <v-img src="/tools/to-do-list.png"></v-img>
-                </v-card>
-                <v-card  width="55" flat height="45" @click="showTimer = !showTimer" class="rounded tool pa-1 bg-transparent">
-                    <v-img src="/tools/stopwatch.png"></v-img>
-                </v-card>
+                <v-tooltip location="top">
+                    <template #activator="{props}">
+                        <v-card v-bind="props"  width="55" flat height="45" @click="showTextEditor = !showTextEditor" class="rounded tool pa-1 bg-transparent">
+                            <v-img src="/tools/text-box.png"></v-img>
+                        </v-card>
+                    </template>
+                    <span class="mb-15">Text Editor</span>
+                </v-tooltip>
+                <v-tooltip location="top">
+                    <template #activator="{props}">
+                        <v-card v-bind="props"  width="55" flat height="45" @click="showTask = !showTask" class="rounded tool pa-1 bg-transparent">
+                            <v-img src="/tools/to-do-list.png"></v-img>
+                        </v-card>
+                    </template>
+                    <span class="mb-15">To do list</span>
+                </v-tooltip>
+                <v-tooltip location="top">
+                    <template #activator="{props}">
+                        <v-card v-bind="props"  width="55" flat height="45" @click="showTimer = !showTimer" class="rounded tool pa-1 bg-transparent">
+                            <v-img src="/tools/stopwatch.png"></v-img>
+                        </v-card>
+                    </template>
+                    <span class="mb-15">Focus Session</span>
+                </v-tooltip>
+                <v-tooltip location="top">
+                    <template #activator="{props}">
+                        <v-card v-bind="props"  width="55" flat height="45" @click="showSettings = !showSettings" class="rounded tool pa-1 mr-n2 bg-transparent">
+                            <v-img src="/tools/cogwheel.png"></v-img>
+                        </v-card>
+                    </template>
+                    <span class="mb-15">Settings</span>
+                </v-tooltip>
                 <!-- <v-card  width="55" flat height="45" @click="showMedia = !showMedia" class="rounded tool pa-1 bg-transparent">
                     <v-img src="/tools/play-button.png"></v-img>
                 </v-card> -->
-                <v-card  width="55" flat height="45" @click="showSettings = !showSettings" class="rounded tool pa-1 mr-n2 bg-transparent">
-                    <v-img src="/tools/cogwheel.png"></v-img>
-                </v-card>
             </v-card>
         </div>
     </v-hover>
@@ -110,9 +130,9 @@ onMounted(() => {
     transition: .25s ease-in-out;
 
 }
-.tool:hover{
+/* .tool:hover{
     transform: scale(1.5) translateY(-10px);
-}
+} */
 
 .tool:active{
     transform: scale(1.2);

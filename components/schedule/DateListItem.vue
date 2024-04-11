@@ -25,7 +25,7 @@
             </div>
             <v-spacer></v-spacer>
             <div class="mt-4 pb-0 d-flex align-center" style="gap: 5px;">
-                <v-btn @click.stop="finished" variant="outlined" class="text-capitalize" size="small" prepend-icon="mdi-checkbox-marked" v-if="!schedule.finished">Finished</v-btn>
+                <v-btn @click.stop="finished" variant="outlined" class="text-capitalize" size="small" prepend-icon="mdi-checkbox-marked" v-if="!schedule.finished">Completed</v-btn>
                 <v-btn @click.stop="finished" variant="outlined" class="text-capitalize" size="small" prepend-icon="mdi-checkbox-blank" v-else>Unfinished</v-btn>
                 <v-btn @click.stop="goToMeet" variant="flat" class="text-capitalize" size="small" prepend-icon="mdi-video" color="blue" v-if="schedule.link">Join Meeting</v-btn>
             </div>

@@ -25,8 +25,6 @@
             <v-text-field @keyup.enter="send" v-model="message" hide-details rounded="lg" single-line
                 density="comfortable" variant="solo-filled" class="" flat append-inner-icon="mdi-send"
                 label="Write your message here..."></v-text-field>
-            <!-- <v-btn class="ml-2 rounded-lg" icon="mdi-image" flat></v-btn>
-                <v-btn class="ml-2 rounded-lg" icon="mdi-microphone" flat></v-btn> -->
         </v-footer>
     </v-layout>
 </template>
@@ -47,12 +45,11 @@ async function scrollTobottom() {
 
 async function send() {
     $project.sendMessage(props.project._id, message.value).then(() => {
-        message.value = ''
-
         nextTick(() => {
             scrollTobottom()
         })
     })
+    message.value = ''
 }
 
 

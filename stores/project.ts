@@ -113,6 +113,14 @@ export const useProjectStore = defineStore('project', () => {
     }
 
     async function findById(id: string){
+        const findProject = projects.value.find(item => item._id == id)
+        if(findProject) return new Promise((resolve) : void=> {
+            project.value = projectRemoveReactive(findProject)
+            //@ts-ignore
+            resolve()
+        })
+
+
         return await useApiFetch('/projects/' + id, {
             onResponse(event){
                 if(event.response.status != 200) return

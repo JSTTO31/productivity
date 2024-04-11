@@ -113,7 +113,7 @@
         <div style="gap: 5px" class="d-flex mt-2">
           <v-col class="px-0">
             <v-textarea v-model="task.description" rows="5" class="mt-2" single-line variant="solo-filled" flat
-              density="comfortable" label="What is the details?"></v-textarea>
+              density="comfortable" label="What are the details?"></v-textarea>
           </v-col>
         </div>
       </v-card>

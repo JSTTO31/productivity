@@ -33,7 +33,7 @@ onMounted(() => {
     setTimeout(() => {
       document.onclick = () => {
         //@ts-ignore
-        if(selectedTheme.type == 'video'){
+        if(selectedTheme.value.type == 'video'){
           const themeSound = preference.value.sounds.theme.value
           const allSoundPercent = preference.value.sounds.all.value / 100
           const reduceThemeSoundByAllSound = themeSound * allSoundPercent

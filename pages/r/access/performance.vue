@@ -46,7 +46,7 @@
                     <h1 class="ml-5 text-h3 font-weight-medium">{{ projects.length }}</h1>
                   </div>
                 </template>
-                Total of projects
+                Total projects
               </v-tooltip>
               <v-divider vertical class="h-100 mx-5"></v-divider>
               <v-tooltip >
@@ -58,7 +58,7 @@
                     <h1 class="ml-5 text-h3 font-weight-medium">{{ schedules.length }}</h1>
                   </div>
                 </template>
-                Total of schedules
+                Total schedules
               </v-tooltip>
               <v-divider vertical class="h-100 mx-5"></v-divider>
               <v-tooltip >
@@ -161,7 +161,7 @@ const completion = computed(() => {
         return data
     }, {count: 0, completed: 0})
 
-    return data.completed / data.count * 100
+    return (data.completed / data.count * 100) || 0
 })
 
 const color = computed(() => completion.value > 49 ? 'success' : completion.value > 15 ? 'warning' : 'error')

@@ -21,8 +21,8 @@
                         </template>
                         <v-list class="rounded">
                             <v-list-item @click="showEdit" prepend-icon="mdi-pencil-outline" density="compact" class="text-capitalize text-caption">Edit</v-list-item>
-                            <v-list-item @click="finished" prepend-icon="mdi-flag" density="compact" class="text-capitalize text-caption" v-if="!schedule.finished">Mark as finished</v-list-item>
-                            <v-list-item v-else @click="finished" prepend-icon="mdi-flag-remove" density="compact" class="text-capitalize text-caption">Mark as unfinished</v-list-item>
+                            <v-list-item @click="finished" prepend-icon="mdi-flag" density="compact" class="text-capitalize text-caption" v-if="!schedule.finished">Mark as completed</v-list-item>
+                            <v-list-item v-else @click="finished" prepend-icon="mdi-flag-remove" density="compact" class="text-capitalize text-caption">Mark as incomplete</v-list-item>
                             <v-list-item @click="menu = false" prepend-icon="mdi-close" density="compact" class="text-capitalize text-caption">Close</v-list-item>
                             <v-list-item @click="$router.push({query: {delete: schedule._id}})" prepend-icon="mdi-trash-can-outline" density="compact" class="text-capitalize text-caption text-error">Delete</v-list-item>
                         </v-list>
@@ -43,7 +43,8 @@
                     </div>
                     <div class="d-flex align-center text-capitalize font-weight-medium mt-3"  style="opacity: .8">
                         <v-chip class="text-capitalize" prepend-icon="mdi-calendar-check" color="success" v-if="status == 'finished'">
-                            {{status}}
+                            {{ status == 'finished' ? 'completed' : status }}
+
                         </v-chip>
                         <v-chip class="text-capitalize" prepend-icon="mdi-calendar-refresh" color="secondary" v-else-if="status == 'ongoing'">
                             {{status}}
