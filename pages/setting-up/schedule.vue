@@ -1,7 +1,7 @@
 <template>
     <v-layout class="h-100 w-100">
         <v-main style="font-family: 'Roboto', sans-serif">
-            <v-container fluid class=" h-100 w-100" style="padding-inline: 100px;padding-top: 100px;">
+            <v-container fluid class=" h-100 w-100" :style="{paddingInline: name == 'lg' ? '100px' : '250px'}" style="padding-top: 100px;">
                 <h1 class="text-center">Select Your Daily Routine Recommendations</h1>   
                 <h4 class="text-center font-weight-regular mb-8">Craft Your Path to Productivity and Well-being with Our Daily Routine Recommendations</h4>
                 <v-row>
@@ -65,6 +65,7 @@ definePageMeta({
         mode: 'out-in'
     },
 });
+const {name} = useDisplay()
 const $user = useUserStore()
 const $schedule = useScheduleStore()
 const completed = ref(false)

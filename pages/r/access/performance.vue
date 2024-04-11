@@ -2,7 +2,7 @@
  <div>
   <v-main>
     <v-card flat class="h-100 rounded-0 pt-5" color="transparent">
-      <v-container class="h-100">
+      <v-container class="h-100" :style="{paddingInline: name == 'lg' ? '' : '250px'}">
         <v-row class="">
           <v-col cols="4">
             <v-card
@@ -114,7 +114,7 @@
 import { driver } from "driver.js";
 import "driver.js/dist/driver.css";
 import { useTimeSpentStore } from '~/stores/timeSpent';
-
+const {name} = useDisplay()
 useHead({
   title: "Performance",
 });

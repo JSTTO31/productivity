@@ -64,7 +64,7 @@
       </v-layout>
     </v-navigation-drawer>
     <v-main>
-      <v-card id="project-container">
+      <v-card id="project-container" :class="name == 'xl' ? 'project-container-xl' : ''">
         <v-layout class="h-100 w-100">
           <v-app-bar flat class="border-b" density="compact">
             <div class="d-flex mr-8 ml-2">
@@ -194,6 +194,7 @@ definePageMeta({
     mode: "out-in",
   },
 });
+const {name} = useDisplay()
 const { project: removeProjectReactivity } = useRemoveReactivity
 const { user } = storeToRefs(useUserStore())
 const title = ref('')
@@ -263,14 +264,14 @@ $project.getAll().then(() => {
 function onFocusTitle() {
   const container = document.getElementById('project-container')
   if (container) {
-    container.style.transform = 'scale(1.5) translate(150px,100px)'
+    container.classList.add(name.value == 'lg' ? 'project-container-focus' : 'project-container-focus-xl')
   }
 }
 
 function onBlurTitle() {
   const container = document.getElementById('project-container')
   if (container) {
-    container.style.transform = 'scale(1)'
+    container.classList.remove(name.value == 'lg' ? 'project-container-focus' : 'project-container-focus-xl')
   }
 }
 
@@ -308,6 +309,12 @@ function remove(index: number) {
     }
   }
 }
+
+onMounted(() => {
+  const container = document.getElementById('project-container')
+  if(container){
+  }
+})
 </script>
 
 <style scoped>
@@ -324,6 +331,21 @@ body::-webkit-scrollbar {
   transition: 0.6s ease;
   animation: slide-center 1s ease-in-out;
 }
+
+.project-container-xl{
+  transform: scale(1.2) !important;
+}
+
+.project-container-focus-xl{
+  transform: scale(1.5) translate(100px,100px) !important;
+}
+
+
+.project-container-focus{
+  transform: scale(1.5) translate(150px,100px) !important;
+}
+
+
 
 @keyframes slide-center {
   from {

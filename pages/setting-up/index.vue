@@ -3,9 +3,9 @@
         <v-main style="font-family: 'Roboto', sans-serif;">
             <v-container fluid class="d-flex flex-column align-center h-100" style="padding-inline: 100px;">
                 <v-col cols="8" class="d-flex flex-column" style="padding-top: 150px;z-index: 10;" >
-                    <h1 class="text-center text-h2 font-weight-bold mt-15">Set Up Your Workspace</h1>
-                    <h3 class="text-center font-weight-regular mt-5">Welcome to efficiently! Customize your environment and preferences to suit your workflow. Let's optimize your experience for maximum efficiency!</h3>
-                    <v-btn class="mx-auto text-capitalize mt-5" variant="outlined" size="x-large" @click="$router.push({name: 'setting-up-background'})">Click to begin your journey</v-btn>
+                    <h1 class="text-center text-h2 font-weight-bold mt-15">Set up your Workspace</h1>
+                    <h3 class="text-center font-weight-regular mt-5 text-h6 text-xl-h5">Welcome to efficiently! Customize your environment and preferences to suit your workflow. Let's optimize your experience for maximum efficiency!</h3>
+                    <v-btn class="mx-auto text-capitalize mt-5 mt-xl-15" variant="outlined" size="x-large" @click="$router.push({name: 'setting-up-background'})">Click to begin your journey</v-btn>
                 </v-col>
                 <v-col class="d-flex align-center justify-center mt-n15">
                     <v-card color="transparent" flat width="500">

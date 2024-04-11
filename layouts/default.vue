@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar style="padding-inline: 115px;" height="80" flat absolute color="transparent">
+  <v-app-bar :style="{paddingInline: displayName == 'lg' ? '115px' : '250px'}" height="80" flat absolute color="transparent">
     <AppLogo style="font-size: 28px;"></AppLogo>
     <v-spacer></v-spacer>
     <v-btn variant="plain" class="mx-1 text-capitalize" :to="{ hash: '#features' }">Features</v-btn>
@@ -29,6 +29,7 @@
 </template>
 
 <script setup lang="ts">
+const {name: displayName} = useDisplay()
 const { name } = useTheme()
 const $user = useUserStore()
 const { user } = storeToRefs(useUserStore())

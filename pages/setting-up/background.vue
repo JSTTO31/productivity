@@ -4,7 +4,7 @@
             <v-container fluid class="d-flex h-100 d-flex w-100" style="padding-inline: 100px;padding-top: 140px">
                 <v-col cols="4">
                     <h3 class="mb-5">Choose your relaxing background</h3>
-                    <div class="d-flex flex-wrap justify-space-between pr-10" style="gap: 0px">
+                    <div class="d-flex flex-wrap pr-10" style="gap: 0px">
                         <v-tooltip v-for="theme, index in themes.filter((item: any) => item.type == 'video')">
                             <template #activator="{ props }">
                                 <v-avatar :style="preference.theme.background == index
@@ -37,7 +37,7 @@
                 </v-col>
                 <v-spacer></v-spacer>
                 <v-col cols="8" class="pl-15"> 
-                    <v-card v-ripple="false" elevation="5" class="w-100 pa-0 theme-card" @click="fullscreen = !fullscreen" :class="fullscreen ? 'fullscreen' : ''" height="455">
+                    <v-card v-ripple="false" elevation="5" class="w-100 pa-0 theme-card" @click="fullscreen = !fullscreen" :class="fullscreen ? 'fullscreen' : ''" :height="name == 'lg' ? 455 : 600">
                         <v-card height="40" class="pa-2 rounded-0 border-b d-flex w-100 align-center" style="position: absolute;z-index: 1000;" flat>
                             <div class="d-flex mr-15 ml-2">
                                 <v-icon class="ml-1" color="success" size="15">mdi-circle</v-icon>
@@ -70,6 +70,7 @@ definePageMeta({
         mode: 'out-in'
     }
 });
+const {name} = useDisplay()
 const {themes} = useThemeAndColor
 const fullscreen = ref(false)
 const {preference} = storeToRefs(usePreferenceStore())

@@ -2,6 +2,7 @@
     <video  id="video" style="width: 100vw;position: absolute;top: 0;left: 0;"  muted :autoplay="true" v-if="selectedTheme.type == 'video'" :src="
     //@ts-ignore
     selectedTheme.backgrounds[0].path" 
+    :key="selectedTheme.id"
     loop>
     </video>
     <div v-else style="width: 100vw;height: 100%;position: absolute;top: 0;left: 0;filter: brightness(90%)" :style="selectedTheme.backgroundColor">
@@ -25,10 +26,12 @@ watch(() => [preference.value.sounds.theme.value, preference.value.sounds.all.va
   video.volume = (reduceThemeSoundByAllSound / 100)
 })
 
+const loading = ref(false)
 
 onMounted(() => {
   //@ts-ignore
   const video : HTMLVideoElement | null = document.getElementById('video')
+
   if(video){
     setTimeout(() => {
       document.onclick = () => {

@@ -10,25 +10,21 @@
         <v-main>
           <div class="d-flex align-center justify-center h-100 flex-column" v-if="selected == 0">
             <v-avatar class="rounded-0 mx-auto" size="200">
-              <v-img src="/icons/confetti2.png"></v-img>
+              <v-img width="250" height="250" src="/icons/confetti2.png"></v-img>
             </v-avatar>
             <h1 class="text-center mt-2 mt-5" style="font-family: 'Roboto', sans-serif;">Welcome <span
                 class="text-capitalize text-primary" v-if="user">{{ user.name }}</span></h1>
             <p class="text-center">Explore helpful tips and guides to get started.</p>
           </div>
           <div class="d-flex align-center justify-center h-100 flex-column" v-else-if="selected == 1">
-            <v-avatar class="rounded-0 mx-auto" size="250">
-              <v-img src="/undraw/study.svg"></v-img>
-            </v-avatar>
+            <NuxtImg width="250" height="250" src="/undraw/study.svg"></NuxtImg>
             <h2 class="text-center mt-2 mt-5 text-decoration-underline" style="font-family: 'Roboto', sans-serif;">
               Build Your Study Routine</h2>
             <p class="text-center px-15">Create a structured study routine directly on your homepage. Plan specific
               times for studying and breaks to help you stay focused and productive during your study sessions.</p>
           </div>
           <div class="d-flex align-center justify-center h-100 flex-column" v-else-if="selected == 2">
-            <v-avatar class="rounded-0 mx-auto" size="250">
-              <v-img src="/undraw/complete.svg"></v-img>
-            </v-avatar>
+            <NuxtImg width="250" height="250" src="/undraw/complete.svg"></NuxtImg>
             <h2 class="text-center mt-2 mt-5 text-decoration-underline" style="font-family: 'Roboto', sans-serif;">
               Manage Your Tasks Efficiently</h2>
             <p class="text-center px-15">Stay organized by utilizing the task management page. Create, prioritize, and
@@ -36,9 +32,7 @@
               tasks into smaller, manageable steps for increased productivity.</p>
           </div>
           <div class="d-flex align-center justify-center h-100 flex-column" v-else-if="selected == 3">
-            <v-avatar class="rounded-0 mx-auto" size="250">
-              <v-img src="/undraw/collaboration.svg"></v-img>
-            </v-avatar>
+            <NuxtImg width="250" height="250" src="/undraw/collaboration.svg"></NuxtImg>
             <h2 class="text-center mt-2 mt-5 text-decoration-underline" style="font-family: 'Roboto', sans-serif;">
               Collaborate Effectively on Projects</h2>
             <p class="text-center px-15">Utilize the collaboration features on the project page to work seamlessly
@@ -46,9 +40,7 @@
               productivity and achieve collective goals.</p>
           </div>
           <div class="d-flex align-center justify-center h-100 flex-column" v-else-if="selected == 4">
-            <v-avatar class="rounded-0 mx-auto" size="250">
-              <v-img src="/undraw/schedule.svg"></v-img>
-            </v-avatar>
+            <NuxtImg width="250" height="250" src="/undraw/schedule.svg"></NuxtImg>
             <h2 class="text-center mt-2 mt-5 text-decoration-underline" style="font-family: 'Roboto', sans-serif;">
               Plan Your Goals and Schedule</h2>
             <p class="text-center px-15">Use the schedule page to plan your goals and schedule your study sessions
@@ -56,9 +48,7 @@
               ensure you're making progress towards your academic objectives.</p>
           </div>
           <div class="d-flex align-center justify-center h-100 flex-column" v-else-if="selected == 5">
-            <v-avatar class="rounded-0 mx-auto" size="250">
-              <v-img src="/undraw/progress.svg"></v-img>
-            </v-avatar>
+            <NuxtImg width="250" height="250" src="/undraw/progress.svg"></NuxtImg>
             <h2 class="text-center mt-2 mt-5 text-decoration-underline" style="font-family: 'Roboto', sans-serif;">
               Track Your Progress</h2>
             <p class="text-center px-15">Monitor your productivity and track your progress with the report feature.
