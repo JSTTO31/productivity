@@ -12,9 +12,7 @@ export type MemberType = {
 }
 
 export type MessageType = {
-    _id: string,
-    project: string,
-    tempId?: string,
+    _id?: string,
     text: string,
     from: userType,
     unsent: boolean,

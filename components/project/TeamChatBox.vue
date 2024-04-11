@@ -30,6 +30,7 @@
 </template>
 
 <script setup lang="ts">
+const {user} = storeToRefs(useUserStore())
 const props = defineProps<{ project: ProjectType }>()
 const emits = defineEmits(['close'])
 const $project = useProjectStore()
@@ -44,10 +45,14 @@ async function scrollTobottom() {
 }
 
 async function send() {
-    $project.sendMessage(props.project._id, message.value).then(() => {
-        nextTick(() => {
-            scrollTobottom()
-        })
+    if(!user.value) return
+    props.project.messages.push({
+        from: user.value,
+        text: message.value,
+        unsent: false,
+        removedBy: [],
+        updatedAt: new Date().toISOString(),
+        createdAt: new Date().toISOString(),
     })
     message.value = ''
 }
@@ -56,8 +61,6 @@ async function send() {
 watch(() => props.project.messages.length, () => {
     scrollTobottom()
 })
-
-await $project.getMessages(props.project._id)
 
 onMounted(() => {
     scrollTobottom()

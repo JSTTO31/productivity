@@ -78,11 +78,16 @@ const $project = useProjectStore()
 const showMenu = ref(false)
 
 function remove() {
-    $project.removeMessage(props.message.project, props.message._id)
+    if(!user.value) return
+    //@ts-ignore
+    if(user.value && !props.message.removedBy.some(item => item == user.value._id)){
+        //@ts-ignore
+        props.message.removedBy.push(user.value)
+    }
 }
 
 function unsent() {
-    $project.unsentMessage(props.message.project, props.message._id)
+    props.message.unsent = true
 }
 </script>
 
