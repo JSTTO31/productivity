@@ -64,7 +64,7 @@ onMounted(() => {
         $user.updatePreference().then(() => {
           clearTimeout(timeout)
         })
-      }, 1000);
+      }, 2500);
     }, {deep: true})
 
   }

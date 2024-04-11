@@ -24,7 +24,7 @@
       </v-col>
       <v-col cols="5">
         <v-card color="transparent" flat width="800">
-          <NuxtImg width="720" src="/undraw/team.svg"></NuxtImg>
+          <v-img width="750" src="/undraw/team.svg"></v-img>
         </v-card>
       </v-col>
     </v-container>
