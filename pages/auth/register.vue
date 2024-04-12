@@ -38,6 +38,7 @@
                             :error-messages="$v.email.$errors[0]?.$message as string || ''" id="email"
                             variant="solo-filled" flat class="my-2" density="comfortable"
                             prepend-inner-icon="mdi-email-outline" single-line
+                            hint="Just use @example.com"
                             label="Enter your email address"></v-text-field>
                     </div>
                     <div class="d-flex" style="gap: 10px;">

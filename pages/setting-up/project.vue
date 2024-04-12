@@ -100,7 +100,7 @@
             }}
             </v-app-bar-title>
           </v-app-bar>
-          <utils-theme-background></utils-theme-background>
+          <utils-theme-background :key="preference.theme.background.toString()"></utils-theme-background>
           <v-main class="w-100 h-100">
             <v-container class="h-100 d-flex w-100 pa-0" fluid>
               <v-col cols="4" class="h-100 pa-0">
@@ -194,6 +194,7 @@ definePageMeta({
     mode: "out-in",
   },
 });
+const {preference} = storeToRefs(usePreferenceStore())
 const {name} = useDisplay()
 const { project: removeProjectReactivity } = useRemoveReactivity
 const { user } = storeToRefs(useUserStore())
@@ -218,7 +219,7 @@ function onFocusTask(index: number) {
   const container = document.getElementById('project-container')
   if (container) {
     if (project.value) {
-      const translateY = 50 - (150 * index);
+      const translateY = 50 - (150 * index);  
       container.style.transform = `scale(1.5) translate(150px,${translateY}px)`
     }
   }
