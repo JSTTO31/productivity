@@ -17,7 +17,7 @@
             <p class="text-center">Explore helpful tips and guides to get started.</p>
           </div>
           <div class="d-flex align-center justify-center h-100 flex-column" v-else-if="selected == 1">
-            <v-avatar class="rounded-0 mx-auto" size="250">
+            <v-avatar class="rounded-0 mx-auto" size="200">
               <v-img src="/undraw/study.svg"></v-img>
             </v-avatar>
             <h2 class="text-center mt-2 mt-5 text-decoration-underline" style="font-family: 'Roboto', sans-serif;">
@@ -26,7 +26,7 @@
               times for studying and breaks to help you stay focused and productive during your study sessions.</p>
           </div>
           <div class="d-flex align-center justify-center h-100 flex-column" v-else-if="selected == 2">
-            <v-avatar class="rounded-0 mx-auto" size="250">
+            <v-avatar class="rounded-0 mx-auto" size="200">
               <v-img src="/undraw/complete.svg"></v-img>
             </v-avatar>
             <h2 class="text-center mt-2 mt-5 text-decoration-underline" style="font-family: 'Roboto', sans-serif;">
@@ -36,7 +36,7 @@
               tasks into smaller, manageable steps for increased productivity.</p>
           </div>
           <div class="d-flex align-center justify-center h-100 flex-column" v-else-if="selected == 3">
-            <v-avatar class="rounded-0 mx-auto" size="250">
+            <v-avatar class="rounded-0 mx-auto" size="200">
               <v-img src="/undraw/collaboration.svg"></v-img>
             </v-avatar>
             <h2 class="text-center mt-2 mt-5 text-decoration-underline" style="font-family: 'Roboto', sans-serif;">
