@@ -17,6 +17,7 @@
                 path: '/theme-videos/nature-3.mp4',
             },
         ],
+        picture: '/screenshots/nature-2.jpg'
     },
     {
         id: 2,
@@ -36,6 +37,7 @@
                 path: '/theme-videos/starry-night-3.mp4',
             },
         ],
+        picture: '/screenshots/starry-night-2.jpg'
     },
     {
         id: 3,
@@ -55,6 +57,7 @@
                 path: '/theme-videos/ocean-3.mp4',
             },
         ],
+        picture: '/screenshots/ocean-2.jpg'
     },
     {
         id: 4,
@@ -71,6 +74,7 @@
                 path: '/theme-videos/zen-2.mp4',
             },
         ],
+        picture: '/screenshots/zen-1.jpg'
     },
     {
         id: 6,
@@ -90,6 +94,7 @@
                 path: '/theme-videos/rain-3.mp4',
             },
         ],
+        picture: '/screenshots/rain-2.jpg'
     },
     {
         id: 7,
@@ -103,6 +108,7 @@
                 path: '/theme-videos/bonfire-1.mp4',
             },
         ],
+        picture: '/screenshots/bonfire-1.jpg'
     },
     {
         id: 8,
@@ -122,6 +128,7 @@
                 path: '/theme-videos/lofi-3.mp4',
             },
         ],
+        picture: '/screenshots/lofi-1.jpg'
     },
     {
         id: 9,
@@ -135,6 +142,7 @@
                 path: '/theme-videos/anime-1.mp4',
             },
         ],
+        picture: '/screenshots/anime-1.jpg'
     },
     {
         id: 10,
@@ -151,6 +159,7 @@
                 path: '/theme-videos/snow-2.mp4',
             },
         ],
+        picture: '/screenshots/snow-1.jpg'
     },
     {
         id: 11,

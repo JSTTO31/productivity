@@ -45,7 +45,7 @@
                                 <v-icon class="ml-1" color="error" size="15">mdi-circle</v-icon>
                             </div>
                         </v-card>
-                        <UtilsThemeBackground class="h-100 w-100"></UtilsThemeBackground>
+                        <UtilsThemeBackground :key="preference.theme.background.toString()" class="h-100 w-100"></UtilsThemeBackground>
                     </v-card>
                 </v-col>
             </v-container>

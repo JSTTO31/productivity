@@ -54,7 +54,7 @@
               ensure you're making progress towards your academic objectives.</p>
           </div>
           <div class="d-flex align-center justify-center h-100 flex-column" v-else-if="selected == 5">
-            <NuxtImg width="250" height="250" src="/undraw/progress.svg"></NuxtImg>
+            <v-img width="250" height="250" src="/undraw/progress.svg"></v-img>
             <h2 class="text-center mt-2 mt-5 text-decoration-underline" style="font-family: 'Roboto', sans-serif;">
               Track Your Progress</h2>
             <p class="text-center px-15">Monitor your productivity and track your progress with the report feature.
