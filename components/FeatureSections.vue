@@ -4,7 +4,6 @@
       id="features"
       fluid
       :style="{
-         backgroundImage: current.dark ? '' : 'linear-gradient(-225deg, #FFFEFF 0%, #D7FFFE 100%)',
           paddingInline: name == 'lg' ? '115px' : '250px'
       }"
       class="pt-15 pb-15"
@@ -42,7 +41,6 @@
       id="features"
       fluid
       :style="{
-         backgroundImage: current.dark ? '' : 'linear-gradient(-225deg, #FFFEFF 0%, #D7FFFE 100%)',
         paddingInline: name == 'lg' ? '115px' : '250px'
       }"
       class="pt-15 pb-15"
@@ -78,7 +76,6 @@
       id="features"
       fluid
       :style="{
-         backgroundImage: current.dark ? '' : 'linear-gradient(-225deg, #FFFEFF 0%, #D7FFFE 100%)',
         paddingInline: name == 'lg' ? '115px' : '250px'
       }"
       class="pt-15 pb-15"
@@ -113,7 +110,6 @@
     
       fluid
       :style="{
-         backgroundImage: current.dark ? '' : 'linear-gradient(-225deg, #FFFEFF 0%, #D7FFFE 100%)',
         paddingInline: name == 'lg' ? '115px' : '250px'
       }"
       class="pt-5 pb-15"
