@@ -82,14 +82,14 @@ definePageMeta({
 const $user = useUserStore()
 const togglePassword = ref(false)
 const information = reactive({
-    // "email": "emily.jones@example.com",
-    // "name": "Emily Jones",
-    // "password": "P@ssw0rd123",
-    // "password_confirmation": "P@ssw0rd123"
-    "email": "",
-    "name": "",
-    "password": "",
-    "password_confirmation": ""
+    "email": "emily.jones@example.com",
+    "name": "Emily Jones",
+    "password": "P@ssw0rd123",
+    "password_confirmation": "P@ssw0rd123"
+        // "email": "",
+        // "name": "",
+        // "password": "",
+        // "password_confirmation": ""
 })
 const $externalResults = ref({})
 

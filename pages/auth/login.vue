@@ -74,6 +74,7 @@ function signInWithGoogle(){
     // location.href = '/auth/google'
     // location.href = config.public.apiBase + '/auth/google'
     location.href = config.public.apiBase.replace('/api', '') + '/auth/google'
+    // location.href = 'http://localhost:8000' + '/auth/google'
 
 }
 </script>

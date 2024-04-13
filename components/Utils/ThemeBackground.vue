@@ -8,7 +8,7 @@
           loop>
           </video>
         </div>
-        <div  v-if="!canStart" class="w-100 h-100" style="position: absolute;top: 0;left: 0%;z-index: 200;">
+        <div  v-if="!canStart" class="w-100" style="position: absolute;top: 0;left: 0%;z-index: 200;">
           <v-img class="w-100 h-100" style="filter: blur(2px) brightness(80%)"  :src="selectedTheme.picture"></v-img>
           <v-progress-circular color="white" size="100" indeterminate style="position: absolute;top: 50%;left: 50%;transform:translate(-50%, -50%)"></v-progress-circular>
         </div>
