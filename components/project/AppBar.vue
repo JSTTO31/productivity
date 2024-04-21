@@ -21,11 +21,10 @@
         </suspense>
     </v-navigation-drawer>
     <v-app-bar class="d-flex align-center text-white" density="compact" :model-value="!!project"
-        style="background-color: rgba(0,0,0,.5);z-index: 50 !important;position: absolute" flat>
+        style="background-color: rgba(0,0,0,.6);z-index: 50 !important;position: absolute" flat>
         <v-app-bar-nav-icon @click.stop="showNavigation = !showNavigation" class="rounded-0"></v-app-bar-nav-icon>
-        <v-app-bar-title id="project-app-bar-title" v-if="project" class="font-weight-bold d-flex ml-2 align-center">
-            <input class="text-white px-2 rounded" style="outline-color: white" v-model="project.title" />
-        </v-app-bar-title>
+        <input id="project-app-bar-title" class="text-white text-h6 px-2 rounded w-25" v-if="project" style="outline-color: white" v-model="project.title" />
+        <v-spacer></v-spacer>
         <!-- <v-btn active size="small" variant="flat" class="ml-2 text-capitalize">Tasks</v-btn>
             <v-btn size="small" variant="tonal" class="ml-2 text-capitalize">Timeline</v-btn>
             <v-divider vertical inset class="ml-2"></v-divider> -->

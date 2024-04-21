@@ -6,6 +6,7 @@
         <v-row class="">
           <v-col cols="4">
             <v-card
+              v-if="user"
               height="150"
               class="d-flex h-100 align-center rounded-lg pa-5"
               id="daily-spend"
@@ -15,10 +16,10 @@
                 style="position: absolute"
                 color="yellow-lighten-4 text-h4"
               >
-                JS
+                <v-img :src="user.picture"></v-img>
               </v-avatar>
               <div class="w-100 ml-10 mt-n5" style="padding-left: 70px">
-                <h2 class="font-weight-medium">Joshua Sotto</h2>
+                <h2 class="font-weight-medium">{{user.name}}</h2>
                 <v-progress-linear
                   height="35"
                   :model-value="timespentProgress"
@@ -139,7 +140,6 @@ const timeSpendToString = computed(() => {
   const minutes = Math.floor((todayTimeSpent.value?.spent / ((1000 * 60) ) % 60))
   return `${hours} hours and ${minutes} minutes`
 })
-
 const data = computed(() => [0,0,0,minutes.value,0,0,0,0])
 
 

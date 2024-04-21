@@ -1,6 +1,9 @@
 <template>
   <v-card class="h-100 w-100 rounded-0 border-s" variant="tonal">
     <v-layout class="h-100 w-100" flat>
+      <v-app-bar density="compact" class="border-b" flat>
+        <v-app-bar-title class="text"><v-icon class="mr-2" style="transform:rotate(25deg)">mdi-pin</v-icon>Task Notes</v-app-bar-title>
+      </v-app-bar>
       <v-main class="bg-transparent h-100" style="overflow-y: auto">
         <div class="d-flex justify-center flex-column align-center pa-10" v-if="task.notes.length < 1">
           <v-avatar size="250" class="mx-auto">
@@ -21,63 +24,6 @@
 
 <script setup lang="ts">
 import type { TaskType } from "~/stores/project";
-
-const notes = [
-  {
-    "text": "Scheduled a meeting with client to discuss project requirements.",
-    "createdAt": "2024-03-02T09:00:00",
-    "updatedAt": "2024-03-02T09:30:00",
-    "from": {
-      "name": "John Doe",
-      "email": "john.doe@example.com"
-    }
-  },
-  {
-    "text": "Researched new market trends for upcoming marketing campaign.",
-    "createdAt": "2024-03-01T14:00:00",
-    "updatedAt": "2024-03-01T15:00:00",
-    "from": {
-      "name": "Jane Smith",
-      "email": "jane.smith@example.com"
-    }
-  },
-  {
-    "text": "Reviewed and approved budget proposal for Q2.",
-    "createdAt": "2024-02-28T10:30:00",
-    "updatedAt": "2024-02-28T11:00:00",
-    "from": {
-      "name": "Alex Johnson",
-      "email": "alex.johnson@example.com"
-    }
-  },
-  {
-    "text": "Scheduled a meeting with client to discuss project requirements.",
-    "createdAt": "2024-03-02T09:00:00",
-    "updatedAt": "2024-03-02T09:30:00",
-    "from": {
-      "name": "John Doe",
-      "email": "john.doe@example.com"
-    }
-  },
-  {
-    "text": "Researched new market trends for upcoming marketing campaign.",
-    "createdAt": "2024-03-01T14:00:00",
-    "updatedAt": "2024-03-01T15:00:00",
-    "from": {
-      "name": "Jane Smith",
-      "email": "jane.smith@example.com"
-    }
-  },
-  {
-    "text": "Reviewed and approved budget proposal for Q2.",
-    "createdAt": "2024-02-28T10:30:00",
-    "updatedAt": "2024-02-28T11:00:00",
-    "from": {
-      "name": "Alex Johnson",
-      "email": "alex.johnson@example.com"
-    }
-  }
-]
 const props = defineProps<{ task: TaskType }>();
 const {user } = storeToRefs(useUserStore())
 const text = ref("")
@@ -88,4 +34,6 @@ function addNotes(id: string){
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>

@@ -1,8 +1,5 @@
 <template>
   <v-layout>
-    <v-navigation-drawer :width="350" location="right">
-      <project-task-message-box :task="task"></project-task-message-box>
-    </v-navigation-drawer>
     <v-app-bar class="d-flex rounded-0 align-center border-b" flat>
       <v-btn v-if="task.completed" prepend-icon="mdi-check-decagram-outline" variant="flat" color="success" class="text-capitalize" @click="ToggleCompleted">Completed</v-btn>
       <v-btn v-else prepend-icon="mdi-check-decagram-outline" variant="outlined" class="text-capitalize" @click="ToggleCompleted">Completed</v-btn>
@@ -35,6 +32,9 @@
       })
       "></v-btn>
     </v-app-bar>
+    <v-navigation-drawer :width="350" location="right">
+      <project-task-message-box :task="task"></project-task-message-box>
+    </v-navigation-drawer>
     <v-main style="overflow-y: hidden">
       <v-card class="pa-5 rounded-0 h-100" style="overflow-y: auto">
         <div style="gap: 5px" class="mb-5 w-100">
