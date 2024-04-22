@@ -215,10 +215,10 @@ export const useProjectStore = defineStore('project', () => {
         })
     }
 
-    async function addMembers(project_id:string, members: {email: string, role: 'admin' | 'member'}[]){
+    async function addMembers(project_id:string, members: MemberType[]){
         return await useApiFetch(`/projects/${project_id}/members`, {
             method: 'POST',
-            body: {members},
+            body: {members: members.map(item => ({email: item.user.email, role: item.role, }))},
             onResponse(event){
                 if(event.response.status != 200) return
                 const projectData = event.response._data.project
@@ -238,16 +238,20 @@ export const useProjectStore = defineStore('project', () => {
         })
     }
 
-    async function updateRoles(project_id: string, members: MemberType){
-        return await useApiFetch(`/projects/${project_id}/members/edit/roles`, {
+    async function updateMembers(project_id: string, members: MemberType){
+        const findProject = projects.value.find(item => item._id == project_id)
+
+        if(!findProject)return
+
+        return await useApiFetch(`/projects/${project_id}`, {
             method: 'PUT',
-            body: {members},
+            body: {...findProject, members},
             onResponse(event){
                 if(event.response.status != 200) return
                 const projectData = event.response._data.project
                 projects.value = projects.value.map(item => item._id == projectData._id ? projectData : item)
                 if(project.value && projectData._id == project.value._id){
-                    project.value = projectData
+                    project.value = projectRemoveReactive(projectData)
                 }
 
                 $notification.addSnackbar("Member succesfully update!")
@@ -321,7 +325,7 @@ export const useProjectStore = defineStore('project', () => {
         })
     }
 
-    return {projects, project, role, sectionFilter, sectionSort, getAll, store, findById, update, addMembers, findMembers, updateRoles, remove, leave, sendMessage, getMessages, removeMessage, unsentMessage, updateById}
+    return {projects, project, role, sectionFilter, sectionSort, getAll, store, findById, update, addMembers, findMembers, updateMembers, remove, leave, sendMessage, getMessages, removeMessage, unsentMessage, updateById}
 })
 
 

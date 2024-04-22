@@ -14,15 +14,15 @@
                     <v-btn v-bind="props" size="25" flat class="rounded ml-2 bg-transparent"
                         icon="mdi-dots-horizontal" id="project-list-item-menu"></v-btn>
                 </template>
-                <v-card width="200" class="pa-2">
+                <v-card width="220" class="pa-2">
                     <!-- If owner -->
                     <v-list class="pa-0" v-if="memberType == 'owner'">
                         <v-list-item prepend-icon="mdi-share-outline" @click="showShareDialog = true" density="compact"
-                            class="text-caption rounded mb-1">Share</v-list-item>
+                            class="text-caption rounded mb-1">Share access</v-list-item>
                         <v-list-item prepend-icon="mdi-text-short" density="compact" class="text-caption rounded mb-1"
                             @click="showRename">Rename</v-list-item>
                         <v-list-item prepend-icon="mdi-account-cog-outline" @click="showManageRoleDialog = true" density="compact"
-                            class="text-caption rounded mb-1">Manage roles</v-list-item>
+                            class="text-caption rounded mb-1">Manage Members</v-list-item>
                         <v-list-item prepend-icon="mdi-clipboard-outline" @click="" density="compact"
                             class="text-caption rounded mb-1" disabled>Paste</v-list-item>
                         <v-list-item prepend-icon="mdi-trash-can-outline" @click="showDeleteConfirmationDialog = true" density="compact"

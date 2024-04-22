@@ -7,21 +7,21 @@ export default () => {
   //@ts-ignore
   confetti({
     scalar: 1.1,
-    particleCount: 100,
-    angle: 1, // Straight up
+    particleCount: 50,
+    angle: .5, // Straight up
     colors: [
       "#ff4500", // OrangeRed
       "#9370db", // MediumPurple
       "#ffa500", // Orange
     ],
     spread: 155,
-    velocity: 200,
-    origin: { x: 0.2, y: 0 }, // Bottom center
+    velocity: 1,
+    origin: { x: 0.2, y: 0, }, // Bottom center
   });
   //@ts-ignore
   confetti({
     scalar: 1.1,
-    particleCount: 100,
+    particleCount: 50,
     angle: 1, // Straight up
     colors: [
       "#ff4500", // OrangeRed
@@ -29,7 +29,7 @@ export default () => {
       "#ffa500", // Orange
     ],
     spread: 155,
-    velocity: 200,
+    velocity: 1,
     origin: { x: 0.8, y: 0 }, // Bottom center
   });
 };

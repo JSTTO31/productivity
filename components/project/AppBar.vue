@@ -72,10 +72,10 @@
             </v-card>
         </v-menu>
         <div class="d-flex mr-6 ml-2" id="project-app-bar-members">
-            <v-menu open-on-hover>
+            <v-menu >
                 <template #activator="{ props }">
                     <div style="cursor: pointer;" class="d-flex align-center" v-bind="props">
-                        <v-card v-for="member, n in project?.members" :key="member._id" class="rounded-circle mr-n4">
+                        <v-card v-for="member, n in project?.members.slice(0,5)" :key="member._id" class="rounded-circle mr-n4">
                             <v-avatar class="border" size="30">
                                 <img class="w-100" :src="member.user.picture" />
                             </v-avatar>
@@ -83,10 +83,10 @@
                     </div>
                 </template>
                 <v-card width="350" class="rounded" v-if="project">
-                    <v-list v-if="project.members" class="pa-0">
+                    <v-list v-if="project.members" class="pa-2">
                         <h4 class="mt-2 px-2 font-weight-medium">Member list</h4>
                         <v-divider class="my-2"></v-divider>
-                        <v-list-item class="pa-2 pr-5 rounde-lg text-caption mb-2" v-for="member in project.members"
+                        <v-list-item class="pa-2 py-1 pr-5 rounde-lg border-b text-caption mb-2" v-for="member in project.members"
                             :key="member._id"
                             :prepend-avatar="member.user.picture"
                             :append-icon="member.role == 'owner' ? 'mdi-account-tie' : member.role == 'admin' ? 'mdi-account-key' : 'mdi-account'">
@@ -99,6 +99,8 @@
                                 <v-chip size="small" style="width: 80px;" prepend-icon="mdi-account"
                                     class="rounded text-center" v-else>Member</v-chip>
                             </template>
+                        </v-list-item>
+                        <v-list-item class="rounded" prepend-icon="mdi-account-plus" @click="showShareDialog = true" title="Add Member">
                         </v-list-item>
                     </v-list>
                 </v-card>

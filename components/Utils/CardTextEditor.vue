@@ -111,14 +111,13 @@
             </v-card>
         </template>
         <template #default="props">
-            <v-card v-bind="props" class="pa-5 bg-background"
+            <v-card v-bind="props" class="pa-5" :class="preference.theme.color == 'light' ? 'bg-grey-lighten-4' : 'bg-background'"
                 style="overflow: auto;z-index: 100;">
                 <v-card width="816" height="12in" class="my-5 mx-auto rounded-lg">
                     <div class="mx-auto rounded-lg w-100 bg-surface" id="text-input" contenteditable="true"
                         placeholder="Write here...">
                     </div>
                 </v-card>
-                <v-alert type="warning" variant="tonal" id="message" text="Currently in development. Thank you for your patience."></v-alert>
             </v-card>
         </template>
     </utils-card>
@@ -128,6 +127,7 @@ const props = defineProps(['showEditor'])
 const emits = defineEmits(['update:showEditor'])
 const width = 685, height = 600
 const { current } = useTheme()
+const {preference} = storeToRefs(usePreferenceStore())
 const { fontFamilies, markColor, toggleCode, textColor, selectedMarkColor, selectedTextColor, history, advanceOption } = useFormat('text-input')
 
 onMounted(() => {

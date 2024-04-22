@@ -208,10 +208,11 @@ function toggleMute(){
 watch(() => [preference.value.sounds.celebration.value, preference.value.sounds.all.value], () => {
   const audionCelebration : HTMLAudioElement = document.getElementById('audio-celebration') as HTMLAudioElement
   if(audionCelebration){
+    console.log('triggered')
     const celebrationSound = preference.value.sounds.celebration.value
     const allSoundPercent = preference.value.sounds.all.value / 100
-    const reducleCelebration = celebrationSound * allSoundPercent
-    audionCelebration.volume = reducleCelebration / 100
+    const reduceSound = celebrationSound * allSoundPercent
+    audionCelebration.volume = 0
   }
 })
 </script>
