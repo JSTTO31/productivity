@@ -143,34 +143,34 @@ onMounted(() => {
     }, duration.value);
   });
 
-  document.onvisibilitychange = () => {
-    if (document.visibilityState == "hidden") {
-      if (interval) clearInterval(interval);
-      timeout = setTimeout(() => {
-        $timespent.update().then(() => {
-          if(todayTimeSpent.value){
-            const remaining = (1000 * 60 * 60 * 2) - todayTimeSpent.value.spent
-            if(remaining){
-              const hours = Math.floor((remaining / (1000 * 60)) / 60)
-              const minutes = Math.floor((remaining / (1000 * 60)) % 60)
+  // document.onvisibilitychange = () => {
+  //   if (document.visibilityState == "hidden") {
+  //     if (interval) clearInterval(interval);
+  //     timeout = setTimeout(() => {
+  //       $timespent.update().then(() => {
+  //         if(todayTimeSpent.value){
+  //           const remaining = (1000 * 60 * 60 * 2) - todayTimeSpent.value.spent
+  //           if(remaining){
+  //             const hours = Math.floor((remaining / (1000 * 60)) / 60)
+  //             const minutes = Math.floor((remaining / (1000 * 60)) % 60)
               
-              if((hours > 0 || minutes > 0) && preference.value.notifications.dailySpend.value && !preference.value.notifications.all.value){
-                var notification = new Notification("Daily Usage Reminder", {
-                  body: `You still have ${Math.floor(hours)}hr and ${Math.floor(minutes)}min remaining time to spend in the app today. Keep up the good work!`,
-                  icon: "/favicon.png" // Path to the notification icon
-                });
-              }
-            }
-          }
-        })
-      }, 1500);
-    } else {
-      if(timeout) return clearTimeout(timeout)
-      interval = setInterval(() => {
-        $timespent.update()
-      },  duration.value);
-    }
-  };
+  //             if((hours > 0 || minutes > 0) && preference.value.notifications.dailySpend.value && !preference.value.notifications.all.value){
+  //               var notification = new Notification("Daily Usage Reminder", {
+  //                 body: `You still have ${Math.floor(hours)}hr and ${Math.floor(minutes)}min remaining time to spend in the app today. Keep up the good work!`,
+  //                 icon: "/favicon.png" // Path to the notification icon
+  //               });
+  //             }
+  //           }
+  //         }
+  //       })
+  //     }, 1500);
+  //   } else {
+  //     if(timeout) return clearTimeout(timeout)
+  //     interval = setInterval(() => {
+  //       $timespent.update()
+  //     },  duration.value);
+  //   }
+  // };
 
   window.onbeforeunload = () => {
     $timespent.update()

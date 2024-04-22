@@ -45,7 +45,7 @@ const loading = ref(false)
 function saveChanges(){
     loading.value = true;
     //@ts-ignore
-    $project.updateMembers(props.project._id, members.value).then(() => {
+    $project.updateMembers(props.project._id, [...members.value, current.value]).then(() => {
         loading.value = false;
         emits('update:showDialog', false)
     })

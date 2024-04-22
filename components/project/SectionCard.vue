@@ -12,7 +12,7 @@
         <v-spacer></v-spacer>
         <v-tooltip text="New Task">
           <template #activator="{ props }">
-            <v-btn v-bind="props" variant="text" icon="mdi-plus" size="small" @click.stop="showCreateTaskDialog = true"
+            <v-btn v-bind="props" variant="text" icon="mdi-plus" size="small" @click.stop="createNewTask"
               @mousedown.stop></v-btn>
           </template>
         </v-tooltip>
@@ -22,7 +22,7 @@
           </template>
           <v-list class="pa-2" @mousedown.stop>
             <v-list-item density="compact" prepend-icon="mdi-plus"
-              class="text-subtitle-2 font-weight-regular rounded-lg mb-1" @click="showCreateTaskDialog = true">New
+              class="text-subtitle-2 font-weight-regular rounded-lg mb-1" @click="createNewTask">New
               Task</v-list-item>
             <v-list-item density="compact" prepend-icon="mdi-text-short"
               class="text-subtitle-2 font-weight-regular rounded-lg mb-1" @click="focus">Rename</v-list-item>
@@ -45,20 +45,12 @@
           <project-list-card-item @mousedown.stop v-for="task in taskFilter" :key="task._id || task.tempId"
             :task="task" :section="section"></project-list-card-item>
           <v-btn class="text-capitalize text-white rounded-lg" color="background" variant="tonal"
-            prepend-icon="mdi-plus" block @mousedown.stop @click.stop="showCreateTaskDialog = true">
+            prepend-icon="mdi-plus" block @mousedown.stop @click.stop="createNewTask">
             New Task
           </v-btn>
         </div>
       </v-main>
     </v-layout>
-    <v-dialog no-click-animation fullscreen v-model="showCreateTaskDialog" persistent class="pa-15 bg-transparent"
-      @mousedown.stop contained>
-      <v-card class="bg-transparent pa-1 rounded-0">
-        <project-create-new-task-card :section="section"
-          @close="showCreateTaskDialog = false"></project-create-new-task-card>
-      </v-card>
-    </v-dialog>
-  
   </v-card>
 </template>
 
@@ -127,6 +119,24 @@ function addSection(position: 'left' | 'right' | null){
   if(findIndex > -1 && position == 'right'){
     project.value.sections.splice(findIndex + 1, 0, { tempId, title: "New Section", tasks: [], order: project.value.sections.length })
 
+  }
+}
+
+function createNewTask(){
+  if(project.value){
+      const section = project.value.sections.find(item => (item._id && item._id == props.section._id) || (item.tempId && item.tempId == props.section.tempId))
+      if(section){
+          const task = {
+            title: 'New Task',
+            dueDate: new Date().toISOString().substring(0, 10),
+            description: '',
+            priority: 'low',
+            assignees: [user.value],
+        }
+          const watchBy = [...task.assignees.filter(item => item?._id != user.value?._id), user.value?._id]
+          //@ts-ignore
+          section.tasks = section.tasks ? [...section.tasks, {...task, tempId: useTempID(8), watchBy, notes: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()}] : section.tasks
+      }
   }
 }
 

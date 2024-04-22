@@ -33,7 +33,7 @@
                     <project-member-list-item  v-for="member in members" :members="members" v-model:members="members" :key="member.user._id.toString()" :member="member"></project-member-list-item>
                     <div  v-if="members.length < 1" class="text-center flex-column text-capitalize w-100 d-flex align-center h-100 pa-15 justify-center align-center">
                         <v-img src="/undraw/share.svg" class="w-100"></v-img>
-                        <h3>Share Project with Groupmate</h3>
+                        <h3 class="mt-5">Share Project with Groupmate</h3>
                     </div>
                 </v-list>
             </div>

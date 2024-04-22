@@ -7,22 +7,12 @@
             <v-app-bar-nav-icon @click="showRightNavigation = !showRightNavigation"></v-app-bar-nav-icon>
             <div id="app-bar-schedule" class="d-flex align-center w-100 pr-2"></div>
         </v-app-bar>
-        <v-main class="h-screen">
+        <v-main style="position: relative" class="h-screen">
             <v-card class="w-100 h-100 rounded-0" id="schedule-main" style="background-color: rgba(0, 0, 0, 0.2) !important">
                 <nuxt-page></nuxt-page>
                 <v-dialog contained width="460" :model-value="!!$route.query.delete" no-click-animation persistent>
                     <schedule-delete-card></schedule-delete-card>
                 </v-dialog>
-                <v-overlay class="d-flex justify-end" contained width="400" height="100%" :model-value="!!$route.query.edit" no-click-animation persistent transition="slide-x-reverse-transition" @click:outside="$router.push({query: {}})">
-                    <v-card class="h-100 rounded-0">
-                        <schedule-edit-container></schedule-edit-container>
-                    </v-card>
-                </v-overlay>
-                <v-overlay class="d-flex justify-end" contained width="400" height="100%" :model-value="!!$route.query.date" no-click-animation persistent transition="slide-x-reverse-transition" @click:outside="$router.push({query: {}})">
-                    <v-card class="h-100 rounded-0">
-                        <schedule-create-container></schedule-create-container>
-                    </v-card>
-                </v-overlay>
             </v-card>
         </v-main>
     </div>

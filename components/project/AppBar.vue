@@ -1,26 +1,28 @@
 <template>
-    <v-navigation-drawer v-if="project" style="z-index: 6000" class="d-flex justify-end" width="400"
+    <v-overlay v-if="project" style="z-index: 6000" class="d-flex justify-end h-100" width="450"
         contained transition="slide-x-reverse-transition" location="right" id="project-team-chat-box" v-model="showChatbox" permanent>
-        <suspense>
-            <project-team-chat-box :project="project" @close="showChatbox = false"></project-team-chat-box>
-            <template #fallback>
-                <v-layout class="h-100 w-100 bg-surface">
-                    <v-main>
-                        <v-skeleton-loader type="table-tfoot"></v-skeleton-loader>
-                        <div>
-                            <v-skeleton-loader class="my-3" type="list-item-avatar-three-line"></v-skeleton-loader>
-                            <v-skeleton-loader class="my-3" type="list-item-avatar-three-line"></v-skeleton-loader>
-                            <v-skeleton-loader class="my-3" type="list-item-avatar-three-line"></v-skeleton-loader>
-                            <v-skeleton-loader class="my-3" type="list-item-avatar-three-line"></v-skeleton-loader>
-                            <v-skeleton-loader class="my-3" type="list-item-avatar-three-line"></v-skeleton-loader>
-                            <v-skeleton-loader class="my-3" type="list-item-avatar-three-line"></v-skeleton-loader>
-                        </div>
-                    </v-main>
-                </v-layout>
-            </template>
-        </suspense>
-    </v-navigation-drawer>
-    <v-app-bar class="d-flex align-center text-white" density="compact" :model-value="!!project"
+        <v-card class="h-screen pt-12">
+            <suspense>
+                <project-team-chat-box :project="project" @close="showChatbox = false"></project-team-chat-box>
+                <template #fallback>
+                    <v-layout class="h-100 w-100 bg-surface">
+                        <v-main>
+                            <v-skeleton-loader type="table-tfoot"></v-skeleton-loader>
+                            <div>
+                                <v-skeleton-loader class="my-3" type="list-item-avatar-three-line"></v-skeleton-loader>
+                                <v-skeleton-loader class="my-3" type="list-item-avatar-three-line"></v-skeleton-loader>
+                                <v-skeleton-loader class="my-3" type="list-item-avatar-three-line"></v-skeleton-loader>
+                                <v-skeleton-loader class="my-3" type="list-item-avatar-three-line"></v-skeleton-loader>
+                                <v-skeleton-loader class="my-3" type="list-item-avatar-three-line"></v-skeleton-loader>
+                                <v-skeleton-loader class="my-3" type="list-item-avatar-three-line"></v-skeleton-loader>
+                            </div>
+                        </v-main>
+                    </v-layout>
+                </template>
+            </suspense>
+        </v-card>
+    </v-overlay>
+    <v-app-bar class="d-flex align-center text-white " density="compact" :model-value="!!project"
         style="background-color: rgba(0,0,0,.6);z-index: 50 !important;position: absolute" flat>
         <v-app-bar-nav-icon @click.stop="showNavigation = !showNavigation" class="rounded-0"></v-app-bar-nav-icon>
         <input id="project-app-bar-title" class="text-white text-h6 px-2 rounded w-25" v-if="project" style="outline-color: white" v-model="project.title" />

@@ -26,7 +26,7 @@
               times for studying and breaks to help you stay focused and productive during your study sessions.</p>
           </div>
           <div class="d-flex align-center justify-center h-100 flex-column" v-else-if="selected == 2">
-            <v-avatar class="rounded-0 mx-auto" size="200">
+            <v-avatar class="rounded-0 mx-auto" size="250">
               <v-img src="/undraw/complete.svg"></v-img>
             </v-avatar>
             <h2 class="text-center mt-2 mt-5 text-decoration-underline" style="font-family: 'Roboto', sans-serif;">
@@ -36,7 +36,7 @@
               tasks into smaller, manageable steps for increased productivity.</p>
           </div>
           <div class="d-flex align-center justify-center h-100 flex-column" v-else-if="selected == 3">
-            <v-avatar class="rounded-0 mx-auto" size="200">
+            <v-avatar class="rounded-0 mx-auto" size="250">
               <v-img src="/undraw/collaboration.svg"></v-img>
             </v-avatar>
             <h2 class="text-center mt-2 mt-5 text-decoration-underline" style="font-family: 'Roboto', sans-serif;">
@@ -46,7 +46,9 @@
               productivity and achieve collective goals.</p>
           </div>
           <div class="d-flex align-center justify-center h-100 flex-column" v-else-if="selected == 4">
-            <v-img width="250" height="250" src="/undraw/schedule.svg"></v-img>
+            <v-avatar class="rounded-0 mx-auto" size="250">
+              <v-img src="/undraw/schedule.svg"></v-img>
+            </v-avatar>
             <h2 class="text-center mt-2 mt-5 text-decoration-underline" style="font-family: 'Roboto', sans-serif;">
               Plan Your Goals and Schedule</h2>
             <p class="text-center px-15">Use the schedule page to plan your goals and schedule your study sessions
@@ -54,7 +56,9 @@
               ensure you're making progress towards your academic objectives.</p>
           </div>
           <div class="d-flex align-center justify-center h-100 flex-column" v-else-if="selected == 5">
-            <v-img width="250" height="250" src="/undraw/progress.svg"></v-img>
+            <v-avatar class="rounded-0 mx-auto" size="250">
+              <v-img src="/undraw/progress.svg"></v-img>
+            </v-avatar>
             <h2 class="text-center mt-2 mt-5 text-decoration-underline" style="font-family: 'Roboto', sans-serif;">
               Track Your Progress</h2>
             <p class="text-center px-15">Monitor your productivity and track your progress with the report feature.
@@ -62,7 +66,7 @@
               improvement and celebrate your successes</p>
           </div>
           <div class="d-flex align-center justify-center h-100 flex-column" v-else>
-            <v-card height="250" class="d-flex align-center" flat>
+            <v-card height="200" class="d-flex align-center" flat>
               <v-avatar class="rounded-0 mx-5" size="100">
                 <v-img src="/tools/text-box.png"></v-img>
               </v-avatar>
