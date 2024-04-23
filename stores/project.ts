@@ -30,6 +30,20 @@ export type NoteType = {
     updatedAt?: string,
 }
 
+export type AttachmentType = {
+    _id: string,
+    fieldname: string,
+    originalname:  string,
+    encoding: string,
+    mimetype:  string,
+    destination:  string,
+    filename:  string,
+    path: string,
+    size:  number,
+    link:  string,
+    author: string
+}
+
 export type TaskType = {
     _id?: string,
     tempId?: string,
@@ -40,6 +54,7 @@ export type TaskType = {
     assignees: userType[],
     watchBy: string[],
     notes: NoteType[],
+    attachments: AttachmentType[]
     completed: boolean,
     createdAt?: string,
     updatedAt?: string,
@@ -162,6 +177,7 @@ export const useProjectStore = defineStore('project', () => {
                 if(event.response.status != 200) return
                 const projectData = event.response._data.project
                 projects.value = projects.value.map(item => item._id == projectData._id ? projectData : item)
+                // project.value = projectRemoveReactive(projectData)
             }
         })
     }
@@ -325,7 +341,26 @@ export const useProjectStore = defineStore('project', () => {
         })
     }
 
-    return {projects, project, role, sectionFilter, sectionSort, getAll, store, findById, update, addMembers, findMembers, updateMembers, remove, leave, sendMessage, getMessages, removeMessage, unsentMessage, updateById}
+    async function addAttachment(project_id: string, section_id: string, task_id: string, file: Blob){
+        const form = new FormData()
+        form.append('attachment', file)
+        return useApiFetch(`/projects/${project_id}/sections/${section_id}/tasks/${task_id}/attachments`, {
+            method: 'post',
+            body: form,
+            onResponse(event){
+                const projectData = event.response._data.project
+                console.log(projectData);
+                
+                if(projectData){
+                    projects.value = projects.value.map(item => item._id == projectData._id ? projectData : item)
+                    project.value = projectRemoveReactive(projectData)
+                }
+                return event
+            }   
+        })
+    }
+
+    return {projects, project, role, sectionFilter, sectionSort, getAll, store, findById, update, addMembers, findMembers, updateMembers, remove, leave, sendMessage, getMessages, removeMessage, unsentMessage, updateById, addAttachment}
 })
 
 

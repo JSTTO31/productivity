@@ -1,7 +1,7 @@
 <template>
     <v-list-item density="compact" v-ripple="false" :id="index == 0 ? 'project-list-item' : ''"
         @click="$router.push({ name: 'r-access-projects-project', params: { project: project._id } })"
-        class="text-caption rounded mb-2 pr-2 font-weight-regular text-capitalize text-no-wrap"
+        class="text-subtitle-2 rounded mb-2 pr-2 font-weight-regular text-capitalize text-no-wrap"
         :active="project._id == $route.params.project">
         <input type="text" v-model="title" ref="textField" v-if="showRenameDialog" style="width: 98%" />
         <span v-else>{{ title }}</span>

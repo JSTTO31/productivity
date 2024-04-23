@@ -1,15 +1,12 @@
 <template>
-  <v-card class="h-100 w-100 rounded-0 border-s" variant="tonal">
+  <v-card class="h-100 w-100 rounded-0 border-s">
     <v-layout class="h-100 w-100" flat>
-      <v-app-bar density="compact" class="border-b" flat>
-        <v-app-bar-title class="text"><v-icon class="mr-2" style="transform:rotate(25deg)">mdi-pin</v-icon>Task Notes</v-app-bar-title>
-      </v-app-bar>
       <v-main class="bg-transparent h-100" style="overflow-y: auto">
-        <div class="d-flex justify-center flex-column align-center pa-10" v-if="task.notes.length < 1">
-          <v-avatar size="250" class="mx-auto">
-            <v-img src="/undraw/quick-message.svg"></v-img>
+        <div class="d-flex justify-center flex-column align-center h-100 pa-10" v-if="task.notes.length < 1">
+          <v-avatar size="150" class="rounded-0 mx-auto">
+            <v-img src="/icons/comments.png"></v-img>
           </v-avatar>
-          <h4 class="text-center mt-n5">Capture your thoughts and ideas effortlessly with our friendly notes box!</h4>
+          <h3 class="text-center mt-5">Capture your thoughts and ideas effortlessly with our friendly notes box!</h3>
         </div>
         <div v-else class="pa-5">
           <ProjectTaskNoteCard  v-for="note in task.notes" :key="note.text" :note="note" :task="task"></ProjectTaskNoteCard>

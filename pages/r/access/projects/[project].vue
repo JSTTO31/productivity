@@ -1,21 +1,22 @@
 <template>
-    <v-card v-if="project" color="transparent"> 
+    <div v-if="project" color="transparent"> 
         <ProjectAppBar></ProjectAppBar>
         <v-main class="pr-0 pb-0 bg h-screen">
             <span id="teleport-dialog"></span>
             <v-card color="transparent" class="h-100 rounded-0" flat>
                 <ProjectSectionContainer :project="project"></ProjectSectionContainer>
             </v-card>
+            <v-overlay no-click-animation :fullscreen="fullscreen" :model-value="!!selectedTask && !!selectedSection"
+                persistent class="bg-transparent d-flex justify-end h-100 align-stretch" @mousedown.stop :width="500" contained style="z-index: 900;" transition="slide-x-reverse-transition" @click:outside="$router.push({})">
+                <v-card class="bg-transparent h-screen pt-12" v-if="selectedTask && selectedSection">
+                    <ProjectShowTask :section="selectedSection" :task="selectedTask"
+                        @fullscreen="fullscreen = !fullscreen" :fullscreen="fullscreen" :key="selectedTask?._id">
+                    </ProjectShowTask>
+                </v-card>
+            </v-overlay>
         </v-main>
-        <v-overlay no-click-animation :fullscreen="fullscreen" :model-value="!!selectedTask && !!selectedSection"
-            persistent class="bg-transparent d-flex justify-end h-100 align-stretch" @mousedown.stop :width="500" contained style="z-index: 9000;" transition="slide-x-reverse-transition" @click:outside="$router.push({})">
-            <v-card class="bg-transparent h-screen pt-12" v-if="selectedTask && selectedSection">
-                <ProjectShowTask :section="selectedSection" :task="selectedTask"
-                    @fullscreen="fullscreen = !fullscreen" :fullscreen="fullscreen" :key="selectedTask?._id">
-                </ProjectShowTask>
-            </v-card>
-        </v-overlay>
-    </v-card>
+       
+    </div>
     <v-main v-else class="h-screen">
         <v-card style="background: rgba(0, 0, 0, .2);" class="h-100 w-100 d-flex align-center justify-center">
             <div class="d-flex flex-column">

@@ -1,5 +1,5 @@
 <template>
-    <v-layout class="h-100 w-100 bg-surface" style="z-index: 300;" id="project-team-chat-box">
+    <v-layout class="h-100 w-100 bg-surface" id="project-team-chat-box">
         <v-app-bar density="compact" class="pl-5 border-b" flat>
             <h4>
                 <v-icon>mdi-chat</v-icon>
@@ -55,15 +55,21 @@ async function send() {
         createdAt: new Date().toISOString(),
     })
     message.value = ''
+    
 }
 
-
+let timeout : NodeJS.Timeout | null = null
 watch(() => props.project.messages.length, () => {
-    scrollTobottom()
+    if(timeout) clearTimeout(timeout)
+    timeout = setTimeout(() => {
+        scrollTobottom()
+    }, 100);
 })
 
 onMounted(() => {
-    scrollTobottom()
+    timeout = setTimeout(() => {
+        scrollTobottom()
+    }, 100);
 })
 
 </script>

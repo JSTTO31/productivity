@@ -43,7 +43,8 @@ export const useTimerStore = defineStore('timer', () => {
         start_session.value = true
         duration.value = 25
         remaining_session.value = number_of_session.value
-        interval = setInterval(timer, 1000 * 60)
+        interval = setInterval(timer, 1000)
+        // interval = setInterval(timer, 1000 * 60)
         setAlert()
     }
 

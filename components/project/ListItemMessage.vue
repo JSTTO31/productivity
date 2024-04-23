@@ -34,11 +34,11 @@
             </div>
         </v-hover>
     </div>
-    <div class="pa-5" v-else>
+    <div class="px-5 py-2" v-else>
         <v-hover v-slot="{ props, isHovering }">
             <div class="d-flex align-end" v-bind="props">
-                <v-avatar class="border mb-n1" size="30">
-                    <v-img :src="'https://source.unsplash.com/random/35x35/?person&' + message.from._id"></v-img>
+                <v-avatar class="border mb-n1" size="35">
+                    <v-img :src="message.from.picture"></v-img>
                 </v-avatar>
                 <div class="d-flex flex-column">
                     <span class="text-caption text-grey-darken-2 font-weight-regular mb-1 px-2">{{

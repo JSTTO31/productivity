@@ -1,7 +1,7 @@
 <template>
-    <v-overlay v-if="project" style="z-index: 6000" class="d-flex justify-end h-100" width="450"
+    <v-overlay v-if="project" style="z-index: 1000" class="d-flex justify-end h-100" width="450"
         contained transition="slide-x-reverse-transition" location="right" id="project-team-chat-box" v-model="showChatbox" permanent>
-        <v-card class="h-screen pt-12">
+        <v-card class="h-screen pt-12 bg-transparent rounded-0" flat>
             <suspense>
                 <project-team-chat-box :project="project" @close="showChatbox = false"></project-team-chat-box>
                 <template #fallback>

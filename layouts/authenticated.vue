@@ -137,11 +137,11 @@ let interval: null | NodeJS.Timeout = null;
 let timeout: null | NodeJS.Timeout = null;
 const duration = computed(() => ((todayTimeSpent.value?.spent || 0) / (1000 * 60 * 60)) >= 2 ? 1000 * 60 * 25 : 1000 * 60 * 5)
 onMounted(() => {
-  $timespent.getTimeSpent().then(() => {
-    interval = setInterval(() => {
-      $timespent.update()
-    }, duration.value);
-  });
+  // $timespent.getTimeSpent().then(() => {
+  //   interval = setInterval(() => {
+  //     $timespent.update()
+  //   }, duration.value);
+  // });
 
   // document.onvisibilitychange = () => {
   //   if (document.visibilityState == "hidden") {

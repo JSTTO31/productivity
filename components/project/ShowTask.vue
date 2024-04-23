@@ -29,7 +29,9 @@
       "></v-btn>
     </v-app-bar>
     <v-main style="overflow-y: hidden">
-      <project-task-information :task="task" :section="section"></project-task-information>
+      <project-task-information v-if="selectedTab == 0" :task="task" :section="section"></project-task-information>
+      <project-task-attachments v-else-if="selectedTab == 1"  :task="task" :section="section"></project-task-attachments>
+      <project-task-comments v-else  :task="task" :section="section"></project-task-comments>
     </v-main>
   </v-layout>
 </template>
@@ -40,17 +42,9 @@ const { user } = storeToRefs(useUserStore())
 const props = defineProps<{ task: TaskType, section: SectionType, fullscreen: boolean }>();
 const emits = defineEmits(["fullscreen"]);
 const isWatcher = computed(() => props.task.watchBy.some(item => item == user.value?._id))
-const findFirstAssignee = computed(
-  () =>
-    project.value?.members.find(
-      (item) => item.user._id == props.task.assignees[0]._id
-    ) || null
-);
 const selectedTab = ref(0)
 const $notification = useNotificationStore()
-const router = useRouter()
 const { project } = storeToRefs(useProjectStore());
-const mainSectionIcon = computed(() => (value: string) => value.toLocaleLowerCase() == 'in progress' ? 'mdi-progress-wrench' : value.toLocaleLowerCase() == 'to do' ? 'mdi-progress-clock' : value.toLocaleLowerCase() == 'completed' ? 'mdi-progress-check' : 'mdi-file-outline')
 function ToggleWatch() {
   if (isWatcher.value) {
     props.task.watchBy = props.task.watchBy.filter(item => item != user.value?._id)
@@ -94,29 +88,6 @@ function ToggleCompleted() {
   }
 }
 
-const toggleAssignee = (value: string) => {
-  const index = props.task.assignees.findIndex((item) => item._id == value);
-  if (index == -1) {
-    const member = project.value?.members.find(item => item.user._id == value)
-    if(!member) return
-    props.task.assignees.push(member.user);
-  } else {
-    props.task.assignees.splice(index, 1);
-  }
-};
-
-
-function changeSection(id: string){
-  if(!project.value)return
-  const findSection = project.value.sections.find(item => (item._id && item._id == id) || (item.tempId && item.tempId == id))
-  const currentSection = project.value.sections.find(item => (item._id && item._id == props.section._id) || (item.tempId && item.tempId == props.section.tempId))
-  if(findSection && currentSection){
-    findSection?.tasks.push(props.task)
-    currentSection.tasks = currentSection.tasks.filter(item => (item._id && item._id != props.task._id) || (item.tempId && item.tempId != props.task.tempId))
-    router.push({query: {section: findSection?._id || findSection.tempId, task: props.task._id || props.task.tempId}})
-  }
-
-}
 
 
 </script>

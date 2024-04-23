@@ -1,9 +1,9 @@
 <template>
     <v-navigation-drawer :model-value="showNavigation" class="border-e" style="z-index: 50 !important;" floating width="280">
         <v-layout class="h-100" id="project-container">
-            <v-app-bar density="compact" class="border-b ml-0 pl-2" flat>
+            <v-app-bar density="compact" class="border-b ml-0 px-2" flat>
                 <v-text-field label="Search..." variant="solo-filled" flat hide-details single-line density="compact" prepend-inner-icon="mdi-filter-variant"></v-text-field>
-                <v-menu>
+                <!-- <v-menu>
                     <template #activator="{props}">
                         <v-btn id="project-create-button" icon="mdi-plus" v-bind="props" size="small" class="ml-2" rounded flat color="primary" variant="elevated" @click="showCreateProjectDialog = true"></v-btn>
                     </template>
@@ -15,7 +15,7 @@
                             <v-list-item density="compact" class="rounded-lg mb-2 text-caption text-center font-weight-regular">Sorry no templates available</v-list-item>
                         </v-list>
                     </v-card>
-                </v-menu>
+                </v-menu> -->
             </v-app-bar>
             <v-main style="overflow: auto;" id="project-list">
                 <suspense>

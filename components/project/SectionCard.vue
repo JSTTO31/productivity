@@ -132,6 +132,8 @@ function createNewTask(){
             description: '',
             priority: 'low',
             assignees: [user.value],
+            attachments: [],
+            notes: []
         }
           const watchBy = [...task.assignees.filter(item => item?._id != user.value?._id), user.value?._id]
           //@ts-ignore
