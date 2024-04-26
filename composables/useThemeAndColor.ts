@@ -8,13 +8,13 @@
         dark: false,
         backgrounds: [
             {
-                path: '/theme-videos/nature-2.mp4',
+                path: 'https://efficiently-au.netlify.app/theme-videos/nature-2.mp4',
             },
             {
-                path: '/theme-videos/nature-2.mp4',
+                path: 'https://efficiently-au.netlify.app/theme-videos/nature-2.mp4',
             },
             {
-                path: '/theme-videos/nature-3.mp4',
+                path: 'https://efficiently-au.netlify.app/theme-videos/nature-3.mp4',
             },
         ],
         picture: '/screenshots/nature-2.jpg',
@@ -29,13 +29,13 @@
         dark: true,
         backgrounds: [
             {
-                path: '/theme-videos/starry-night-2.mp4',
+                path: 'https://efficiently-au.netlify.app/theme-videos/starry-night-2.mp4',
             },
             {
-                path: '/theme-videos/starry-night-2.mp4',
+                path: 'https://efficiently-au.netlify.app/theme-videos/starry-night-2.mp4',
             },
             {
-                path: '/theme-videos/starry-night-3.mp4',
+                path: 'https://efficiently-au.netlify.app/theme-videos/starry-night-3.mp4',
             },
         ],
         picture: '/screenshots/starry-night-2.jpg',
@@ -50,13 +50,13 @@
         dark: true,
         backgrounds: [
             {
-                path: '/theme-videos/ocean-2.mp4',
+                path: 'https://efficiently-au.netlify.app/theme-videos/ocean-2.mp4',
             },
             {
-                path: '/theme-videos/ocean-2.mp4',
+                path: 'https://efficiently-au.netlify.app/theme-videos/ocean-2.mp4',
             },
             {
-                path: '/theme-videos/ocean-3.mp4',
+                path: 'https://efficiently-au.netlify.app/theme-videos/ocean-3.mp4',
             },
         ],
         picture: '/screenshots/ocean-2.jpg',
@@ -71,10 +71,10 @@
         dark: false,
         backgrounds: [
             {
-                path: '/theme-videos/zen-1.mp4',
+                path: 'https://efficiently-au.netlify.app/theme-videos/zen-1.mp4',
             },
             {
-                path: '/theme-videos/zen-2.mp4',
+                path: 'https://efficiently-au.netlify.app/theme-videos/zen-2.mp4',
             },
         ],
         picture: '/screenshots/zen-1.jpg',
@@ -89,13 +89,13 @@
         dark: true,
         backgrounds: [
             {
-                path: '/theme-videos/rain-2.mp4',
+                path: 'https://efficiently-au.netlify.app/theme-videos/rain-2.mp4',
             },
             {
-                path: '/theme-videos/rain-2.mp4',
+                path: 'https://efficiently-au.netlify.app/theme-videos/rain-2.mp4',
             },
             {
-                path: '/theme-videos/rain-3.mp4',
+                path: 'https://efficiently-au.netlify.app/theme-videos/rain-3.mp4',
             },
         ],
         picture: '/screenshots/rain-2.jpg',
@@ -110,7 +110,7 @@
         dark: true,
         backgrounds: [
             {
-                path: '/theme-videos/bonfire-1.mp4',
+                path: 'https://efficiently-au.netlify.app/theme-videos/bonfire-1.mp4',
             },
         ],
         picture: '/screenshots/bonfire-1.jpg',
@@ -125,13 +125,13 @@
         dark: true,
         backgrounds: [
             {
-                path: '/theme-videos/lofi-1.mp4',
+                path: 'https://efficiently-au.netlify.app/theme-videos/lofi-1.mp4',
             },
             {
-                path: '/theme-videos/lofi-2.mp4',
+                path: 'https://efficiently-au.netlify.app/theme-videos/lofi-2.mp4',
             },
             {
-                path: '/theme-videos/lofi-3.mp4',
+                path: 'https://efficiently-au.netlify.app/theme-videos/lofi-3.mp4',
             },
         ],
         picture: '/screenshots/lofi-1.jpg',
@@ -146,7 +146,7 @@
         color: 'purple-lighten-3',
         backgrounds: [
             {
-                path: '/theme-videos/anime-1.mp4',
+                path: 'https://efficiently-au.netlify.app/theme-videos/anime-1.mp4',
             },
         ],
         picture: '/screenshots/anime-1.jpg',
@@ -161,10 +161,10 @@
         dark: true,
         backgrounds: [
             {
-                path: '/theme-videos/snow-1.mp4',
+                path: 'https://efficiently-au.netlify.app/theme-videos/snow-1.mp4',
             },
             {
-                path: '/theme-videos/snow-2.mp4',
+                path: 'https://efficiently-au.netlify.app/theme-videos/snow-2.mp4',
             },
         ],
         picture: '/screenshots/snow-1.jpg',
