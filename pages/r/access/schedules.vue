@@ -14,12 +14,12 @@
                 </v-dialog>
             </v-card>
         </v-main>
-        <v-overlay contained width="460" transition="slide-x-reverse-transition" class="d-flex justify-end h-100" :model-value="!!$route.query.date?.toString()">
+        <v-overlay contained width="460" transition="slide-x-reverse-transition" class="d-flex justify-end h-100" :model-value="!!$route.query.date?.toString()" @click:outside="$router.push({})">
             <v-card class="h-screen pt-12">
                 <schedule-create-container></schedule-create-container>
             </v-card>
         </v-overlay>
-        <v-overlay contained width="460" transition="slide-x-reverse-transition" class="d-flex justify-end h-100" :model-value="!!$route.query.edit?.toString()">
+        <v-overlay contained width="460" transition="slide-x-reverse-transition" class="d-flex justify-end h-100" :model-value="!!$route.query.edit?.toString()" @click:outside="$router.push({})">
             <v-card class="h-screen pt-12">
                 <schedule-edit-container></schedule-edit-container>
             </v-card>
