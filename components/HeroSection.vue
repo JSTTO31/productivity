@@ -17,7 +17,7 @@
         Manage Tasks, Enhance Focus, and Unleash Your Efficiency Potential with
         Our Cutting-Edge App
       </h3>
-      <div class="d-flex justify-center mt-12">
+      <div class="d-flex justify-center mt-12" style="gap: 15px">
         <v-btn
           color="primary"
           class="font-weight-bold rounded-lg text-capitalize"
@@ -25,6 +25,16 @@
           flat
           @click="$router.push({ name: 'auth-login' })"
           >Get's started for free</v-btn
+        >
+        <v-btn
+          class="font-weight-bold rounded-lg text-capitalize"
+          size="x-large"
+          flat
+          variant="text"
+          prepend-icon="mdi-play"
+          @click="showVideo = true"
+          
+          >Watch our video</v-btn
         >
       </div>
       <div
@@ -111,9 +121,15 @@
         </div>
       </marquee>
     </v-container>
+    <v-dialog width="923" v-model="showVideo">
+      <v-card>
+        <iframe width="923" height="519" src="https://www.youtube.com/embed/Of2aOXPx4nM" title="Efficiently - Thesis Video presentation 1080p" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </v-card>
+    </v-dialog>
 </template>
 
 <script setup lang="ts">
+const showVideo = ref(false)
 const {current} = useTheme()
 const {name} = useDisplay()
 </script>
