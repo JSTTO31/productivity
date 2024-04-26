@@ -27,7 +27,7 @@
         ></v-text-field>
       </div>
     </v-card>
-    <video class="w-100" loop autoplay muted :src="src"></video>
+    <video class="w-100" loop autoplay preload="true" muted :src="src"></video>
   </v-card>
 </template>
 

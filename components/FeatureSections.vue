@@ -32,8 +32,7 @@
         >
       </div>
       <div class="d-flex">
-        <FeatureVideoContainer src="/video/home.mp4"></FeatureVideoContainer>
-
+        <FeatureVideoContainer src="https://efficiently-au.netlify.app/video/home.mp4"></FeatureVideoContainer>
       </div>
     </v-container>
     <v-container
@@ -68,7 +67,7 @@
         >
       </div>
       <div class="d-flex">
-        <FeatureVideoContainer src="/video/project.mp4"></FeatureVideoContainer>
+        <FeatureVideoContainer src="https://efficiently-au.netlify.app/video/project.mp4"></FeatureVideoContainer>
       </div>
     </v-container>
     <v-container
@@ -103,7 +102,7 @@
         >
       </div>
       <div class="d-flex">
-       <FeatureVideoContainer src="/video/schedule.mp4"></FeatureVideoContainer>
+       <FeatureVideoContainer src="https://efficiently-au.netlify.app/video/schedule.mp4"></FeatureVideoContainer>
       </div>
     </v-container>
     <v-container
