@@ -3,6 +3,7 @@
     id="video"
     ref="video"
     style="position: fixed; top: 0; left: 0"
+    :key="preference.theme.background"
   ></UtilsThemeBackground>
   <v-app-bar
     class="pa-0 border-b px-5 bg-surface"

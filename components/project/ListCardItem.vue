@@ -1,10 +1,12 @@
 <template>
-    <v-card class="mb-3 rounded bg-surface task" :disabled="!havePermission" style="z-index: 100 !important;cursor:pointer"
+    <v-card class="mb-3 rounded bg-surface task" :disabled="!havePermission || !!task.tempId" style="z-index: 100 !important;cursor:pointer"
         :id="task._id || task.tempId"
         @click.stop="$router.push({ query: { task: task?._id || task.tempId, section: section?._id || section.tempId } })" v-ripple="false">
         <!-- <v-card class="rounded-lg ma-2 mt-2 mb-3" flat>
             <v-img :src="'https://source.unsplash.com/random/500x200/?collaboration&' + task.title"></v-img>
         </v-card> -->
+        <v-progress-circular id="card-loader" indeterminate size="55" v-if="!!task.tempId"></v-progress-circular>
+
         <v-card class="d-flex handle align-center justify-center rounded-lg" flat>
             <v-icon>mdi-dots-horizontal</v-icon>
         </v-card>
@@ -223,5 +225,11 @@ onMounted(() => {
 <style scoped>
 .handle{
     cursor: grab;
+}
+#card-loader{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
 }
 </style>

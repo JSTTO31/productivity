@@ -3,7 +3,7 @@
         <v-container class="pa-0 h-100 d-flex w-100" fluid
             style="background-color: rgba(0,0,0,.2);overflow-x: auto;overflow-y: hidden;" id="sections-container">
             <v-col cols="3" xl="2" class="pa-0 rounded-0 h-100 section-parent" style="position: relative"
-                v-for="section, index  in filteredSections" :key="section._id || section.tempId"
+                v-for="section, index  in project.sections" :key="section._id || section.tempId"
                 :data-parent-order="index">
                 <project-section-card :key="section._id || section.tempId" :section="section"
                     :data-section-order="index.toString()"></project-section-card>
@@ -34,7 +34,7 @@ const filteredSections = computed(() =>
 function addNewSection() {
     if (project.value) {
         const tempId = useTempID(8)
-        sectionFilter.value.sections.push(tempId)
+        // sectionFilter.value.sections.push(tempId)
         project.value.sections.push({ tempId, title: "New Section", tasks: [], order: project.value.sections.length })
     }
 }
@@ -52,7 +52,7 @@ watch(() => [
         $project.update().finally(() => {
             updateLoading(false)
         })
-    }, 500);
+    }, 800);
 
 
 }, { deep: true, immediate: false })

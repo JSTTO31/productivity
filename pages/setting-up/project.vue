@@ -283,7 +283,8 @@ const add = () => {
     project.value.sections[0].tasks.push({
       title: task_title.value, dueDate: new Date().toISOString().substring(0, 10),
       //@ts-ignore
-      priority: 'low', assignees: [user.value], tempId: useTempID(8), watchBy: [user.value._id], notes: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
+      priority: 'low', assignees: [user.value], tempId: useTempID(8), watchBy: [user.value._id], notes: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(),
+      attachments: [],
     })
 
     task_title.value = ''

@@ -25,6 +25,9 @@
                     </template>
                 </suspense>
             </v-main>
+            <v-footer app v-if="projects.length > 0">
+                <v-btn id="project-create-button" class="text-capitalize" prepend-icon="mdi-plus" block flat color="primary" variant="elevated" @click="newProject">Add Project</v-btn>
+            </v-footer>
         </v-layout>
     </v-navigation-drawer>
 
@@ -32,6 +35,7 @@
 
 <script setup lang="ts">
 import { useProjectStore } from '~/stores/project';
+const {projects} = storeToRefs(useProjectStore())
 const props = defineProps(['showNavigation'])
 const showCreateProjectDialog = ref(true)
 const $project = useProjectStore()

@@ -7,7 +7,7 @@
         <p class="text-caption font-weight-regular text-center">
             To create a project for tasks, analyze needs, plan, involve stakeholders, form a team, monitor progress.
         </p>
-        <v-btn class="mt-5 text-capitalize" prepend-icon="mdi-plus" variant="outlined" @click="$project.store" >Create new project</v-btn>
+        <v-btn class="mt-5 text-capitalize" prepend-icon="mdi-plus" variant="outlined" @click="$project.store()" >Create new project</v-btn>
     </div>
 </template>
 

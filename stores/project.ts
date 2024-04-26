@@ -176,8 +176,9 @@ export const useProjectStore = defineStore('project', () => {
             onResponse(event){
                 if(event.response.status != 200) return
                 const projectData = event.response._data.project
-                projects.value = projects.value.map(item => item._id == projectData._id ? projectData : item)
-                // project.value = projectRemoveReactive(projectData)
+                projects.value = projects.value.map(item => item._id == projectData._id ? projectRemoveReactive(projectData) : item)
+                project.value = projectRemoveReactive(projectData)
+
             }
         })
     }

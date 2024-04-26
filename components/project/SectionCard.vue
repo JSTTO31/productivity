@@ -1,6 +1,6 @@
 <template>
   <v-card class="h-100 w-100 rounded-0 section" style="background-color: rgba(0, 0, 0, 0.1); position: absolute;overflow: visible;z-index: 100 !important;"
-    :id="section._id || section.tempId">
+    :id="section._id || section.tempId" :disabled="!!section.tempId">
     <v-layout class="h-100 w-100 " style="overflow: visible;z-index: 100 !important;">
       <v-app-bar color="transparent" density="compact" class="text-white pl-4 pa-0" flat>
         <h4>
