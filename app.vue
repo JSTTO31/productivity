@@ -68,6 +68,7 @@ onMounted(() => {
     }, {deep: true})
 
   }
+  
 })
 
 watch(() => preference.value.theme.color, () => {

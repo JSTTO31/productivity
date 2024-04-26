@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-card color="secondary" flat class="mb-4 border" variant="flat">
+        <v-card flat class="mb-4 border" variant="flat">
             <v-card-text>
                 <div class="d-flex align-center text-caption mb-2">
                     <div class="d-flex">
@@ -24,7 +24,7 @@
                         </v-list>
                     </v-menu>
                 </div>
-                <p class="">
+                <p class="text-subtitle-1 font-weight-regular mt-5">
                     {{ note.text }}</p>
             </v-card-text>
         </v-card>

@@ -20,7 +20,10 @@
           Take Control of Your Productivity Journey!
         </h1>
         <h3 class="mt-5 font-weight-regular">Unlock your productivity potential with Efficiently. Sign up now to streamline task management, schedule effectively, and achieve your goals effortlessly. Experience the difference today!</h3>
-        <v-btn size="x-large" color="black" class="mt-15 text-capitalize" @click="$router.push({ name: 'auth-login' })">Try it now, it's free</v-btn>
+        <div>
+          <v-btn size="x-large" color="black" class="mt-15 text-capitalize" @click="$router.push({ name: 'auth-login' })">Try it now, it's free</v-btn>
+          <v-btn size="x-large" color="black" class="mt-15 text-capitalize" @click="$router.push({ name: 'auth-login' })"></v-btn>
+        </div>
       </v-col>
       <v-col cols="5">
         <v-card color="transparent" flat width="800">

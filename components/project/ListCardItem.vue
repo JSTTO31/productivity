@@ -41,11 +41,10 @@
                 </v-card>
                 <v-spacer></v-spacer>
 
-                <v-chip :prepend-icon="isWatcher ? 'mdi-eye-outline' : 'mdi-eye-off-outline'" variant="text"
-                    size="small" class="mr-2 text-capitalize rounded">Watch</v-chip>
-                <v-badge :content="task.notes ? task.notes.length : 0" location="right" inline>
-                    <v-chip prepend-icon="mdi-note-text-outline" variant="text" size="small"
-                        class="text-capitalize rounded">Notes</v-chip>
+                <v-icon  class="mr-2 text-capitalize rounded">{{ isWatcher ? 'mdi-eye-outline' : 'mdi-eye-off-outline' }}</v-icon>
+                <v-badge :content="task.notes ? task.notes.length : 0">
+                    <v-icon variant="text"
+                        class="text-capitalize rounded">mdi-chat-outline</v-icon>
                 </v-badge>
             </div>
         </div>

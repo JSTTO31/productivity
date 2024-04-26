@@ -1,6 +1,5 @@
-
 <template>
-    <div>
+    <v-card flat color="transparent">
         <schedule-navigation-drawer :show-navigation="showRightNavigation"></schedule-navigation-drawer>
         <v-app-bar class="d-flex  align-center text-white" density="compact"
             style="background-color: rgba(0,0,0,.4);z-index: 50 !important;" flat absolute @vue:mounted="appbar = true">
@@ -15,7 +14,17 @@
                 </v-dialog>
             </v-card>
         </v-main>
-    </div>
+        <v-overlay contained width="460" transition="slide-x-reverse-transition" class="d-flex justify-end h-100" :model-value="!!$route.query.date?.toString()">
+            <v-card class="h-screen pt-12">
+                <schedule-create-container></schedule-create-container>
+            </v-card>
+        </v-overlay>
+        <v-overlay contained width="460" transition="slide-x-reverse-transition" class="d-flex justify-end h-100" :model-value="!!$route.query.edit?.toString()">
+            <v-card class="h-screen pt-12">
+                <schedule-edit-container></schedule-edit-container>
+            </v-card>
+        </v-overlay>
+    </v-card>
 </template>
 
 <script setup lang="ts">

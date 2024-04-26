@@ -52,7 +52,7 @@ watch(() => [
         $project.update().finally(() => {
             updateLoading(false)
         })
-    }, 800);
+    }, 1500);
 
 
 }, { deep: true, immediate: false })

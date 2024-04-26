@@ -14,8 +14,8 @@ export default () => {
       "#9370db", // MediumPurple
       "#ffa500", // Orange
     ],
-    spread: 155,
-    velocity: 1,
+    spread: 555,
+    startVelocity: 55,
     origin: { x: 0.2, y: 0, }, // Bottom center
   });
   //@ts-ignore
@@ -28,8 +28,8 @@ export default () => {
       "#9370db", // MediumPurple
       "#ffa500", // Orange
     ],
-    spread: 155,
-    velocity: 1,
+    spread: 555,
+    startVelocity: 55,
     origin: { x: 0.8, y: 0 }, // Bottom center
   });
 };
