@@ -61,21 +61,21 @@ onMounted(() => {
     });
 
 
-    setTimeout(() => {
-      document.onclick = () => {
-        //@ts-ignore
-        if(selectedTheme.value.type == 'video' && video){
-          const themeSound = preference.value.sounds.theme.value
-          const allSoundPercent = preference.value.sounds.all.value / 100
-          const reduceThemeSoundByAllSound = themeSound * allSoundPercent
-          video.muted = false
-          video.volume = reduceThemeSoundByAllSound / 100
-          video.play()
-          canStart.value = true
-        }
-        document.onclick = null
-      }
-    }, 1000);
+    // setTimeout(() => {
+    //   document.onclick = () => {
+    //     //@ts-ignore
+    //     if(selectedTheme.value.type == 'video' && video){
+    //       const themeSound = preference.value.sounds.theme.value
+    //       const allSoundPercent = preference.value.sounds.all.value / 100
+    //       const reduceThemeSoundByAllSound = themeSound * allSoundPercent
+    //       video.muted = false
+    //       video.volume = reduceThemeSoundByAllSound / 100
+    //       video.play()
+    //       canStart.value = true
+    //     }
+    //     document.onclick = null
+    //   }
+    // }, 1000);
   }
 })
 </script>
