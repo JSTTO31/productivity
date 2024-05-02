@@ -19,6 +19,8 @@
   </v-app>
 </template>
 <script setup>
+import mongoose, { mongo } from 'mongoose';
+
 const {mobile} = useDisplay()
 useHead({
   titleTemplate: (titleChunk) => {
@@ -68,7 +70,7 @@ onMounted(() => {
     }, {deep: true})
 
   }
-  
+
 })
 
 watch(() => preference.value.theme.color, () => {

@@ -12,18 +12,18 @@
                     Alread have an account? <span class="text-blue-darken-2" style="cursor: pointer;"
                         @click="$router.push({ name: 'auth-login' })">Sign in</span>
                 </h3>
-                <v-card class="d-flex justify-center mt-10 align-center pa-3" @click="signInWithGoogle" variant="outlined">
+                <!-- <v-card class="d-flex justify-center mt-10 align-center pa-3" @click="signInWithGoogle" variant="outlined">
                     <v-avatar size="30">
                         <v-img src="/icons/google.png"></v-img>
                     </v-avatar>
                     <h3 class="font-weight-medium ml-5">Sign up with google</h3>
-                </v-card>
-                <v-form @submit.prevent="submit">
-                    <div class="d-flex align-center my-5">
+                </v-card> -->
+                <v-form @submit.prevent="submit" class="mt-10">
+                    <!-- <div class="d-flex align-center my-5">
                         <v-divider></v-divider>
                         <span class="w-25 text-center">or</span>
                         <v-divider></v-divider>
-                    </div>
+                    </div> -->
                     <div>
                         <label class="font-weight-bold" for="name">Name</label>
                         <v-text-field v-model="$v.name.$model"
@@ -36,10 +36,13 @@
                         <label class="font-weight-bold" for="email">Email address</label>
                         <v-text-field v-model="$v.email.$model"
                             :error-messages="$v.email.$errors[0]?.$message as string || ''" id="email"
-                            variant="solo-filled" flat class="my-2" density="comfortable"
+                            variant="solo-filled" flat class="my-2 pr-0" density="comfortable"
                             prepend-inner-icon="mdi-email-outline" single-line
-                            hint="Just use @example.com"
-                            label="Enter your email address"></v-text-field>
+                            label="Enter your email address">
+                            <template #append-inner>
+                                <h4 class="">@efficiently.com</h4>
+                            </template>
+                        </v-text-field>
                     </div>
                     <div class="d-flex" style="gap: 10px;">
                         <div class="w-50">
@@ -95,7 +98,7 @@ const $externalResults = ref({})
 
 const rules = {
     name: {required},
-    email: {required, email},
+    email: {required},
     password: {required, minLength: minLength(8)},
     password_confirmation: {required, sameAs: sameAs(computed(() => information.password))}
 }
@@ -103,11 +106,9 @@ const rules = {
 
 const submit = async () => {
     if(!await $v.value.$validate()) return 
-    const {error,status} = await $user.register(information)
+    const {error,status} = await $user.register({...information, email: information.email + '@efficiently.com'})
     
     if(error.value && error.value.data.errors){
-        console.log('triggered');
-        
         $externalResults.value = error.value.data.errors.reduce((container: any, error: any) => {
             if(!container[error.path]){
                 container[error.path] = []

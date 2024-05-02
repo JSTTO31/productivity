@@ -22,6 +22,7 @@
 </template>
 
 <script setup lang="ts">
+import mongoose from 'mongoose';
 import type { RouteLocationNormalizedLoaded } from 'vue-router';
 import useTempID from '~/composables/useTempID';
 const { project, sectionFilter } = storeToRefs(useProjectStore())
@@ -34,8 +35,8 @@ const filteredSections = computed(() =>
 function addNewSection() {
     if (project.value) {
         const tempId = useTempID(8)
-        // sectionFilter.value.sections.push(tempId)
-        project.value.sections.push({ tempId, title: "New Section", tasks: [], order: project.value.sections.length })
+        project.value.sections.push({ tempId, _id: new mongoose.Types.ObjectId().toString(),
+        title: "New Section", tasks: [], order: project.value.sections.length })
     }
 }
 let delay: NodeJS.Timeout | null = null
@@ -52,7 +53,7 @@ watch(() => [
         $project.update().finally(() => {
             updateLoading(false)
         })
-    }, 1500);
+    }, 800);
 
 
 }, { deep: true, immediate: false })
