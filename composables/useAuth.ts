@@ -6,8 +6,8 @@ export default function useAuth(){
     const credentials = reactive({
         // email: 'joshuasotto@example.example',
         // password: 'joshuasotto'
-        email: '',
-        password: ''
+        email: 'demo@example.com',
+        password: '123456'
     })
 
     const rules = {
