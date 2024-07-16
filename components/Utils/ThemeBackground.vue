@@ -1,7 +1,7 @@
 <template>
     <v-card flat v-if="selectedTheme.type == 'video'" class="w-100 h-100" style="position: absolute;top: 0;left: 0">
         <div class="w-100" style="z-index: 100;">
-          <video :id="'video' + selectedTheme.id.toString()" preload="true" class="w-100"  muted autoplay :src="
+          <video :id="'video' + selectedTheme.id.toString()" class="w-100"  muted autoplay :src="
           //@ts-ignore
           selectedTheme.backgrounds[0].path" 
           :key="selectedTheme.id"
