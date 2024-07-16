@@ -1,7 +1,7 @@
 <template>
     <v-main class="d-flex align-center justify-center ">
         <client-only>
-            <v-card flat class="rounded-xl px-5 d-flex mt-n15 flex-column px-10" color="transparent" width="550">
+            <v-card flat class="rounded-xl px-5 d-flex mt-n15 flex-column px-10" color="transparent" width="550" :disabled="loading">
                 <v-avatar @click="$router.push({ name: 'index' })" class="mx-auto" size="75"
                     style="transform: rotate(25deg);cursor: pointer;">
                     <v-icon size="75">mdi-lightning-bolt</v-icon>
@@ -41,7 +41,7 @@
                         <span class="text-blue-darken-1">Forgot the password?</span>
                     </div>
                     <v-btn type="submit" class="rounded-lg mt-5 text-capitalize" append-icon="mdi-login" size="large"
-                        color="primary">Login account</v-btn>
+                        color="primary" :loading="loading">Login account</v-btn>
                 </v-form>
                 <!-- <div v-else>
                     <v-card class="d-flex justify-center mt-5 align-center pa-3" @click="showTextField = true" color="grey-lighten-2"
@@ -64,7 +64,7 @@ definePageMeta({
     pageTransition: false,
 })
 const togglePassword = ref(false)
-const { $v, submit } = useAuth()
+const { $v, submit, loading } = useAuth()
 const showTextField = ref(false)
 
 

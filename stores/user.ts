@@ -75,7 +75,7 @@ export const useUserStore = defineStore('user', () => {
         })
     }
 
-    async function login(credentials: {email: string, password: string}){
+    async function login(credentials: any){
         return await useApiFetch('/login', {
             method: 'post',
             body: credentials,

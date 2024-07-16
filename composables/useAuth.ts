@@ -6,9 +6,10 @@ export default function useAuth(){
     const credentials = reactive({
         // email: 'joshuasotto@example.example',
         // password: 'joshuasotto'
-        email: 'demo@example.com',
-        password: '123456'
+        email: 'demo@efficiently.com',
+        password: '12345678'
     })
+    const loading = ref(false)
 
     const rules = {
         email: {required, email},
@@ -19,12 +20,18 @@ export default function useAuth(){
 
     const $v = useVuelidate(rules, credentials, {$externalResults})
 
+    watch(() => [credentials.password, credentials.email], () => {
+        $externalResults.value = {}
+    })
+
     async function submit(){
         
         if(!await $v.value.$validate()) return 
         
         try {
+            loading.value = true
             const {error, status} = await $user.login(credentials)
+            loading.value = false
             
             if(error.value && error.value.data.errors){
                 $externalResults.value = error.value.data.errors.reduce((container: any, error: any) => {
@@ -56,5 +63,5 @@ export default function useAuth(){
         }
     }
 
-    return {$v, credentials, submit}
+    return {$v, credentials, submit, loading}
 }
