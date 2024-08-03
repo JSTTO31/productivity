@@ -50,11 +50,23 @@ useHead({
     }
   ]
 })
+
+useSeoMeta({
+  title: 'Arellano Connect: Building Alumni Connections with Communication and Job Opportunities',
+  ogTitle: 'Arellano Connect: Building Alumni Connections with Communication and Job Opportunities',
+  description: 'Arellano Connect is a platform that strengthens the Arellano University alumni community. It facilitates seamless communication, networking, and offers job opportunities, enhancing graduates\' career prospects. Awarded first runner-up at the Arellano Colloquium, Arellano Connect is dedicated to fostering a supportive alumni network.',
+  ogDescription: 'Arellano Connect is a platform that strengthens the Arellano University alumni community. It facilitates seamless communication, networking, and offers job opportunities, enhancing graduates\' career prospects. Awarded first runner-up at the Arellano Colloquium, Arellano Connect is dedicated to fostering a supportive alumni network.',
+  ogImage: '/landing-page.png'
+})
+
 const $user = useUserStore()
 const {user} = storeToRefs(useUserStore())
 const {preference} = storeToRefs(usePreferenceStore())
 const $preference = usePreferenceStore()
 let timeout = null
+
+
+
 
 onMounted(() => {
   $preference.setBackgroundColor()
